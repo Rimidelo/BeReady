@@ -3,12 +3,13 @@
   padding: 0;
   text-decoration: none;
   list-style-type: none;
+  box-sizing: border-box;
 }
 
 body {
   font-family: "Heebo", sans-serif;
 }
-
+/*Header section*/
 header {
   background: #ebebeb;
   height: 81px;
@@ -19,10 +20,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-#logo_section {
-  margin-right: 50px;
+  padding-left: 11px;
+  padding-right: 50px;
 }
 
 #site-logo {
@@ -34,7 +33,64 @@ header {
   height: 81px;
   width: 84px;
 }
+#info_section {
+  display: flex;
+  align-items: center;
+}
 
+#clientCompany-sign {
+  width: 46px;
+  height: 61px;
+}
+
+#user_info {
+  width: 177px;
+  height: 64px;
+  gap: 0px;
+  border-radius: 100px;
+  opacity: 0px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  padding-right: 7px;
+}
+
+#user_info > div{
+  display: flex;
+  flex-direction: column;
+}
+
+#user_info > img {
+  width: 62px;
+  height: 55px;
+}
+
+#user_info > div > p {
+  width: 75px;
+  height: 19px;
+  font-family: Heebo;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 23.5px;
+  text-align: right;
+  margin-right: 8px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#user_info > div > p:last-child {
+  width: 124px;
+  height: 18px;
+  font-family: Heebo;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20.56px;
+  text-align: right;
+  color: #3ba585;
+}
+
+/*Side Menu section */
 .sidebar {
   margin-top: 81px;
   height: 100vh;
