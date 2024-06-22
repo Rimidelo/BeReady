@@ -182,6 +182,7 @@ main {
   flex-shrink: 0;
   fill: #000;
   margin-right: 21px;
+  cursor:pointer;
 }
 .custom-search-form {
   width: 197px;
