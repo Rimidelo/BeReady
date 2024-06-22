@@ -11,6 +11,11 @@ a {
   color: inherit;
 }
 
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
 body {
   font-family: "Heebo", sans-serif;
 }
@@ -61,7 +66,7 @@ header {
   padding-right: 7px;
 }
 
-#user_info > div{
+#user_info > div {
   display: flex;
   flex-direction: column;
 }
@@ -101,6 +106,7 @@ header {
   height: 100vh;
   width: 200px;
   background-color: #ebebeb;
+  position: fixed;
 }
 .sidebar .nav-link {
   color: #000;
@@ -136,6 +142,78 @@ main {
   padding-top: 81px;
 }
 
+#page_info {
+  padding-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 129px;
+  margin-bottom: 2px;
+}
+
+#page_info > section {
+  display: flex;
+  align-items: center;
+}
+
+#page_info > h1 {
+  height: 62px;
+  font-family: Heebo;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 70.5px;
+  text-align: right;
+  color: #000;
+}
+
+.add-activity {
+  width: 50px;
+  height: 50px;
+  background-image: url("/images/plus.png");
+  background-size: cover;
+  background-position: center 5px;
+}
+
+#sort-button {
+  display: block;
+  background-image: url(../images/sort.svg);
+  width: 42px;
+  height: 27px;
+  flex-shrink: 0;
+  fill: #000;
+  margin-right: 21px;
+}
+.custom-search-form {
+  width: 197px;
+  height: 40px;
+  position: relative;
+  border-radius: 100px 100px 100px 100px;
+  background: #f3f3f3c4;
+  opacity: 0.8; /* Adjust opacity as needed */
+}
+
+.custom-search-input {
+  border: none;
+  background: transparent;
+  height: 100%;
+  width: calc(100% - 40px); /* Adjust for icon width */
+  padding: 10px 15px;
+  color: #333;
+  border-radius: 12px 0px 0px 12px;
+}
+
+.custom-search-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  padding: 10px;
+  background: transparent url("../images/search-icon.svg") no-repeat center /
+    24px 24px;
+  border: none;
+  cursor: pointer;
+}
 /* responsive alternatives */
 @media (max-width: 768px) {
   .sidebar {
