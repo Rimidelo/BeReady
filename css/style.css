@@ -215,6 +215,8 @@ main {
   border: none;
   cursor: pointer;
 }
+
+
 /* responsive alternatives */
 @media (max-width: 768px) {
   #sidebar {
