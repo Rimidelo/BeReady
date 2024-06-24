@@ -1,0 +1,39 @@
+{
+    "activities": [
+        {
+            "id": 0,
+            "type": "Physical",
+            "name": "הרמת משקולות",
+            "frameworkType": "אישי"
+        },
+        {
+            "id": 1,
+            "type": "Physical",
+            "name": "הרמת משקולות",
+            "frameworkType": "אישי"
+        },
+        {
+            "id": 2,
+            "type": "Physical",
+            "name": "הרמת משקולות",
+            "frameworkType": "קבוצתי",
+            "scheduledAttributes": {
+                "participants": {
+                    "actualAmount": 14,
+                    "maxAmount": 20
+                },
+                "schedule": {
+                    "date": "14/04",
+                    "day": "ראשון",
+                    "hours": "17:00-21:00"
+                }
+            }
+        },
+        {
+            "id": 3,
+            "type": "Physical",
+            "name": "הרמת משקולות",
+            "frameworkType": "אישי"
+        }
+    ]
+}
