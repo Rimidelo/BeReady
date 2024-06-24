@@ -14,7 +14,7 @@
         },
         {
             "id": 2,
-            "type": "Physical",
+            "type": "Brain",
             "name": "הרמת משקולות",
             "frameworkType": "קבוצתי",
             "scheduledAttributes": {

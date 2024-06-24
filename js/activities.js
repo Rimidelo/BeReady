@@ -11,21 +11,21 @@ let activityList = [];
 const activityListElement = document.getElementById("activity-list");
 
 window.onload = () => {
-  readActivitiesData()
-    .then(() => console.log(activityList))
-    .then(initActivityList);
+  readActivitiesData().then(initActivityList);
 };
 
 const readActivitiesData = async () =>
   fetch("./data/activities.json")
     .then((response) => response.json())
-    .then((data) => (activityList = data));
+    .then(({ activities }) => activityList.push(...activities));
 
 const initActivityList = () => {
   for (const activity of activityList) {
     addActivityElement(createActivityElement(activity));
   }
 };
+
+const getActivityElementId = (id) => `activity-${id}`;
 
 const createActivityElement = ({
   id,
@@ -35,12 +35,12 @@ const createActivityElement = ({
   scheduledAttributes,
 }) => {
   const newActivityElement = document.createElement("li");
-  newActivityElement.id = `activity-${id}`;
+  newActivityElement.id = getActivityElementId(id);
   newActivityElement.classList.add("activity");
   newActivityElement.append(
     createActivityTypeIcon(type),
     createActivityContentElement(name, frameworkType, scheduledAttributes),
-    createActivityButtonsElement()
+    createActivityButtonsElement(id)
   );
   return newActivityElement;
 };
@@ -102,15 +102,17 @@ const createActivityDetailsElement = (frameworkType, scheduledAttributes) => {
   return activityDetailsElement;
 };
 
-const createActivityButtonsElement = () => {
+const createActivityButtonsElement = (id) => {
   const activityButtonsElement = document.createElement("section");
   const editButtonElement = document.createElement("button");
   const deleteButtonElement = document.createElement("button");
   const editIconElement = document.createElement("img");
   const deleteIconElement = document.createElement("img");
   activityButtonsElement.classList.add("activity-buttons");
-  editButtonElement.classList.add("edit-btn");
-  deleteButtonElement.classList.add("delete-btn");
+  editButtonElement.classList.add("edit-btn", "btn");
+  deleteButtonElement.classList.add("delete-btn", "btn");
+  addOnClickToBtn(id, editButtonElement, openEditActivity);
+  addOnClickToBtn(id, deleteButtonElement, removeActivity);
   editIconElement.src = ACTIVITY_ACTIONS_ICONS["edit"];
   editIconElement.alt = "edit";
   deleteIconElement.src = ACTIVITY_ACTIONS_ICONS["delete"];
@@ -119,6 +121,10 @@ const createActivityButtonsElement = () => {
   deleteButtonElement.appendChild(deleteIconElement);
   activityButtonsElement.append(editButtonElement, deleteButtonElement);
   return activityButtonsElement;
+};
+
+const addOnClickToBtn = (id, element, onClickAction) => {
+  element.onclick = () => onClickAction(id);
 };
 
 const generateId = (() => {
@@ -143,8 +149,11 @@ const addActivity = ({ type, name, frameworkType, scheduledAttributes }) => {
 };
 
 const removeActivity = (id) => {
-  const activityToRemoveElement = document.getElementById(id);
+  const activityToRemoveElement = document.getElementById(
+    getActivityElementId(id)
+  );
   activityListElement.removeChild(activityToRemoveElement);
+  delete activityList[id];
 };
 
-const editActivity = (id) => {};
+const openEditActivity = (id) => {};
