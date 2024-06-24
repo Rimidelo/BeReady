@@ -11,9 +11,7 @@ const activityList = [];
 const activityListElement = document.getElementById("activity-list");
 
 window.onload = () => {
-  readActivitiesData()
-    .then(() => console.log(activityList))
-    .then(initActivityList);
+  readActivitiesData().then(initActivityList);
 };
 
 const readActivitiesData = async () =>
@@ -27,6 +25,8 @@ const initActivityList = () => {
   }
 };
 
+const getActivityElementId = (id) => `activity-${id}`;
+
 const createActivityElement = ({
   id,
   type,
@@ -35,7 +35,7 @@ const createActivityElement = ({
   scheduledAttributes,
 }) => {
   const newActivityElement = document.createElement("li");
-  newActivityElement.id = `activity-${id}`;
+  newActivityElement.id = getActivityElementId(id);
   newActivityElement.classList.add("activity");
   newActivityElement.append(
     createActivityTypeIcon(type),
@@ -149,9 +149,11 @@ const addActivity = ({ type, name, frameworkType, scheduledAttributes }) => {
 };
 
 const removeActivity = (id) => {
-  const activityToRemoveElement = document.getElementById(id);
+  const activityToRemoveElement = document.getElementById(
+    getActivityElementId(id)
+  );
   activityListElement.removeChild(activityToRemoveElement);
-  delete activityList[id[-1]];
+  delete activityList[id];
 };
 
 const openEditActivity = (id) => {};
