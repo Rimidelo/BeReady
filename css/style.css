@@ -182,7 +182,7 @@ main {
   flex-shrink: 0;
   fill: #000;
   margin-right: 21px;
-  cursor:pointer;
+  cursor: pointer;
 }
 .custom-search-form {
   width: 197px;
@@ -216,7 +216,6 @@ main {
   cursor: pointer;
 }
 
-
 /* responsive alternatives */
 @media (max-width: 768px) {
   #sidebar {
@@ -225,4 +224,10 @@ main {
     padding: 20px;
     margin-bottom: 20px;
   }
+}
+
+#activity-list > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
