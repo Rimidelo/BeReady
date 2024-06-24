@@ -231,7 +231,6 @@ main {
   }
 }
 
-<<<<<<< HEAD
 /*add activity modal*/
 body {
   direction: rtl;
@@ -266,10 +265,11 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-=======
-#activity-list > li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
->>>>>>> af02f718c3eca7362d97fc68e6f163ce12c01538
+
 }
+  #activity-list > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
