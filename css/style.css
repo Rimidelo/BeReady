@@ -172,6 +172,11 @@ main {
   background-image: url("/images/plus.png");
   background-size: cover;
   background-position: center 5px;
+  cursor: pointer;
+}
+
+.btn.add-activity:focus {
+  box-shadow: none;
 }
 
 #sort-button {
@@ -182,7 +187,7 @@ main {
   flex-shrink: 0;
   fill: #000;
   margin-right: 21px;
-  cursor:pointer;
+  cursor: pointer;
 }
 .custom-search-form {
   width: 197px;
@@ -216,7 +221,6 @@ main {
   cursor: pointer;
 }
 
-
 /* responsive alternatives */
 @media (max-width: 768px) {
   #sidebar {
@@ -225,4 +229,40 @@ main {
     padding: 20px;
     margin-bottom: 20px;
   }
+}
+
+/*add activity modal*/
+body {
+  direction: rtl;
+  text-align: right;
+}
+
+.custom-border-end {
+  border-right: 1px solid #d6d6d6;
+  height: 384.005px;
+}
+
+#upload {
+  display: none;
+}
+
+#file-add-icon {
+  cursor: pointer;
+}
+
+.form-label > h4 {
+  width: 152px;
+  height: 42px;
+  opacity: 1;
+  font-family: Heebo;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 42px;
+  text-align: center;
+  color: #ffffff;
+  background: #606060;
+  border-radius: 3px 0 0 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }

@@ -7,7 +7,7 @@ const TYPE_ICONS = {
   Brain: "images/activity/types/brain-icon.png",
 };
 const COLLECTIVE = "קבוצתי";
-const activityList = [];
+let activityList = [];
 const activityListElement = document.getElementById("activity-list");
 
 window.onload = () => {
