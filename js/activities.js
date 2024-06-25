@@ -5,8 +5,13 @@ const ACTIVITY_ACTIONS_ICONS = {
 const TYPE_ICONS = {
   Physical: "images/activity/types/weight-icon.png",
   Brain: "images/activity/types/brain-icon.png",
+  Mental: "",
+  Coordination: "",
+  Leadership: "",
 };
+
 const COLLECTIVE = "קבוצתי";
+const PERSONAL = "אישי";
 let activityList = [];
 const activityListElement = document.getElementById("activity-list");
 
@@ -79,7 +84,7 @@ const createActivityDetailsElement = (frameworkType, scheduledAttributes) => {
   frameworkTypeElement.innerText = frameworkType;
   frameworkTypeElement.classList.add("activity-framework-type");
   activityDetailsElement.appendChild(frameworkTypeElement);
-  if (frameworkType == COLLECTIVE) {
+  if (scheduledAttributes) {
     const { actualAmount, maxAmount } = scheduledAttributes.participants;
     const { date, day, hours } = scheduledAttributes.schedule;
     const participantsAmountElement = document.createElement("span");
@@ -133,16 +138,16 @@ const generateId = (() => {
 })();
 
 const addActivityElement = (activityElement) => {
-  activityListElement.appendChild(activityElement);
+  activityListElement.insertBefore(
+    activityElement,
+    activityListElement.firstChild
+  );
 };
 
-const addActivity = ({ type, name, frameworkType, scheduledAttributes }) => {
+const addActivity = (newActivityData) => {
   const newActivity = {
     id: generateId(),
-    type,
-    name,
-    frameworkType,
-    scheduledAttributes,
+    ...newActivityData,
   };
   activityList.push(newActivity);
   addActivityElement(createActivityElement(newActivity));
