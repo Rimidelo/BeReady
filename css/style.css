@@ -143,7 +143,7 @@ main {
 }
 
 #page_info {
-  padding-right: 8px;
+  margin-right: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -156,7 +156,7 @@ main {
   align-items: center;
 }
 
-#page_info > h1 {
+#page_info > section > h1 {
   height: 62px;
   font-family: Heebo;
   font-size: 48px;
@@ -164,6 +164,7 @@ main {
   line-height: 70.5px;
   text-align: right;
   color: #000;
+  margin-right: 8px;
 }
 
 .add-activity {
