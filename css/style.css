@@ -138,7 +138,7 @@ header {
 }
 
 main {
-  padding-right: 192px;
+  padding-right: 200px;
   padding-top: 81px;
 }
 
@@ -164,7 +164,6 @@ main {
   line-height: 70.5px;
   text-align: right;
   color: #000;
-  margin-right: 8px;
 }
 
 .add-activity {
@@ -266,11 +265,111 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-
 }
-  #activity-list > li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+/* Adding style to activity list items */
+#activity-list > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 108px); /* Dynamic width minus the margins */
+  height: 119px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  background: rgba(223, 223, 223, 0.77);
+  padding: 10px 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-right: 15px;
+  margin-left: 93px;
+  margin-bottom: 30px;
+}
 
+.activity-type-icon {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+
+.activity-type-icon img {
+  width: 72px;
+  height: 72px;
+}
+
+.activity-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0 15px;
+  margin-top: 10px;
+}
+
+.activity-name {
+  margin-bottom: 4px;
+  font-family: Heebo;
+  font-size: 36px;
+  font-weight: 300;
+  text-align: right;
+  width: 354px;
+  height: 43px;
+}
+
+.activity-details {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.activity-framework-type,
+.activity-participants-amount,
+.activity-date,
+.activity-day,
+.activity-hour {
+  font-size: 24px;
+  color: #000000;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  direction: rtl;
+}
+
+.activity-participants-amount::before,
+.activity-date::before,
+.activity-day::before,
+.activity-hour::before {
+  content: "";
+  display: inline-block;
+  width: 23px;
+  height: 23px;
+  margin-left: 5px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.activity-participants-amount::before {
+  background-image: url("/images/activity/buttons/people-icon.png");
+}
+
+.activity-date::before {
+  background-image: url("/images/activity/buttons/clock-icon.png");
+}
+
+.activity-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.activity-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.activity-buttons img {
+  width: 49px;
+  height: 49px;
+}
