@@ -5,9 +5,9 @@ const ACTIVITY_ACTIONS_ICONS = {
 const TYPE_ICONS = {
   Physical: "images/activity/types/weight-icon.png",
   Brain: "images/activity/types/brain-icon.png",
-  Mental: "",
-  Coordination: "",
-  Leadership: "",
+  Mental: "images/activity/types/mental-icon.png",
+  Coordination: "images/activity/types/coordination-icon.png",
+  Leadership: "images/activity/types/leadership-icon.png",
 };
 
 const COLLECTIVE = "קבוצתי";
