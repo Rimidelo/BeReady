@@ -1,0 +1,14 @@
+{
+    "users": [
+        {
+            "type": "manager",
+            "name": "John Doe",
+            "company_id": 12345
+        },
+        {
+            "type": "user",
+            "name": "Jane Smith",
+            "company_id": 67890
+        }
+    ]
+}
