@@ -221,19 +221,17 @@ main {
   cursor: pointer;
 }
 
-/* responsive alternatives */
-@media (max-width: 768px) {
-  #sidebar {
-    width: 100%;
-    height: auto;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-}
-
 /*add activity modal*/
 body {
   direction: rtl;
+  text-align: right;
+}
+
+label {
+  font-family: Heebo;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26.44px;
   text-align: right;
 }
 
@@ -241,6 +239,14 @@ body {
   border-right: 1px solid #d6d6d6;
   height: 384.005px;
 }
+
+#ActivityFormName {
+  width: 264px;
+}
+#ActivityFormType {
+  width: 264px;
+}
+
 
 #upload {
   display: none;
@@ -271,7 +277,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 108px); /* Dynamic width minus the margins */
+  width: calc(100% - 108px);
   height: 119px;
   flex-shrink: 0;
   border-radius: 9px;
@@ -372,4 +378,14 @@ body {
 .activity-buttons img {
   width: 49px;
   height: 49px;
+}
+
+/* responsive alternatives */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
 }

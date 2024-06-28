@@ -33,7 +33,7 @@ activityForm.addEventListener("submit", function (event) {
   const unit = document.getElementById("unit").value;
   const isGroupActivity = document.getElementById("groupActivity").checked;
   const upload = document.getElementById("upload").files[0];
-  
+
   const formData = {
     name: name,
     type: type,

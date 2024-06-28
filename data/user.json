@@ -1,14 +1,8 @@
 {
-    "users": [
-        {
-            "type": "manager",
-            "name": "John Doe",
-            "company_id": 12345
-        },
-        {
-            "type": "user",
-            "name": "Jane Smith",
-            "company_id": 67890
-        }
-    ]
+    "LoggedInUser": {
+        "type": "manager",
+        "name": "יוגב שגיא",
+        "company_name": "חמש אצבעות",
+        "company_id": 12345
+    }
 }

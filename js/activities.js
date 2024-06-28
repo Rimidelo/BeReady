@@ -14,15 +14,36 @@ const COLLECTIVE = "קבוצתי";
 const PERSONAL = "אישי";
 let activityList = [];
 const activityListElement = document.getElementById("activity-list");
+let LoggedInUser;
 
-window.onload = () => {
-  readActivitiesData().then(initActivityList);
+window.onload = async () => {
+  console.log("Window loaded, initializing");
+  try {
+    await readUserData();
+    console.log("User data read successfully");
+    console.log(LoggedInUser);
+    await readActivitiesData();
+    console.log("Activities data read successfully");
+    initActivityList();
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
 };
+
 
 const readActivitiesData = async () =>
   fetch("./data/activities.json")
     .then((response) => response.json())
     .then(({ activities }) => activityList.push(...activities));
+
+const readUserData = async () =>
+  fetch("./data/user.json")
+    .then(response => response.json())
+    .then(data => {
+      LoggedInUser = data.LoggedInUser;
+      console.log(LoggedInUser);
+    });
+
 
 const initActivityList = () => {
   for (const activity of activityList) {
@@ -38,6 +59,7 @@ const createActivityElement = ({
   name,
   frameworkType,
   scheduledAttributes,
+  company_id,
 }) => {
   const newActivityElement = document.createElement("li");
   newActivityElement.id = getActivityElementId(id);
@@ -45,7 +67,7 @@ const createActivityElement = ({
   newActivityElement.append(
     createActivityTypeIcon(type),
     createActivityContentElement(name, frameworkType, scheduledAttributes),
-    createActivityButtonsElement(id)
+    createActivityButtonsElement(id, company_id)
   );
   return newActivityElement;
 };
@@ -107,24 +129,26 @@ const createActivityDetailsElement = (frameworkType, scheduledAttributes) => {
   return activityDetailsElement;
 };
 
-const createActivityButtonsElement = (id) => {
+const createActivityButtonsElement = (id, company_id) => {
   const activityButtonsElement = document.createElement("section");
-  const editButtonElement = document.createElement("button");
-  const deleteButtonElement = document.createElement("button");
-  const editIconElement = document.createElement("img");
-  const deleteIconElement = document.createElement("img");
-  activityButtonsElement.classList.add("activity-buttons");
-  editButtonElement.classList.add("edit-btn", "btn");
-  deleteButtonElement.classList.add("delete-btn", "btn");
-  addOnClickToBtn(id, editButtonElement, openEditActivity);
-  addOnClickToBtn(id, deleteButtonElement, removeActivity);
-  editIconElement.src = ACTIVITY_ACTIONS_ICONS["edit"];
-  editIconElement.alt = "edit";
-  deleteIconElement.src = ACTIVITY_ACTIONS_ICONS["delete"];
-  deleteIconElement.alt = "delete";
-  editButtonElement.appendChild(editIconElement);
-  deleteButtonElement.appendChild(deleteIconElement);
-  activityButtonsElement.append(editButtonElement, deleteButtonElement);
+  if (company_id == LoggedInUser.company_id) {
+    const editButtonElement = document.createElement("button");
+    const deleteButtonElement = document.createElement("button");
+    const editIconElement = document.createElement("img");
+    const deleteIconElement = document.createElement("img");
+    activityButtonsElement.classList.add("activity-buttons");
+    editButtonElement.classList.add("edit-btn", "btn");
+    deleteButtonElement.classList.add("delete-btn", "btn");
+    addOnClickToBtn(id, editButtonElement, openEditActivity);
+    addOnClickToBtn(id, deleteButtonElement, removeActivity);
+    editIconElement.src = ACTIVITY_ACTIONS_ICONS["edit"];
+    editIconElement.alt = "edit";
+    deleteIconElement.src = ACTIVITY_ACTIONS_ICONS["delete"];
+    deleteIconElement.alt = "delete";
+    editButtonElement.appendChild(editIconElement);
+    deleteButtonElement.appendChild(deleteIconElement);
+    activityButtonsElement.append(editButtonElement, deleteButtonElement);
+  }
   return activityButtonsElement;
 };
 
@@ -161,4 +185,4 @@ const removeActivity = (id) => {
   delete activityList[id];
 };
 
-const openEditActivity = (id) => {};
+const openEditActivity = (id) => { };

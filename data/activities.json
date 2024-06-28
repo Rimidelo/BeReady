@@ -4,13 +4,15 @@
             "id": 0,
             "type": "Physical",
             "name": "הרמת משקולות",
-            "frameworkType": "אישי"
+            "frameworkType": "אישי",
+            "company_id": 67890
         },
         {
             "id": 1,
             "type": "Physical",
             "name": "הרמת משקולות",
-            "frameworkType": "אישי"
+            "frameworkType": "אישי",
+            "company_id": 67890
         },
         {
             "id": 2,
@@ -33,12 +35,15 @@
                     "hours": "17:00-21:00"
                 }
             }
+            ,
+            "company_id": 12345
         },
         {
             "id": 3,
             "type": "Physical",
             "name": "הרמת משקולות",
-            "frameworkType": "אישי"
+            "frameworkType": "אישי",
+            "company_id": 67890
         }
     ]
 }
