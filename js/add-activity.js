@@ -26,26 +26,26 @@ activityForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const action = activityForm.getAttribute("data-action");
+  const name = document.getElementById("name").value;
+  const type = document.getElementById("type").value;
+  const description = document.getElementById("description").value;
+  const target = document.getElementById("target").value;
+  const unit = document.getElementById("unit").value;
+  const isGroupActivity = document.getElementById("groupActivity").checked;
+  const upload = document.getElementById("upload").files[0];
+  
+  const formData = {
+    name: name,
+    type: type,
+    description: description,
+    target: {
+      value: target,
+      unit: unit,
+    },
+    frameworkType: isGroupActivity ? COLLECTIVE : PERSONAL,
+  };
+
   if (action === "archive") {
-    const name = document.getElementById("name").value;
-    const type = document.getElementById("type").value;
-    const description = document.getElementById("description").value;
-    const target = document.getElementById("target").value;
-    const unit = document.getElementById("unit").value;
-    const isGroupActivity = document.getElementById("groupActivity").checked;
-    const upload = document.getElementById("upload").files[0];
-
-    const formData = {
-      name: name,
-      type: type,
-      description: description,
-      target: {
-        value: target,
-        unit: unit,
-      },
-      frameworkType: isGroupActivity ? COLLECTIVE : PERSONAL,
-    };
-
     addActivity(formData);
     console.log("Add to Archive:", formData);
     let myModalEl = document.getElementById("add-activity-modal");
