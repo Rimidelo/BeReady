@@ -17,13 +17,9 @@ const activityListElement = document.getElementById("activity-list");
 let LoggedInUser;
 
 window.onload = async () => {
-  console.log("Window loaded, initializing");
   try {
     await readUserData();
-    console.log("User data read successfully");
-    console.log(LoggedInUser);
     await readActivitiesData();
-    console.log("Activities data read successfully");
     initActivityList();
   } catch (error) {
     console.error("An error occurred:", error);
@@ -41,7 +37,6 @@ const readUserData = async () =>
     .then(response => response.json())
     .then(data => {
       LoggedInUser = data.LoggedInUser;
-      console.log(LoggedInUser);
     });
 
 
@@ -53,14 +48,8 @@ const initActivityList = () => {
 
 const getActivityElementId = (id) => `activity-${id}`;
 
-const createActivityElement = ({
-  id,
-  type,
-  name,
-  frameworkType,
-  scheduledAttributes,
-  company_id,
-}) => {
+const createActivityElement = (activity) => {
+  const { id, type, name, frameworkType, scheduledAttributes, company_id } = activity;
   const newActivityElement = document.createElement("li");
   newActivityElement.id = getActivityElementId(id);
   newActivityElement.classList.add("activity");
@@ -69,6 +58,9 @@ const createActivityElement = ({
     createActivityContentElement(name, frameworkType, scheduledAttributes),
     createActivityButtonsElement(id, company_id)
   );
+  newActivityElement.addEventListener('click', () => {
+    openActivityModal(activity);
+  });
   return newActivityElement;
 };
 
