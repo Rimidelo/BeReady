@@ -59,8 +59,10 @@ const buildModalElement = (mode, activityData) => `
                   <div class="form-check group-activity">
                     <label class="form-check-label" for="is-group-activity">פעילות קבוצתית</label>
                     <input class="form-check-input" id="is-group-activity" name="isGroupActivity" type="checkbox" ${
-                      activityData?.frameworkType == COLLECTIVE && "checked"
-                    } />
+                      mode.disabled && "disabled"
+                    } ${
+  activityData?.frameworkType == COLLECTIVE && "checked"
+} />
                   </div>
                 </div>
             </section>
