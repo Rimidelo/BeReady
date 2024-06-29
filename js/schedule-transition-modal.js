@@ -65,6 +65,5 @@ function openScheduleTransitionModal(formData, activityModalInstance) {
     addActivity(formData);
     activityForm.reset();
     transitionModalInstance.hide();
-    scheduleFormModal(formData, transitionModalInstance);
   };
 }

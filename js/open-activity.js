@@ -90,7 +90,7 @@ const buildModalElement = (mode, activityData) => `
     </div>
   </div>`;
 
-const getActivityFormData = (activityList) => {
+const getActivityFormData = (activityData) => {
   const activityFormElement = document.getElementById("activity-form");
   const activityFormData = new FormData(activityFormElement);
 
