@@ -9,15 +9,6 @@ const openActivityModal = (activityData) => {
         };
         return categories[type] || '';
     };
-    // const getUnitLabel = (unit) => {
-    //     const units = {
-    //         Minutes: "דקות",
-    //         Seconds: "שניות",
-    //         Repetitions: "חזרות",
-    //         Wins: "נצחונות"
-    //     };
-    //     return units[unit] || '';
-    // };
     const modalHtml = `
         <div class="modal fade" id="activity-modal" tabindex="-1" aria-labelledby="activityModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -42,16 +33,14 @@ const openActivityModal = (activityData) => {
                                 <textarea id="description" class="form-control" rows="3" readonly>${activityData.description || ''}</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="activityTarget">יעד</label>
                                 <div class="activity-row">
-                                    <section id="unit-select-group">
-                                        <input type="text" id="activityTarget" class="form-control" value="${activityData.target.value || ''}" disabled />
-                                        <input type="text" id="unit" class="form-control" value="${activityData.target.unit}" disabled>
-                                    </section>
                                     <div class="form-check group-activity">
-                                        <label class="form-check-label" for="groupActivity">פעילות קבוצתית</label>
-                                        <input class="form-check-input" type="checkbox" ${activityData.frameworkType === 'Group' ? 'checked' : ''} disabled />
+                                    <div class="unit-select">
+                                        <label class="form-check-label">יעד:</label>
+                                        <label class="form-check-label">${activityData.target.value}</label>
+                                        <label class="form-check-label">${activityData.target.unit}</label>
                                     </div>
+                                    <label class="form-check-label">${activityData.frameworkType}</label>
                                 </div>
                             </div>
                         </section>
@@ -60,9 +49,8 @@ const openActivityModal = (activityData) => {
                                 <section id="file-adder">
                                     <label for="upload" class="form-label">
                                         <img src="/images/activity/file-add-icon.png" alt="file-add-icon" id="file-add-icon" />
-                                        <h4>העלו קובץ</h4>
-                                    </label>
-                                    <input type="file" class="form-control" id="upload" disabled />
+                                            <h1 class="modal-title fs-5">שם הקובץ:</h1>
+                                        </label>
                                 </section>
                             </div>
                         </section>
