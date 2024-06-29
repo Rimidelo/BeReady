@@ -80,7 +80,9 @@ const buildModalElement = (mode, activityData) => `
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">בטל</button>
-            <button type="submit" class="btn btn-secondary" id="add-activity-archive" data-action="onAddToArchive">הוסף למאגר</button>
+            <button type="submit" class="btn btn-secondary" id="add-activity-archive" data-action="onAddToArchive">${
+              mode.addToArchiveText
+            }</button>
             <button type="submit" class="btn btn-success add-activity-company" id="add-activity-company" data-action="onAddToCompany">הוסף לפעילויות שלנו</button>
           </div>
         </form>

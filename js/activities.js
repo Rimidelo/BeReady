@@ -209,18 +209,21 @@ const editActivity = (newActivityData) => {
 const MODE_CONFIG = {
   READ: {
     title: "פרטי פעילות",
+    addToArchiveText: "הוסף למאגר",
     disabled: true,
     onAddToArchive: () => console.log("read"),
     onAddToCompany: openScheduleTransitionModal,
   },
   ADD: {
     title: "יצירת פעילות חדשה",
+    addToArchiveText: "הוסף למאגר",
     disabled: false,
     onAddToArchive: addActivity,
     onAddToCompany: openScheduleTransitionModal,
   },
   EDIT: {
     title: "עריכת פעילות קיימת",
+    addToArchiveText: "עדכן למאגר",
     disabled: false,
     onAddToArchive: editActivity,
     onAddToCompany: openScheduleTransitionModal,
