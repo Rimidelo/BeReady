@@ -87,7 +87,7 @@
   </main>
   <!-- Modal -->
   <div class="modal fade" id="add-activity-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-dialog  modal-dialog-centered modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">יצירת פעילות חדשה</h1>
@@ -95,43 +95,49 @@
         </div>
         <form id="activity-form">
           <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="ActivityFormName">שם הפעילות</label>
-                  <input type="text" id="ActivityFormName" class="form-control" required="">
-                </div>
-                <div class="form-group">
-                  <label for="ActivityFormName">קטגוריה</label>
-                  <select id="ActivityFormName" class="form-select">
-                    <option value="Physical">כוח וסיבולת</option>
-                    <option value="Mental">מנטלי</option>
-                    <option value="Brain">חשיבתי</option>
-                    <option value="Coordination">קורדינציה</option>
-                    <option value="Leadership">כישורי מנהיגות</option>
-                  </select>
+            <section id="activity-col-right">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="ActivityFormName">שם הפעילות</label>
+                    <input type="text" id="ActivityFormName" class="form-control" required="">
+                  </div>
+                  <div class="form-group">
+                    <label for="ActivityFormType">קטגוריה</label>
+                    <select id="ActivityFormType" class="form-select">
+                      <option value="Physical">כוח וסיבולת</option>
+                      <option value="Mental">מנטלי</option>
+                      <option value="Brain">חשיבתי</option>
+                      <option value="Coordination">קורדינציה</option>
+                      <option value="Leadership">כישורי מנהיגות</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="description">תיאור הפעילות</label>
                   <textarea id="description" class="form-control" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="target">יעד</label>
-                  <div class="target-container">
-                    <input type="text" id="target" class="form-control" required="" inputmode="numeric" />
-                    <select id="unit" class="form-select">
-                      <option value="Minutes">דקות</option>
-                      <option value="Seconds">שניות</option>
-                      <option value="Repetitions">חזרות</option>
-                      <option value="Wins">נצחונות</option>
-                    </select>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="groupActivity" />
+                  <label for="activityTarget">יעד</label>
+                  <div class="activity-row">
+                    <section id="unit-select-group">
+                      <input type="text" id="activityTarget" class="form-control" required="" inputmode="numeric" />
+                      <div class="unit-select">
+                        <label for="unit" class="visually-hidden">יחידת מדידה</label>
+                        <select id="unit" class="form-select">
+                          <option value="Minutes">דקות</option>
+                          <option value="Seconds">שניות</option>
+                          <option value="Repetitions">חזרות</option>
+                          <option value="Wins">נצחונות</option>
+                        </select>
+                      </div>
+                    </section>
+                    <div class="form-check group-activity">
                       <label class="form-check-label" for="groupActivity">פעילות קבוצתית</label>
+                      <input class="form-check-input" type="checkbox" />
                     </div>
                   </div>
-                </div>
-              </div>
+            </section>
+            <section id="activity-col-left">
               <div class="col-md-6 custom-border-end">
                 <section id="file-adder">
                   <label for="upload" class="form-label">
@@ -141,7 +147,7 @@
                   <input type="file" class="form-control" id="upload" />
                 </section>
               </div>
-            </div>
+            </section>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
@@ -158,8 +164,10 @@
       </div>
     </div>
   </div>
+
   <script src="js/activities.js"></script>
   <script src="js/add-activity.js"></script>
+  <script src="js/open-activity.js"></script>
 </body>
 
 </html>
