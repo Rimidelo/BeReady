@@ -14,79 +14,103 @@
   <title>BeReady - Activity archive</title>
 </head>
 
-<body>
-  <header>
-    <section>
-      <a id="site-logo" href="index.html"></a>
-    </section>
-    <a id="profile-link" href="#">
-      <section id="info_section">
-        <img src="/images/header/5finger-logo.png" alt="5finger-logo" id="company-sign" />
-        <section id="user_info">
-          <img src="/images/header/yogev.png" alt="User Avatar" />
-          <div>
-            <p>שלום, יוגב!</p>
-            <p>מנהל מערכת</p>
+  <body>
+    <header>
+      <section>
+        <a id="site-logo" href="index.html"></a>
+      </section>
+      <a id="profile-link" href="#">
+        <section id="info_section">
+          <img
+            src="/images/header/5finger-logo.png"
+            alt="5finger-logo"
+            id="company-sign"
+          />
+          <section id="user_info">
+            <img src="/images/header/yogev.png" alt="User Avatar" />
+            <div>
+              <p>שלום, יוגב!</p>
+              <p>מנהל מערכת</p>
+            </div>
+          </section>
+        </section>
+      </a>
+    </header>
+    <aside>
+      <section id="sidebar">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <span class="icon-placeholder"
+                ><img
+                  src="/images/sidebar/my-activitires-icon.png"
+                  alt="my-activitires-icon Icon"
+                  class="icon-img"
+              /></span>
+              הפעילויות שלנו
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="activity-archive.html">
+              <span class="icon-placeholder"
+                ><img
+                  src="/images/sidebar/all-activitires-icon.png"
+                  alt="all-activitires-icon Icon"
+                  class="icon-img"
+              /></span>
+              מאגר פעילויות
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="calender.html">
+              <span class="icon-placeholder"
+                ><img
+                  src="/images/sidebar/calender.svg"
+                  alt="calender Icon"
+                  class="icon-img"
+              /></span>
+              יומן
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="members.html">
+              <span class="icon-placeholder"
+                ><img
+                  src="/images/sidebar/members.png"
+                  alt="Members Icon"
+                  class="icon-img"
+              /></span>
+              חניכים
+            </a>
+          </li>
+        </ul>
+      </section>
+    </aside>
+    <main>
+      <section id="page_info" class="d-flex align-items-center">
+        <section>
+          <h1>מאגר פעילויות</h1>
+          <button type="button" class="btn add-activity-btn"></button>
+        </section>
+        <section id="search-and-sort">
+          <div class="custom-search-form">
+            <input
+              class="custom-search-input"
+              type="search"
+              placeholder=""
+              aria-label="Search"
+            />
+            <button class="custom-search-btn" type="submit"></button>
           </div>
+          <span id="sort-button"></span>
         </section>
       </section>
-    </a>
-  </header>
-  <aside>
-    <section id="sidebar">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link" href="index.html">
-            <span class="icon-placeholder"><img src="/images/sidebar/my-activitires-icon.png"
-                alt="my-activitires-icon Icon" class="icon-img" /></span>
-            הפעילויות שלנו
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="activity-archive.html">
-            <span class="icon-placeholder"><img src="/images/sidebar/all-activitires-icon.png"
-                alt="all-activitires-icon Icon" class="icon-img" /></span>
-            מאגר פעילויות
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="calender.html">
-            <span class="icon-placeholder"><img src="/images/sidebar/calender.svg" alt="calender Icon"
-                class="icon-img" /></span>
-            יומן
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="members.html">
-            <span class="icon-placeholder"><img src="/images/sidebar/members.png" alt="Members Icon"
-                class="icon-img" /></span>
-            חניכים
-          </a>
-        </li>
-      </ul>
-    </section>
-  </aside>
-  <main>
-    <section id="page_info" class="d-flex align-items-center">
-      <section>
-        <h1>מאגר פעילויות</h1>
-        <button type="button" class="btn add-activity-btn"></button>
+      <section id="activities">
+        <ul id="activity-list"></ul>
       </section>
-      <section id="search-and-sort">
-        <div class="custom-search-form">
-          <input class="custom-search-input" type="search" placeholder="" aria-label="Search" />
-          <button class="custom-search-btn" type="submit"></button>
-        </div>
-        <span id="sort-button"></span>
-      </section>
-    </section>
-    <section id="activities">
-      <ul id="activity-list"></ul>
-    </section>
-  </main>
-  <script src="js/open-activity.js"></script>
-  <script src="js/activities.js"></script>
-  <script src="js/schedule-transition-modal.js"></script>
-</body>
-
+    </main>
+    <script src="js/open-activity.js"></script>
+    <script src="js/schedule-transition-modal.js"></script>
+    <script src="js/activities.js"></script>
+  </body>
 </html>
