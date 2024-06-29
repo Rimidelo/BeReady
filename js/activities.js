@@ -15,11 +15,13 @@ const PERSONAL = "אישי";
 let activityList = [];
 const activityListElement = document.getElementById("activity-list");
 let LoggedInUser;
+let generateId;
 
 window.onload = async () => {
   try {
     await readUserData();
     await readActivitiesData();
+    generateId = createIdGenerator();
     initActivityList();
     setAddActivityBtnOnClick();
   } catch (error) {
@@ -55,7 +57,12 @@ const createActivityElement = (activity) => {
   newActivityElement.classList.add("activity");
   newActivityElement.append(
     createActivityTypeIcon(type),
-    createActivityContentElement(activity, name, frameworkType, scheduledAttributes),
+    createActivityContentElement(
+      activity,
+       name,
+      frameworkType,
+      scheduledAttributes
+    ),
     createActivityButtonsElement(id, company_id)
   );
   return newActivityElement;
@@ -71,7 +78,8 @@ const createActivityTypeIcon = (type) => {
   return iconFrameElement;
 };
 
-const createActivityContentElement = (activity,
+const createActivityContentElement = (
+  activity,
   name,
   frameworkType,
   scheduledAttributes
@@ -146,16 +154,26 @@ const addOnClickToBtn = (id, element, onClickAction) => {
   element.onclick = () => onClickAction(id);
 };
 
-const generateId = (() => {
-  let lastId = activityList[-1]?.id || -1;
+const createIdGenerator = () => {
+  let lastId = activityList[activityList.length - 1]?.id || -1;
   return () => ++lastId;
-})();
+};
 
 const addActivityElement = (activityElement) => {
   activityListElement.insertBefore(
     activityElement,
     activityListElement.firstChild
   );
+};
+
+const getActivityIndexInList = (id) => {
+  return id;
+  for (let i = 0; i < activityList.length; i++) {
+    if (activityList[i]?.id == id) {
+      console.log("i", i, "id", id);
+      return i;
+    }
+  }
 };
 
 const addActivity = (newActivityData) => {
@@ -176,14 +194,20 @@ const removeActivity = (id) => {
   );
   activityListElement.removeChild(activityToRemoveElement);
    console.log(`DELETE /activities/${id}`);
-  delete activityList[id];
+  delete activityList[getActivityIndexInList(id)];
 };
 
 const editActivity = (newActivityData) => {
-  activityList[newActivityData.id] = {
+  const activityToEditElement = document.getElementById(
+    getActivityElementId(newActivityData.id)
+  );
+  activityList[getActivityIndexInList(newActivityData.id)] = {
     ...newActivityData,
   };
-  console.log(activityList);
+  activityListElement.replaceChild(
+    createActivityElement(newActivityData),
+    activityToEditElement
+  );
 };
 
 const MODE_CONFIG = {
@@ -207,8 +231,12 @@ const MODE_CONFIG = {
   },
 };
 
-const openEditActivity = (id) =>
-  openActivityModal(MODE_CONFIG["EDIT"], activityList[id]);
+const openEditActivity = (id) => {
+  openActivityModal(
+    MODE_CONFIG["EDIT"],
+    activityList[getActivityIndexInList(id)]
+  );
+};
 
 const setAddActivityBtnOnClick = () => {
   const addActivityElements =

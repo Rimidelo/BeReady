@@ -81,11 +81,12 @@ const buildModalElement = (mode, activityData) => `
     </div>
   </div>`;
 
-const getActivityFormData = () => {
+const getActivityFormData = (activityList) => {
   const activityFormElement = document.getElementById("activity-form");
   const activityFormData = new FormData(activityFormElement);
 
   return {
+    ...activityList,
     name: activityFormData.get("name"),
     type: activityFormData.get("type"),
     description: activityFormData.get("description"),
@@ -132,7 +133,7 @@ const openActivityModal = (mode, activityData) => {
   activityForm.onsubmit = (event) => {
     event.preventDefault();
     const action = event.submitter.getAttribute("data-action");
-    const formData = getActivityFormData();
+    const formData = getActivityFormData(activityData);
 
     mode[action]?.(formData, activityModal);
     activityModal.hide();
