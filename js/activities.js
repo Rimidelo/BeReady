@@ -177,11 +177,18 @@ const removeActivity = (id) => {
   delete activityList[id];
 };
 
+const editActivity = (newActivityData) => {
+  activityList[newActivityData.id] = {
+    ...newActivityData,
+  };
+  console.log(activityList);
+};
+
 const MODE_CONFIG = {
   READ: {
     title: "פרטי פעילות",
     disabled: true,
-    onAddToArchive: addActivity,
+    onAddToArchive: () => console.log("read"),
     onAddToCompany: openScheduleTransitionModal,
   },
   ADD: {
@@ -193,7 +200,7 @@ const MODE_CONFIG = {
   EDIT: {
     title: "עריכת פעילות קיימת",
     disabled: false,
-    onAddToArchive: addActivity,
+    onAddToArchive: editActivity,
     onAddToCompany: openScheduleTransitionModal,
   },
 };
