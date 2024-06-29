@@ -98,12 +98,12 @@
             <section id="activity-col-right">
               <div class="form-row">
                 <div class="form-group">
-                  <label for="ActivityFormName">שם הפעילות</label>
-                  <input type="text" id="ActivityFormName" class="form-control" required="">
+                  <label for="activity-form-name">שם הפעילות</label>
+                  <input type="text" id="activity-form-name" name="name" class="form-control" required="">
                 </div>
                 <div class="form-group">
-                  <label for="ActivityFormType">קטגוריה</label>
-                  <select id="ActivityFormType" class="form-select">
+                  <label for="activity-form-type">קטגוריה</label>
+                  <select id="activity-form-type" name="type" class="form-select">
                     <option value="Physical">כוח וסיבולת</option>
                     <option value="Mental">מנטלי</option>
                     <option value="Brain">חשיבתי</option>
@@ -113,17 +113,17 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="description">תיאור הפעילות</label>
-                <textarea id="description" class="form-control" rows="3"></textarea>
+                <label for="activity-form-description">תיאור הפעילות</label>
+                <textarea id="activity-form-description" name="description" class="form-control" rows="3"></textarea>
               </div>
               <div class="form-group">
-                <label for="activityTarget">יעד</label>
+                <label for="activity-form-target">יעד</label>
                 <div class="activity-row">
                   <section id="unit-select-group">
-                    <input type="text" id="activityTarget" class="form-control" required="" inputmode="numeric" />
+                    <input type="text" id="activity-form-target" name="target" class="form-control" required="" inputmode="numeric" />
                     <div class="unit-select">
                       <label for="unit" class="visually-hidden">יחידת מדידה</label>
-                      <select id="unit" class="form-select">
+                      <select id="unit" name="unit" class="form-select">
                         <option value="Minutes">דקות</option>
                         <option value="Seconds">שניות</option>
                         <option value="Repetitions">חזרות</option>
@@ -132,8 +132,8 @@
                     </div>
                   </section>
                   <div class="form-check group-activity">
-                    <label class="form-check-label" for="groupActivity">פעילות קבוצתית</label>
-                    <input class="form-check-input" id="groupActivity"type="checkbox" />
+                    <label class="form-check-label" for="is-group-activity">פעילות קבוצתית</label>
+                    <input class="form-check-input" id="is-group-activity" name="isGroupActivity" type="checkbox" />
                   </div>
                 </div>
             </section>

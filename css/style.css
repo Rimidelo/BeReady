@@ -318,17 +318,17 @@ label {
   height: 384.005px;
 }
 
-#ActivityFormName,
-#ActivityFormType,
-#description,
-#activityTarget,
-#unit {
+#activity-form-name,
+#activity-form-type,
+#activity-form-description,
+#activity-form-target,
+#activity-form-unit {
   border-radius: 3px;
   border: 2px solid #d6d6d6;
 }
 
-#ActivityFormName,
-#ActivityFormType {
+#activity-form-name,
+#activity-form-type {
   width: 264px;
   height: 39px;
 }
@@ -338,7 +338,7 @@ label {
   height: 90px;
 }
 
-#activityTarget {
+#activity-form-target {
   width: 95px;
   height: 39px;
 }
