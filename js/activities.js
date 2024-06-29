@@ -186,8 +186,8 @@ const addActivity = (newActivityData) => {
   activityList.push(newActivity);
   addActivityElement(createActivityElement(newActivity));
   // Simulate POST request
-  console.log('POST /activities');
-  console.log('Request body:', newActivity);
+  console.log("POST /activities");
+  console.log("Request body:", newActivity);
 };
 
 const removeActivity = (id) => {
@@ -215,18 +215,21 @@ const editActivity = (newActivityData) => {
 const MODE_CONFIG = {
   READ: {
     title: "פרטי פעילות",
+    addToArchiveText: "הוסף למאגר",
     disabled: true,
     onAddToArchive: () => console.log("read"),
     onAddToCompany: openScheduleTransitionModal,
   },
   ADD: {
     title: "יצירת פעילות חדשה",
+    addToArchiveText: "הוסף למאגר",
     disabled: false,
     onAddToArchive: addActivity,
     onAddToCompany: openScheduleTransitionModal,
   },
   EDIT: {
     title: "עריכת פעילות קיימת",
+    addToArchiveText: "עדכן למאגר",
     disabled: false,
     onAddToArchive: editActivity,
     onAddToCompany: openScheduleTransitionModal,
