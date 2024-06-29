@@ -18,7 +18,7 @@
             "frameworkType": "אישי",
             "company_id": 67890,
             "target": {
-                "value": 5,
+                "value": 6,
                 "unit": "Repetitions"
             }
         },
@@ -29,7 +29,7 @@
             "description": "מרימים משקולות",
             "frameworkType": "קבוצתי",
             "target": {
-                "value": 5,
+                "value": 7,
                 "unit": "Repetitions"
             },
             "scheduledAttributes": {
@@ -53,7 +53,7 @@
             "frameworkType": "אישי",
             "company_id": 67890,
             "target": {
-                "value": 5,
+                "value": 8,
                 "unit": "Repetitions"
             }
         }
