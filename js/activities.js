@@ -1,3 +1,4 @@
+const MY_ACTIVITIES_PAGE_TITLE = "BeReady";
 const ACTIVITY_ACTIONS_ICONS = {
   edit: "images/activity/buttons/edit-icon.png",
   delete: "images/activity/buttons/delete-icon.png",
@@ -59,7 +60,7 @@ const createActivityElement = (activity) => {
     createActivityTypeIcon(type),
     createActivityContentElement(
       activity,
-       name,
+      name,
       frameworkType,
       scheduledAttributes
     ),
@@ -104,7 +105,8 @@ const createActivityDetailsElement = (frameworkType, scheduledAttributes) => {
   frameworkTypeElement.innerText = frameworkType;
   frameworkTypeElement.classList.add("activity-framework-type");
   activityDetailsElement.appendChild(frameworkTypeElement);
-  if (scheduledAttributes) {
+
+  if (scheduledAttributes && document.title == MY_ACTIVITIES_PAGE_TITLE) {
     const { actualAmount, maxAmount } = scheduledAttributes.participants;
     const { date, day, hours } = scheduledAttributes.schedule;
     const participantsAmountElement = document.createElement("span");
@@ -193,7 +195,7 @@ const removeActivity = (id) => {
     getActivityElementId(id)
   );
   activityListElement.removeChild(activityToRemoveElement);
-   console.log(`DELETE /activities/${id}`);
+  console.log(`DELETE /activities/${id}`);
   delete activityList[getActivityIndexInList(id)];
 };
 

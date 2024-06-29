@@ -81,12 +81,12 @@ const buildModalElement = (mode, activityData) => `
     </div>
   </div>`;
 
-const getActivityFormData = (activityList) => {
+const getActivityFormData = (activityData) => {
   const activityFormElement = document.getElementById("activity-form");
   const activityFormData = new FormData(activityFormElement);
 
   return {
-    ...activityList,
+    ...activityData,
     name: activityFormData.get("name"),
     type: activityFormData.get("type"),
     description: activityFormData.get("description"),
