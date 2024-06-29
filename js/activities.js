@@ -210,6 +210,7 @@ const editActivity = (newActivityData) => {
     createActivityElement(newActivityData),
     activityToEditElement
   );
+  console.log(`POST /activities/${newActivityData.id}`);
 };
 
 const MODE_CONFIG = {
