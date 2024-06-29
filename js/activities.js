@@ -55,12 +55,9 @@ const createActivityElement = (activity) => {
   newActivityElement.classList.add("activity");
   newActivityElement.append(
     createActivityTypeIcon(type),
-    createActivityContentElement(name, frameworkType, scheduledAttributes),
+    createActivityContentElement(activity,name, frameworkType, scheduledAttributes),
     createActivityButtonsElement(id, company_id)
   );
-  newActivityElement.addEventListener("click", () => {
-    openActivityModal(MODE_CONFIG["READ"], activity);
-  });
   return newActivityElement;
 };
 
@@ -74,7 +71,7 @@ const createActivityTypeIcon = (type) => {
   return iconFrameElement;
 };
 
-const createActivityContentElement = (
+const createActivityContentElement = (activity,
   name,
   frameworkType,
   scheduledAttributes
@@ -84,6 +81,7 @@ const createActivityContentElement = (
   activityContentElement.classList.add("activity-content");
   nameElement.innerText = name;
   nameElement.classList.add("activity-name");
+  nameElement.onclick = () => openActivityModal(MODE_CONFIG["READ"], activity);
   activityContentElement.append(
     nameElement,
     createActivityDetailsElement(frameworkType, scheduledAttributes)
