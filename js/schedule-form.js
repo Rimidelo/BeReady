@@ -57,6 +57,8 @@ function scheduleFormModal(formData, transitionModalInstance) {
 
   document.body.insertAdjacentHTML("beforeend", modalHTML);
   flatpickr("#date-input", { dateFormat: "d/m/Y" });
+  flatpickr("#time-from", { enableTime: true, noCalendar: true, dateFormat: "H:i" });
+  flatpickr("#time-to", { enableTime: true, noCalendar: true, dateFormat: "H:i" });
   const modalElement = document.getElementById("new-invitation-modal");
   const scheduleTransitionModalInstance = new bootstrap.Modal(modalElement);
   scheduleTransitionModalInstance.show();
@@ -77,6 +79,7 @@ function scheduleFormModal(formData, transitionModalInstance) {
 function handleSubmit(formData, scheduleTransitionModalInstance) {
   console.log("3 ", formData);
   const scheduleFormElement = document.getElementById("invitation-form");
+  const activityForm = document.getElementById("activity-form");
   const scheduleFormData = new FormData(scheduleFormElement);
   const scheduleData = {
     date: document.getElementById("date-input").value,
@@ -90,18 +93,31 @@ function handleSubmit(formData, scheduleTransitionModalInstance) {
     },
   };
 
+  const scheduledFormData = {
+    ...formData,
+    scheduledAttributes: {
+      participants: {
+        actualAmount: 0,
+        maxAmount: 0
+      },
+      schedule: {
+        date: "",
+        day: "",
+        hours: "",
+        repeat: ""
+      }
+    }
+  };
+
   scheduleData.day = getDayOfWeek(scheduleData.date);
   console.log("Schedule Data:", scheduleData);
-  formData.scheduledAttributes.participants.maxAmount =
-    scheduleData.participants.maxAmount;
-  formData.scheduledAttributes.participants.actualAmount = 0;
-  formData.scheduledAttributes.schedule.date = scheduleData.date;
-  formData.scheduledAttributes.schedule.day = scheduleData.day;
-  formData.scheduledAttributes.schedule.hours =
-    scheduleData.time.from + " - " + scheduleData.time.to;
-  formData.scheduledAttributes.schedule.repeat = scheduleData.repeat;
-  console.log("Activity Data:", formData);
-  addActivity(formData);
+  scheduledFormData.scheduledAttributes.participants.maxAmount = scheduleData.participants.maxAmount;
+  scheduledFormData.scheduledAttributes.participants.actualAmount = 0;
+  scheduledFormData.scheduledAttributes.schedule.date = scheduleData.date;
+  scheduledFormData.scheduledAttributes.schedule.day = scheduleData.day;
+  scheduledFormData.scheduledAttributes.schedule.hours = scheduleData.time.from + " - " + scheduleData.time.to;
+  scheduledFormData.scheduledAttributes.schedule.repeat = scheduleData.repeat;
+  console.log("Activity Data:", scheduledFormData);
+  addActivity(scheduledFormData);
   scheduleTransitionModalInstance.hide();
-  activityForm.reset();
 }
