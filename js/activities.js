@@ -21,11 +21,11 @@ window.onload = async () => {
     await readUserData();
     await readActivitiesData();
     initActivityList();
+    setAddActivityBtnOnClick();
   } catch (error) {
     console.error("An error occurred:", error);
   }
 };
-
 
 const readActivitiesData = async () =>
   fetch("./data/activities.json")
@@ -34,11 +34,10 @@ const readActivitiesData = async () =>
 
 const readUserData = async () =>
   fetch("./data/user.json")
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       LoggedInUser = data.LoggedInUser;
     });
-
 
 const initActivityList = () => {
   for (const activity of activityList) {
@@ -49,7 +48,8 @@ const initActivityList = () => {
 const getActivityElementId = (id) => `activity-${id}`;
 
 const createActivityElement = (activity) => {
-  const { id, type, name, frameworkType, scheduledAttributes, company_id } = activity;
+  const { id, type, name, frameworkType, scheduledAttributes, company_id } =
+    activity;
   const newActivityElement = document.createElement("li");
   newActivityElement.id = getActivityElementId(id);
   newActivityElement.classList.add("activity");
@@ -58,8 +58,8 @@ const createActivityElement = (activity) => {
     createActivityContentElement(name, frameworkType, scheduledAttributes),
     createActivityButtonsElement(id, company_id)
   );
-  newActivityElement.addEventListener('click', () => {
-    openActivityModal(activity);
+  newActivityElement.addEventListener("click", () => {
+    openActivityModal(MODE_CONFIG["READ"], activity);
   });
   return newActivityElement;
 };
@@ -177,4 +177,13 @@ const removeActivity = (id) => {
   delete activityList[id];
 };
 
-const openEditActivity = (id) => { };
+const openEditActivity = (id) =>
+  openActivityModal(MODE_CONFIG["EDIT"], activityList[id]);
+
+const setAddActivityBtnOnClick = () => {
+  const addActivityElements =
+    document.getElementsByClassName("add-activity-btn");
+  for (const addActivityElement of addActivityElements) {
+    addActivityElement.onclick = () => openActivityModal(MODE_CONFIG["ADD"]);
+  }
+};
