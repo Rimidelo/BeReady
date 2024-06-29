@@ -27,7 +27,7 @@ activityForm.addEventListener("submit", function (event) {
   const activityFormElement = document.getElementById("activity-form");
   const activityFormData = new FormData(activityFormElement);
   const action = activityForm.getAttribute("data-action");
-  const formData = {
+  let formData = {
     name: activityFormData.get("name"),
     type: activityFormData.get("type"),
     description: activityFormData.get("description"),
@@ -37,6 +37,10 @@ activityForm.addEventListener("submit", function (event) {
     },
     frameworkType: activityFormData.get("isGroupActivity") ? COLLECTIVE : PERSONAL,
     company_id: LoggedInUser.company_id,
+    scheduledAttributes: {
+      participants: {},
+      schedule: {}
+    }
   };
   let myModalEl = document.getElementById("add-activity-modal");
   let activityModalInstance = bootstrap.Modal.getInstance(myModalEl);
@@ -50,6 +54,12 @@ activityForm.addEventListener("submit", function (event) {
     activityModalInstance.hide();
     if (formData.frameworkType == COLLECTIVE) {
       openScheduleTransitionModal(formData, activityModalInstance);
+    }
+    else {
+      addActivity(formData);
+      console.log("Add to company:", formData);
+      activityModalInstance.hide();
+      activityForm.reset();
     }
   }
 });
