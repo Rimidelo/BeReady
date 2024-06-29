@@ -24,25 +24,19 @@ addToCompanyButton.addEventListener("click", function () {
 
 activityForm.addEventListener("submit", function (event) {
   event.preventDefault();
-
+  const activityFormElement = document.getElementById("activity-form");
+  const activityFormData = new FormData(activityFormElement);
   const action = activityForm.getAttribute("data-action");
-  const name = document.getElementById("name").value;
-  const type = document.getElementById("type").value;
-  const description = document.getElementById("description").value;
-  const target = document.getElementById("target").value;
-  const unit = document.getElementById("unit").value;
-  const isGroupActivity = document.getElementById("groupActivity").checked;
-  const upload = document.getElementById("upload").files[0];
   
   const formData = {
-    name: name,
-    type: type,
-    description: description,
+    name: activityFormData.get("name"),
+    type: activityFormData.get("type"),
+    description: activityFormData.get("description"),
     target: {
-      value: target,
-      unit: unit,
+      value: activityFormData.get("target"),
+      unit: activityFormData.get("unit"),
     },
-    frameworkType: isGroupActivity ? COLLECTIVE : PERSONAL,
+    frameworkType: activityFormData.get("isGroupActivity") ? COLLECTIVE : PERSONAL,
   };
 
   if (action === "archive") {
