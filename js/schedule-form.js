@@ -1,11 +1,11 @@
 function getDayOfWeek(dateString) {
-    const daysOfWeek = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"];
-    const dateParts = dateString.split('/');
-    const date = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`);
-    return daysOfWeek[date.getDay()];
+  const daysOfWeek = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"];
+  const dateParts = dateString.split("/");
+  const date = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`);
+  return daysOfWeek[date.getDay()];
 }
 function scheduleFormModal(formData, transitionModalInstance) {
-    const modalHTML = `
+  const modalHTML = `
     <div class="modal fade" id="new-invitation-modal" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -55,55 +55,53 @@ function scheduleFormModal(formData, transitionModalInstance) {
     </div>
     `;
 
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
-    flatpickr("#date-input", { dateFormat: "d/m/Y" });
-    const modalElement = document.getElementById('new-invitation-modal');
-    const scheduleTransitionModalInstance = new bootstrap.Modal(modalElement);
-    scheduleTransitionModalInstance.show();
+  document.body.insertAdjacentHTML("beforeend", modalHTML);
+  flatpickr("#date-input", { dateFormat: "d/m/Y" });
+  const modalElement = document.getElementById("new-invitation-modal");
+  const scheduleTransitionModalInstance = new bootstrap.Modal(modalElement);
+  scheduleTransitionModalInstance.show();
 
+  const backButton = modalElement.querySelector(".btn-secondary");
+  backButton.onclick = () => {
+    scheduleTransitionModalInstance.hide();
+    transitionModalInstance.show();
+  };
 
-    const backButton = modalElement.querySelector('.btn-secondary');
-    backButton.addEventListener('click', function () {
-        scheduleTransitionModalInstance.hide();
-        transitionModalInstance.show();
-    });
-
-
-    console.log('1 ', formData);
-    const scheduleForm = document.getElementById("invitation-form");
-    scheduleForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        console.log('2 ', formData);
-        handleSubmit(formData, scheduleTransitionModalInstance);
-    });
+  const scheduleForm = document.getElementById("invitation-form");
+  scheduleForm.onsubmit = (event) => {
+    event.preventDefault();
+    handleSubmit(formData, scheduleTransitionModalInstance);
+  };
 }
 
 function handleSubmit(formData, scheduleTransitionModalInstance) {
-    console.log('3 ', formData);
-    const scheduleFormElement = document.getElementById("invitation-form");
-    const scheduleFormData = new FormData(scheduleFormElement);
-    const scheduleData = {
-        date: document.getElementById('date-input').value,
-        time: {
-            from: scheduleFormData.get("time-from"),
-            to: scheduleFormData.get("time-to"),
-        },
-        repeat: scheduleFormData.get("activityRepeat"),
-        participants: {
-            maxAmount: scheduleFormData.get("activityParticipants"),
-        },
-    };
+  console.log("3 ", formData);
+  const scheduleFormElement = document.getElementById("invitation-form");
+  const scheduleFormData = new FormData(scheduleFormElement);
+  const scheduleData = {
+    date: document.getElementById("date-input").value,
+    time: {
+      from: scheduleFormData.get("time-from"),
+      to: scheduleFormData.get("time-to"),
+    },
+    repeat: scheduleFormData.get("activityRepeat"),
+    participants: {
+      maxAmount: scheduleFormData.get("activityParticipants"),
+    },
+  };
 
-    scheduleData.day = getDayOfWeek(scheduleData.date);
-    console.log("Schedule Data:", scheduleData);
-    formData.scheduledAttributes.participants.maxAmount = scheduleData.participants.maxAmount;
-    formData.scheduledAttributes.participants.actualAmount = 0;
-    formData.scheduledAttributes.schedule.date = scheduleData.date;
-    formData.scheduledAttributes.schedule.day = scheduleData.day;
-    formData.scheduledAttributes.schedule.hours = scheduleData.time.from + ' - ' + scheduleData.time.to;
-    formData.scheduledAttributes.schedule.repeat = scheduleData.repeat;
-    console.log("Activity Data:", formData);
-    addActivity(formData);
-    scheduleTransitionModalInstance.hide();
-    activityForm.reset();
+  scheduleData.day = getDayOfWeek(scheduleData.date);
+  console.log("Schedule Data:", scheduleData);
+  formData.scheduledAttributes.participants.maxAmount =
+    scheduleData.participants.maxAmount;
+  formData.scheduledAttributes.participants.actualAmount = 0;
+  formData.scheduledAttributes.schedule.date = scheduleData.date;
+  formData.scheduledAttributes.schedule.day = scheduleData.day;
+  formData.scheduledAttributes.schedule.hours =
+    scheduleData.time.from + " - " + scheduleData.time.to;
+  formData.scheduledAttributes.schedule.repeat = scheduleData.repeat;
+  console.log("Activity Data:", formData);
+  addActivity(formData);
+  scheduleTransitionModalInstance.hide();
+  activityForm.reset();
 }

@@ -118,11 +118,8 @@ const openActivityModal = (mode, activityData) => {
     uploadElement.click();
   };
 
-  document
-    .querySelector('label[for="upload"]')
-    .addEventListener("click", function () {
-      document.getElementById("upload").click();
-    });
+  document.querySelector('label[for="upload"]').onclick = () =>
+    document.getElementById("upload").click();
 
   if (activityData) {
     document.querySelector(
