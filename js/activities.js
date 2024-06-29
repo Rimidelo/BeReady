@@ -59,7 +59,7 @@ const createActivityElement = (activity) => {
     createActivityTypeIcon(type),
     createActivityContentElement(
       activity,
-       name,
+      name,
       frameworkType,
       scheduledAttributes
     ),
@@ -184,8 +184,8 @@ const addActivity = (newActivityData) => {
   activityList.push(newActivity);
   addActivityElement(createActivityElement(newActivity));
   // Simulate POST request
-  console.log('POST /activities');
-  console.log('Request body:', newActivity);
+  console.log("POST /activities");
+  console.log("Request body:", newActivity);
 };
 
 const removeActivity = (id) => {
@@ -193,7 +193,7 @@ const removeActivity = (id) => {
     getActivityElementId(id)
   );
   activityListElement.removeChild(activityToRemoveElement);
-   console.log(`DELETE /activities/${id}`);
+  console.log(`DELETE /activities/${id}`);
   delete activityList[getActivityIndexInList(id)];
 };
 
