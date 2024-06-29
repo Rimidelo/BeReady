@@ -27,7 +27,6 @@ activityForm.addEventListener("submit", function (event) {
   const activityFormElement = document.getElementById("activity-form");
   const activityFormData = new FormData(activityFormElement);
   const action = activityForm.getAttribute("data-action");
-  
   const formData = {
     name: activityFormData.get("name"),
     type: activityFormData.get("type"),
@@ -49,7 +48,7 @@ activityForm.addEventListener("submit", function (event) {
   } else if (action === "company") {
     console.log("Adding to company...");
     activityModalInstance.hide();
-    if (isGroupActivity === true) {
+    if (formData.frameworkType == COLLECTIVE) {
       openScheduleTransitionModal(formData, activityModalInstance);
     }
   }

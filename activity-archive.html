@@ -9,6 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <title>BeReady - Activity archive</title>
@@ -120,7 +121,8 @@
                 <label for="activity-form-target">יעד</label>
                 <div class="activity-row">
                   <section id="unit-select-group">
-                    <input type="text" id="activity-form-target" name="target" class="form-control" required="" inputmode="numeric" />
+                    <input type="text" id="activity-form-target" name="target" class="form-control" required=""
+                      inputmode="numeric" />
                     <div class="unit-select">
                       <label for="unit" class="visually-hidden">יחידת מדידה</label>
                       <select id="unit" name="unit" class="form-select">
@@ -152,12 +154,14 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">בטל</button>
             <button type="submit" class="btn btn-secondary" id="add-activity-arcive">הוסף למאגר</button>
-            <button type="submit" class="btn btn-success add-activity-company" id="add-activity-company">הוסף לפעילויות שלנו</button>
+            <button type="submit" class="btn btn-success add-activity-company" id="add-activity-company">הוסף לפעילויות
+              שלנו</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="js/activities.js"></script>
   <script src="js/add-activity.js"></script>
   <script src="js/schedule-transition-modal.js"></script>

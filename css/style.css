@@ -546,7 +546,97 @@ label {
 }
 
 /* schedule modal */
+#date-input {
+  width: 185px;
+  height: 42px;
+  padding: 6px 8px;
+  background: #ffffff;
+  color: #444444;
+  border-color: #d6d6d6;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 3px;
+  font-family: "Heebo";
+  font-weight: 400;
+  font-size: 18px;
+  text-align: right;
+  margin-left: 1rem;
+}
+#form-row-schedule{
+  margin-left: 0;
+}
 
+#time-from,
+#time-to {
+  width: 102px;
+  height: 42px;
+  padding: 6px 8px;
+  background: #ffffff;
+  color: #c0c0c0;
+  border-color: #d6d6d6;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 3px;
+  font-family: "Heebo";
+  font-weight: 400;
+  font-size: 18px;
+  text-align: right;
+}
+
+#repeat-select {
+  width: 126px;
+  height: 42px;
+  border-color: #d6d6d6;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 3px;
+  font-weight: 400;
+  font-size: 18px;
+  text-align: right;
+}
+
+#participants-group {
+  display: flex;
+  align-items: center;
+}
+
+#participants-label {
+  margin-right: 10px;
+  font-family: "Heebo";
+  font-weight: 400;
+  font-size: 18px;
+  text-align: right;
+}
+
+#participants-input {
+  width: 57px;
+  height: 42px;
+  padding: 6px 8px;
+  background: #ffffff;
+  color: #444444;
+  border-color: #d6d6d6;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 3px;
+  font-family: "Heebo";
+  font-weight: 400;
+  font-size: 18px;
+  text-align: right;
+  margin-right: 1rem;
+}
+.btn-success {
+  width: 183px;
+  height: 42px;
+  padding: 0px 10px 1px 10px;
+  background: #3BA585;
+  color: #FFFFFF;
+  border-radius: 3px;
+  font-family: "Heebo";
+  font-weight: 400;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+}
 /* responsive alternatives */
 @media (max-width: 768px) {
   #sidebar {

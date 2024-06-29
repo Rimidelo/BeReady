@@ -53,19 +53,86 @@ function openScheduleTransitionModal(formData, activityModalInstance) {
     modalDialog.appendChild(modalContent);
     modalEl.appendChild(modalDialog);
     document.body.appendChild(modalEl);
-    const modalInstance = new bootstrap.Modal(modalEl);
-    modalInstance.show();
+    const transitionModalInstance = new bootstrap.Modal(modalEl);
+    transitionModalInstance.show();
 
     yesButton.addEventListener('click', function () {
         console.log('Yes');
-        modalInstance.hide();
+        transitionModalInstance.hide();
+        scheduleFormModal(formData, activityModalInstance);
     });
 
     noButton.addEventListener('click', function () {
         addActivity(formData);
         console.log("Add to Archive:", formData);
-        activityModalInstance.hide();
         activityForm.reset();
-        modalInstance.hide();
+        transitionModalInstance.hide();
+        scheduleFormModal(formData, transitionModalInstance);
+    });
+}
+
+
+function scheduleFormModal(formData, transitionModalInstance) {
+    const modalHTML = `
+    <div class="modal fade" id="new-invitation-modal" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="invitationModalLabel">תזמון</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="invitation-form">
+                    <div class="modal-body">
+                        <section id="activity-col-right">
+                            <div class="form-row" >
+                                <div class="form-group col-md-6" id="form-row-schedule">
+                                    <label for="date-input">מתאריך:</label>
+                                    <input type="text" id="date-input" class="form-control">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="time-from">שעה:</label>
+                                    <div class="d-flex align-items-center">
+                                        <input type="text" id="time-from" class="form-control">
+                                            <label class="mx-2">עד</label>
+                                            <input type="text" id="time-to" class="form-control">
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="repeat-select">חזרות:</label>
+                                    <select id="repeat-select" class="form-select">
+                                        <option value="none">ללא חזרה</option>
+                                        <option value="daily">יומי</option>
+                                        <option value="weekly">שבועי</option>
+                                        <option value="monthly">חודשי</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="participants-group">
+                                    <label for="participants-input" id="participants-label">כמות משתתפים:</label>
+                                    <input type="text" id="participants-input" class="form-control">
+                                </div>
+                        </section>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" >חזור</button>
+                        <button type="submit" class="btn btn-success">תזמן</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    flatpickr("#date-input", { dateFormat: "d/m/Y" });
+    const modalElement = document.getElementById('new-invitation-modal');
+    const scheduleTransitionModalInstance = new bootstrap.Modal(modalElement);
+    scheduleTransitionModalInstance.show();
+
+
+    const backButton = modalElement.querySelector('.btn-secondary');
+    backButton.addEventListener('click', function () {
+        scheduleTransitionModalInstance.hide();
+        transitionModalInstance.show();
     });
 }
