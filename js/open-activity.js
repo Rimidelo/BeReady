@@ -1,18 +1,4 @@
 const EMPTY_FIELD = "";
-const MODE_CONFIG = {
-  READ: {
-    title: "פרטי פעילות",
-    disabled: true,
-  },
-  ADD: {
-    title: "יצירת פעילות חדשה",
-    disabled: false,
-  },
-  EDIT: {
-    title: "עריכת פעילות קיימת",
-    disabled: false,
-  },
-};
 
 const buildModalElement = (mode, activityData) => `
   <div class="modal fade" id="activity-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -92,7 +78,7 @@ const buildModalElement = (mode, activityData) => `
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">בטל</button>
-            <button type="submit" class="btn btn-secondary" id="add-activity-arcive" data-action="onAddToArchive">הוסף למאגר</button>
+            <button type="submit" class="btn btn-secondary" id="add-activity-archive" data-action="onAddToArchive">הוסף למאגר</button>
             <button type="submit" class="btn btn-success add-activity-company" id="add-activity-company" data-action="onAddToCompany">הוסף לפעילויות שלנו</button>
           </div>
         </form>
@@ -153,7 +139,7 @@ const openActivityModal = (mode, activityData) => {
 
   activityForm.onsubmit = (event) => {
     event.preventDefault();
-    const action = activityForm.getAttribute("data-action");
+    const action = event.submitter.getAttribute("data-action");
     const formData = getActivityFormData();
 
     mode[action]?.(formData, activityModal);

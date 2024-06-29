@@ -162,8 +162,8 @@ const addActivityElement = (activityElement) => {
 
 const addActivity = (newActivityData) => {
   const newActivity = {
-    id: generateId(),
     ...newActivityData,
+    id: generateId(),
   };
   activityList.push(newActivity);
   addActivityElement(createActivityElement(newActivity));
@@ -175,6 +175,27 @@ const removeActivity = (id) => {
   );
   activityListElement.removeChild(activityToRemoveElement);
   delete activityList[id];
+};
+
+const MODE_CONFIG = {
+  READ: {
+    title: "פרטי פעילות",
+    disabled: true,
+    onAddToArchive: addActivity,
+    onAddToCompany: openScheduleTransitionModal,
+  },
+  ADD: {
+    title: "יצירת פעילות חדשה",
+    disabled: false,
+    onAddToArchive: addActivity,
+    onAddToCompany: openScheduleTransitionModal,
+  },
+  EDIT: {
+    title: "עריכת פעילות קיימת",
+    disabled: false,
+    onAddToArchive: addActivity,
+    onAddToCompany: openScheduleTransitionModal,
+  },
 };
 
 const openEditActivity = (id) =>
