@@ -8,7 +8,7 @@
             "company_id": 67890,
             "target": {
                 "value": 5,
-                "unit": "חזרות"
+                "unit": "Repetitions"
             }
         },
         {
@@ -19,7 +19,7 @@
             "company_id": 67890,
             "target": {
                 "value": 5,
-                "unit": "חזרות"
+                "unit": "Repetitions"
             }
         },
         {
@@ -30,7 +30,7 @@
             "frameworkType": "קבוצתי",
             "target": {
                 "value": 5,
-                "unit": "חזרות"
+                "unit": "Repetitions"
             },
             "scheduledAttributes": {
                 "participants": {
@@ -54,7 +54,7 @@
             "company_id": 67890,
             "target": {
                 "value": 5,
-                "unit": "חזרות"
+                "unit": "Repetitions"
             }
         }
     ]

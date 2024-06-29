@@ -9,6 +9,15 @@ const openActivityModal = (activityData) => {
         };
         return categories[type] || '';
     };
+    const getUnitLabel = (unit) => {
+        const units = {
+            Minutes: "דקות",
+            Seconds: "שניות",
+            Repetitions: "חזרות",
+            Wins: "נצחונות"
+        };
+        return units[unit] || '';
+    };
     const modalHtml = `
         <div class="modal fade" id="activity-modal" tabindex="-1" aria-labelledby="activityModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -38,7 +47,7 @@ const openActivityModal = (activityData) => {
                                     <div class="unit-select">
                                         <label class="form-check-label">יעד:</label>
                                         <label class="form-check-label">${activityData.target.value}</label>
-                                        <label class="form-check-label">${activityData.target.unit}</label>
+                                        <label class="form-check-label">${getUnitLabel(activityData.target.unit)}</label>
                                     </div>
                                     <label class="form-check-label">${activityData.frameworkType}</label>
                                 </div>
