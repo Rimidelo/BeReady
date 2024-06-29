@@ -55,7 +55,7 @@ const createActivityElement = (activity) => {
   newActivityElement.classList.add("activity");
   newActivityElement.append(
     createActivityTypeIcon(type),
-    createActivityContentElement(activity,name, frameworkType, scheduledAttributes),
+    createActivityContentElement(activity, name, frameworkType, scheduledAttributes),
     createActivityButtonsElement(id, company_id)
   );
   return newActivityElement;
@@ -165,6 +165,9 @@ const addActivity = (newActivityData) => {
   };
   activityList.push(newActivity);
   addActivityElement(createActivityElement(newActivity));
+  // Simulate POST request
+  console.log('POST /activities');
+  console.log('Request body:', newActivity);
 };
 
 const removeActivity = (id) => {
@@ -172,6 +175,7 @@ const removeActivity = (id) => {
     getActivityElementId(id)
   );
   activityListElement.removeChild(activityToRemoveElement);
+   console.log(`DELETE /activities/${id}`);
   delete activityList[id];
 };
 

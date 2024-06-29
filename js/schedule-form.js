@@ -77,7 +77,6 @@ function scheduleFormModal(formData, transitionModalInstance) {
 }
 
 function handleSubmit(formData, scheduleTransitionModalInstance) {
-  console.log("3 ", formData);
   const scheduleFormElement = document.getElementById("invitation-form");
   const activityForm = document.getElementById("activity-form");
   const scheduleFormData = new FormData(scheduleFormElement);
@@ -110,14 +109,12 @@ function handleSubmit(formData, scheduleTransitionModalInstance) {
   };
 
   scheduleData.day = getDayOfWeek(scheduleData.date);
-  console.log("Schedule Data:", scheduleData);
   scheduledFormData.scheduledAttributes.participants.maxAmount = scheduleData.participants.maxAmount;
   scheduledFormData.scheduledAttributes.participants.actualAmount = 0;
   scheduledFormData.scheduledAttributes.schedule.date = scheduleData.date;
   scheduledFormData.scheduledAttributes.schedule.day = scheduleData.day;
   scheduledFormData.scheduledAttributes.schedule.hours = scheduleData.time.from + " - " + scheduleData.time.to;
   scheduledFormData.scheduledAttributes.schedule.repeat = scheduleData.repeat;
-  console.log("Activity Data:", scheduledFormData);
   addActivity(scheduledFormData);
   scheduleTransitionModalInstance.hide();
 }
