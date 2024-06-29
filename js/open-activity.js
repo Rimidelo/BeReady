@@ -90,15 +90,14 @@ const buildModalElement = (mode, activityData) => `
     </div>
   </div>`;
 
-const getActivityFormData = (activityData) => {
+const getActivityFormData = (activityList) => {
   const activityFormElement = document.getElementById("activity-form");
   const activityFormData = new FormData(activityFormElement);
 
   return {
     name: activityFormData.get("name") || activityList.name,
     type: activityFormData.get("type") || activityList.type,
-    description:
-      activityFormData.get("description") || activityList.description,
+    description: activityFormData.get("description") || activityList.description,
     target: {
       value: activityFormData.get("target") || activityList.target.value,
       unit: activityFormData.get("unit") || activityList.target.unit,

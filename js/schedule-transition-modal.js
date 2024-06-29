@@ -1,4 +1,10 @@
 function openScheduleTransitionModal(formData, activityModalInstance) {
+  if(formData.frameworkType === PERSONAL) {
+    addActivity(formData);
+    activityModalInstance.hide();
+    transitionModalInstance.hide();
+    return;
+  }
   const modalEl = document.createElement("div");
   modalEl.className = "modal fade";
   modalEl.id = "ScheduleTransitionModal";
@@ -63,7 +69,6 @@ function openScheduleTransitionModal(formData, activityModalInstance) {
 
   noButton.onclick = () => {
     addActivity(formData);
-    activityForm.reset();
     transitionModalInstance.hide();
   };
 }
