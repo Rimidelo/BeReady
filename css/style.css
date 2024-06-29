@@ -221,19 +221,95 @@ main {
   cursor: pointer;
 }
 
-/* responsive alternatives */
-@media (max-width: 768px) {
-  #sidebar {
-    width: 100%;
-    height: auto;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-}
-
 /*add activity modal*/
 body {
   direction: rtl;
+  text-align: right;
+}
+.modal-xl {
+  width: 986px;
+  max-width: 100%;
+}
+.modal-body {
+  display: flex;
+}
+
+.modal-title {
+  font-weight: bold;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-footer {
+  border-top: none;
+  display: flex;
+  gap: 30px;
+}
+
+.modal-header .btn-close {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+#activity-col-right {
+  margin-left: 2rem;
+}
+
+.modal-footer .btn-danger,
+.modal-footer .btn-secondary {
+  border: none;
+  outline: none;
+  width: 131px;
+  height: 39px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  background: #ebebeb;
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.modal-footer .btn-scucess {
+  width: 192px;
+  height: 39px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  background: #3ba585;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.form-group {
+  margin-top: 1rem;
+}
+
+.form-row .form-group:first-child {
+  margin-left: 119px;
+}
+
+.activity-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+#unit-select-group {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+label {
+  font-family: Heebo;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26.44px;
   text-align: right;
 }
 
@@ -242,6 +318,36 @@ body {
   height: 384.005px;
 }
 
+#ActivityFormName,
+#ActivityFormType,
+#description,
+#activityTarget,
+#unit {
+  border-radius: 3px;
+  border: 2px solid #d6d6d6;
+}
+
+#ActivityFormName,
+#ActivityFormType {
+  width: 264px;
+  height: 39px;
+}
+
+#description {
+  width: 645px;
+  height: 90px;
+}
+
+#activityTarget {
+  width: 95px;
+  height: 39px;
+}
+#unit {
+  width: 135px;
+  height: 39px;
+  border-radius: 3px 0px 0px 0px;
+  border: 2px 0px 0px 0px;
+}
 #upload {
   display: none;
 }
@@ -250,28 +356,42 @@ body {
   cursor: pointer;
 }
 
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.form-check-input {
+  order: -1;
+  margin-top: 0;
+}
+
+.form-label {
+  margin-right: 2.5rem;
+}
 .form-label > h4 {
   width: 152px;
   height: 42px;
   opacity: 1;
-  font-family: Heebo;
   font-size: 18px;
   font-weight: 700;
   line-height: 42px;
   text-align: center;
   color: #ffffff;
   background: #606060;
-  border-radius: 3px 0 0 0;
+  border-radius: 3px;
   padding: 0;
-  margin: 0;
+  margin: 1.5rem;
   box-sizing: border-box;
+  cursor: pointer;
 }
+
 /* Adding style to activity list items */
 #activity-list > li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 108px); /* Dynamic width minus the margins */
+  width: calc(100% - 108px);
   height: 119px;
   flex-shrink: 0;
   border-radius: 9px;
@@ -315,6 +435,7 @@ body {
   text-align: right;
   width: 354px;
   height: 43px;
+  cursor: pointer;
 }
 
 .activity-details {
@@ -372,4 +493,60 @@ body {
 .activity-buttons img {
   width: 49px;
   height: 49px;
+}
+/*Transition modal style*/
+.modal-title {
+  width: 571px;
+  height: 66px;
+  color: #444444;
+  font-family: "Heebo", sans-serif;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1.3;
+  text-align: right;
+  margin: 0 auto;
+}
+.custom-button {
+  width: 278px;
+  height: 193px;
+  padding: 8px;
+  background: #dfdfdfc4;
+  color: #000000;
+  border-radius: 20px;
+  font-size: 72px;
+  line-height: 1.3;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.btn-light {
+  width: 137px;
+  height: 42px;
+  padding: 0px 10px 1px 10px;
+  background: #ebebeb;
+  color: #444444;
+  border-radius: 3px;
+  font-family: "Heebo", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* schedule modal */
+
+/* responsive alternatives */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
 }

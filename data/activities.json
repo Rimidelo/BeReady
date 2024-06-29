@@ -4,23 +4,33 @@
             "id": 0,
             "type": "Physical",
             "name": "הרמת משקולות",
-            "frameworkType": "אישי"
+            "frameworkType": "אישי",
+            "company_id": 67890,
+            "target": {
+                "value": 5,
+                "unit": "Repetitions"
+            }
         },
         {
             "id": 1,
             "type": "Physical",
-            "name": "הרמת משקולות",
-            "frameworkType": "אישי"
+            "name": "ריצת 3000",
+            "frameworkType": "אישי",
+            "company_id": 67890,
+            "target": {
+                "value": 5,
+                "unit": "Repetitions"
+            }
         },
         {
             "id": 2,
             "type": "Brain",
-            "name": "הרמת משקולות",
+            "name": "קוביה הונגרית",
             "description": "מרימים משקולות",
             "frameworkType": "קבוצתי",
             "target": {
                 "value": 5,
-                "unit": "חזרות"
+                "unit": "Repetitions"
             },
             "scheduledAttributes": {
                 "participants": {
@@ -33,12 +43,19 @@
                     "hours": "17:00-21:00"
                 }
             }
+            ,
+            "company_id": 12345
         },
         {
             "id": 3,
             "type": "Physical",
-            "name": "הרמת משקולות",
-            "frameworkType": "אישי"
+            "name": "שחייה",
+            "frameworkType": "אישי",
+            "company_id": 67890,
+            "target": {
+                "value": 5,
+                "unit": "Repetitions"
+            }
         }
     ]
 }
