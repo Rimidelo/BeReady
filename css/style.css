@@ -169,7 +169,7 @@ main {
 .add-activity-btn {
   width: 50px;
   height: 50px;
-  background-image: url("/images/plus.png");
+  background-image: url("../images/plus.png");
   background-size: cover;
   background-position: center 5px;
   cursor: pointer;
@@ -471,11 +471,11 @@ label {
 }
 
 .activity-participants-amount::before {
-  background-image: url("images/activity/buttons/people-icon.png");
+  background-image: url("../images/activity/buttons/people-icon.png");
 }
 
 .activity-date::before {
-  background-image: url("images/activity/buttons/clock-icon.png");
+  background-image: url("../images/activity/buttons/clock-icon.png");
 }
 
 .activity-buttons {
