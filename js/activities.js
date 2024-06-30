@@ -218,7 +218,6 @@ const MODE_CONFIG = {
     title: "פרטי פעילות",
     addToArchiveText: "הוסף למאגר",
     disabled: true,
-    onAddToArchive: () => console.log("read"),
     onAddToCompany: openScheduleTransitionModal,
   },
   ADD: {

@@ -80,9 +80,11 @@ const buildModalElement = (mode, activityData) => `
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">בטל</button>
-            <button type="submit" class="btn btn-secondary" id="add-activity-archive" data-action="onAddToArchive">${
-              mode.addToArchiveText
-            }</button>
+            ${
+              mode.onAddToArchive
+                ? `<button type="submit" class="btn btn-secondary" id="add-activity-archive" data-action="onAddToArchive">${mode.addToArchiveText}</button>`
+                : ``
+            }
             <button type="submit" class="btn btn-success add-activity-company" id="add-activity-company" data-action="onAddToCompany">הוסף לפעילויות שלנו</button>
           </div>
         </form>
@@ -95,19 +97,20 @@ const getActivityFormData = (activityList) => {
   const activityFormData = new FormData(activityFormElement);
 
   return {
+    ...activityList,
     name: activityFormData.get("name") || activityList.name,
     type: activityFormData.get("type") || activityList.type,
-    description: activityFormData.get("description") || activityList.description,
+    description:
+      activityFormData.get("description") || activityList.description,
     target: {
       value: activityFormData.get("target") || activityList.target.value,
       unit: activityFormData.get("unit") || activityList.target.unit,
     },
-    frameworkType:
-      activityFormData.get("isGroupActivity") == null
-        ? activityList.frameworkType
-        : activityFormData.get("isGroupActivity")
-        ? COLLECTIVE
-        : PERSONAL,
+    frameworkType: !!activityFormData.get("isGroupActivity")
+      ? COLLECTIVE
+      : activityList
+      ? activityList.frameworkType
+      : PERSONAL,
     company_id: LoggedInUser.company_id,
   };
 };
