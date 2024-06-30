@@ -14,15 +14,13 @@ const buildModalElement = (mode, activityData) => `
               <div class="form-row">
                 <div class="form-group">
                   <label for="activity-form-name">שם הפעילות</label>
-                  <input type="text" id="activity-form-name" name="name" class="form-control" required="" value="${
-                    activityData?.name || EMPTY_FIELD
-                  }" ${mode.disabled && "disabled"}>
+                  <input type="text" id="activity-form-name" name="name" class="form-control" required="" value="${activityData?.name || EMPTY_FIELD
+  }" ${mode.disabled && "disabled"}>
                 </div>
                 <div class="form-group">
                   <label for="activity-form-type">קטגוריה</label>
-                  <select id="activity-form-type" name="type" class="form-select" ${
-                    mode.disabled && "disabled"
-                  }>
+                  <select id="activity-form-type" name="type" class="form-select" ${mode.disabled && "disabled"
+  }>
                     <option value="Physical">כוח וסיבולת</option>
                     <option value="Mental">מנטלי</option>
                     <option value="Brain">חשיבתי</option>
@@ -33,22 +31,19 @@ const buildModalElement = (mode, activityData) => `
               </div>
               <div class="form-group">
                 <label for="activity-form-description">תיאור הפעילות</label>
-                <textarea id="activity-form-description" name="description" class="form-control" rows="3" ${
-                  mode.disabled && "readonly"
-                }>${activityData?.description || EMPTY_FIELD}</textarea>
+                <textarea id="activity-form-description" name="description" class="form-control" rows="3" ${mode.disabled && "readonly"
+  }>${activityData?.description || EMPTY_FIELD}</textarea>
               </div>
               <div class="form-group">
                 <label for="activity-form-target">יעד</label>
                 <div class="activity-row">
                   <section id="unit-select-group">
-                    <input type="text" id="activity-form-target" name="target" class="form-control" required="" inputmode="numeric" value="${
-                      activityData?.target.value || EMPTY_FIELD
-                    }" ${mode.disabled && "disabled"} />
+                    <input type="text" id="activity-form-target" name="target" class="form-control" required="" inputmode="numeric" value="${activityData?.target.value || EMPTY_FIELD
+  }" ${mode.disabled && "disabled"} />
                     <div class="unit-select">
                       <label for="unit" class="visually-hidden">יחידת מדידה</label>
-                      <select id="unit" name="unit" class="form-select" ${
-                        mode.disabled && "disabled"
-                      }>
+                      <select id="unit" name="unit" class="form-select" ${mode.disabled && "disabled"
+  }>
                         <option value="Minutes">דקות</option>
                         <option value="Seconds">שניות</option>
                         <option value="Repetitions">חזרות</option>
@@ -58,11 +53,9 @@ const buildModalElement = (mode, activityData) => `
                   </section>
                   <div class="form-check group-activity">
                     <label class="form-check-label" for="is-group-activity">פעילות קבוצתית</label>
-                    <input class="form-check-input" id="is-group-activity" name="isGroupActivity" type="checkbox" ${
-                      mode.disabled && "disabled"
-                    } ${
-  activityData?.frameworkType == COLLECTIVE && "checked"
-} />
+                    <input class="form-check-input" id="is-group-activity" name="isGroupActivity" type="checkbox" ${mode.disabled && "disabled"
+  } ${activityData?.frameworkType == COLLECTIVE && "checked"
+  } />
                   </div>
                 </div>
             </section>
@@ -70,7 +63,7 @@ const buildModalElement = (mode, activityData) => `
               <div class="col-md-6 custom-border-end">
                 <section id="file-adder">
                   <label for="upload" class="form-label">
-                    <img src="../images/activity/file-add-icon.png" alt="file-add-icon" id="file-add-icon" />
+                    <img src="images/activity/file-add-icon.png" alt="file-add-icon" id="file-add-icon" />
                     <h4>העלו קובץ</h4>
                   </label>
                   <input type="file" class="form-control" id="upload" />
@@ -80,11 +73,10 @@ const buildModalElement = (mode, activityData) => `
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">בטל</button>
-            ${
-              mode.onAddToArchive
-                ? `<button type="submit" class="btn btn-secondary" id="add-activity-archive" data-action="onAddToArchive">${mode.addToArchiveText}</button>`
-                : ``
-            }
+            ${mode.onAddToArchive
+    ? `<button type="submit" class="btn btn-secondary" id="add-activity-archive" data-action="onAddToArchive">${mode.addToArchiveText}</button>`
+    : ``
+  }
             <button type="submit" class="btn btn-success add-activity-company" id="add-activity-company" data-action="onAddToCompany">הוסף לפעילויות שלנו</button>
           </div>
         </form>
@@ -109,8 +101,8 @@ const getActivityFormData = (activityList) => {
     frameworkType: !!activityFormData.get("isGroupActivity")
       ? COLLECTIVE
       : activityList
-      ? activityList.frameworkType
-      : PERSONAL,
+        ? activityList.frameworkType
+        : PERSONAL,
     company_id: LoggedInUser.company_id,
   };
 };
