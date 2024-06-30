@@ -136,25 +136,35 @@ const createActivityDetailsElement = (frameworkType, scheduledAttributes) => {
 
 const createActivityButtonsElement = (id, company_id) => {
   const activityButtonsElement = document.createElement("section");
-  if (company_id == LoggedInUser.company_id) {
-    const editButtonElement = document.createElement("button");
-    const deleteButtonElement = document.createElement("button");
-    const editIconElement = document.createElement("img");
-    const deleteIconElement = document.createElement("img");
-    activityButtonsElement.classList.add("activity-buttons");
-    editButtonElement.classList.add("edit-btn", "btn");
-    deleteButtonElement.classList.add("delete-btn", "btn");
-    addOnClickToBtn(id, editButtonElement, openEditActivity);
-    addOnClickToBtn(id, deleteButtonElement, removeActivity);
-    editIconElement.src = ACTIVITY_ACTIONS_ICONS["edit"];
-    editIconElement.alt = "edit";
-    deleteIconElement.src = ACTIVITY_ACTIONS_ICONS["delete"];
-    deleteIconElement.alt = "delete";
-    editButtonElement.appendChild(editIconElement);
-    deleteButtonElement.appendChild(deleteIconElement);
-    activityButtonsElement.append(editButtonElement, deleteButtonElement);
+  if (company_id == LoggedInUser.company_id || document.title == MY_ACTIVITIES_PAGE_TITLE) {
+    isArchivePage() && createActivityEditBtn(id, activityButtonsElement);
+    createActivityDeleteBtn(id, activityButtonsElement);
   }
   return activityButtonsElement;
+};
+
+const isArchivePage = () => document.title == "BeReady - Activity archive";
+
+const createActivityEditBtn = (id, activityButtonsElement) => {
+  const editButtonElement = document.createElement("button");
+  const editIconElement = document.createElement("img");
+  editButtonElement.classList.add("edit-btn", "btn");
+  addOnClickToBtn(id, editButtonElement, openEditActivity);
+  editIconElement.src = ACTIVITY_ACTIONS_ICONS["edit"];
+  editIconElement.alt = "edit";
+  editButtonElement.appendChild(editIconElement);
+  activityButtonsElement.appendChild(editButtonElement);
+}
+
+const createActivityDeleteBtn = (id, activityButtonsElement) => {
+  const deleteButtonElement = document.createElement("button");
+  const deleteIconElement = document.createElement("img");
+  deleteButtonElement.classList.add("delete-btn", "btn");
+  addOnClickToBtn(id, deleteButtonElement, removeActivity);
+  deleteIconElement.src = ACTIVITY_ACTIONS_ICONS["delete"];
+  deleteIconElement.alt = "delete";
+  deleteButtonElement.appendChild(deleteIconElement);
+  activityButtonsElement.appendChild(deleteButtonElement);
 };
 
 const addOnClickToBtn = (id, element, onClickAction) => {
