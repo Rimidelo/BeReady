@@ -1,5 +1,5 @@
 function openScheduleTransitionModal(formData, activityModalInstance) {
-  if(formData.frameworkType === PERSONAL) {
+  if (formData.frameworkType === PERSONAL) {
     addActivity(formData);
     activityModalInstance.hide();
     transitionModalInstance.hide();
