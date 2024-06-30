@@ -70,7 +70,7 @@ const buildModalElement = (mode, activityData) => `
               <div class="col-md-6 custom-border-end">
                 <section id="file-adder">
                   <label for="upload" class="form-label">
-                    <img src="/images/activity/file-add-icon.png" alt="file-add-icon" id="file-add-icon" />
+                    <img src="images/activity/file-add-icon.png" alt="file-add-icon" id="file-add-icon" />
                     <h4>העלו קובץ</h4>
                   </label>
                   <input type="file" class="form-control" id="upload" />
