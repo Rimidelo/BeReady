@@ -9,6 +9,18 @@
             "target": {
                 "value": 5,
                 "unit": "Repetitions"
+            },
+            "scheduledAttributes": {
+                "participants": {
+                    "actualAmount": 10,
+                    "maxAmount": 15
+                },
+                "schedule": {
+                    "date": "14/04",
+                    "day": "ראשון",
+                    "hours": "10:00-11:00",
+                    "repeat": "שבועי"
+                }
             }
         },
         {
@@ -20,6 +32,18 @@
             "target": {
                 "value": 6,
                 "unit": "Repetitions"
+            },
+            "scheduledAttributes": {
+                "participants": {
+                    "actualAmount": 8,
+                    "maxAmount": 12
+                },
+                "schedule": {
+                    "date": "15/04",
+                    "day": "שני",
+                    "hours": "08:00-09:00",
+                    "repeat": "שבועי"
+                }
             }
         },
         {
@@ -43,8 +67,7 @@
                     "hours": "17:00-21:00",
                     "repeat": "שבועי"
                 }
-            }
-            ,
+            },
             "company_id": 12345
         },
         {
@@ -56,6 +79,110 @@
             "target": {
                 "value": 8,
                 "unit": "Repetitions"
+            },
+            "scheduledAttributes": {
+                "participants": {
+                    "actualAmount": 5,
+                    "maxAmount": 10
+                },
+                "schedule": {
+                    "date": "16/04",
+                    "day": "שלישי",
+                    "hours": "07:00-08:00",
+                    "repeat": "שבועי"
+                }
+            }
+        },
+        {
+            "id": 4,
+            "type": "Mental",
+            "name": "שחמט",
+            "frameworkType": "קבוצתי",
+            "company_id": 12345,
+            "target": {
+                "value": 3,
+                "unit": "Repetitions"
+            },
+            "scheduledAttributes": {
+                "participants": {
+                    "actualAmount": 6,
+                    "maxAmount": 12
+                },
+                "schedule": {
+                    "date": "17/04",
+                    "day": "רביעי",
+                    "hours": "16:00-18:00",
+                    "repeat": "שבועי"
+                }
+            }
+        },
+        {
+            "id": 5,
+            "type": "Physical",
+            "name": "יוגה",
+            "frameworkType": "קבוצתי",
+            "company_id": 67890,
+            "target": {
+                "value": 10,
+                "unit": "Repetitions"
+            },
+            "scheduledAttributes": {
+                "participants": {
+                    "actualAmount": 12,
+                    "maxAmount": 15
+                },
+                "schedule": {
+                    "date": "18/04",
+                    "day": "חמישי",
+                    "hours": "18:00-19:30",
+                    "repeat": "שבועי"
+                }
+            }
+        },
+        {
+            "id": 6,
+            "type": "Physical",
+            "name": "רכיבה על אופניים",
+            "frameworkType": "אישי",
+            "company_id": 67890,
+            "target": {
+                "value": 15,
+                "unit": "Repetitions"
+            },
+            "scheduledAttributes": {
+                "participants": {
+                    "actualAmount": 7,
+                    "maxAmount": 10
+                },
+                "schedule": {
+                    "date": "19/04",
+                    "day": "שישי",
+                    "hours": "09:00-11:00",
+                    "repeat": "שבועי"
+                }
+            }
+        },
+        {
+            "id": 7,
+            "type": "Mental",
+            "name": "מדיטציה",
+            "frameworkType": "אישי",
+            "company_id": 12345,
+            "target": {
+                "value": 20,
+                "unit": "Repetitions"
+            },
+            "scheduledAttributes": {
+                "participants": {
+                    "actualAmount": 10,
+                    "maxAmount": 20
+                },
+                "schedule": {
+                    "date": "20/04",
+                    "day": "שבת",
+                    "hours": "07:00-07:30",
+                    "repeat": "יומי"
+                }
             }
         }
     ]

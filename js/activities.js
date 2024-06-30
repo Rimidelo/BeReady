@@ -11,6 +11,11 @@ const TYPE_ICONS = {
   Leadership: "images/activity/types/leadership-icon.png",
 };
 
+const ACTIVITY_DATA_URL_BY_PAGE = {
+  "BeReady": "./data/activities.json",
+  "BeReady - Activity archive": "./data/activityArchive.json",
+}
+
 const COLLECTIVE = "קבוצתי";
 const PERSONAL = "אישי";
 let activityList = [];
@@ -31,7 +36,7 @@ window.onload = async () => {
 };
 
 const readActivitiesData = async () =>
-  fetch("./data/activities.json")
+  fetch(ACTIVITY_DATA_URL_BY_PAGE[document.title])
     .then((response) => response.json())
     .then(({ activities }) => activityList.push(...activities));
 
