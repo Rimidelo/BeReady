@@ -4,7 +4,7 @@
             "id": 0,
             "type": "Physical",
             "name": "הרמת משקולות",
-            "frameworkType": "אישי",
+            "frameworkType": "קבוצתי",
             "company_id": 67890,
             "target": {
                 "value": 5,
@@ -27,7 +27,7 @@
             "id": 1,
             "type": "Physical",
             "name": "ריצת 3000",
-            "frameworkType": "אישי",
+            "frameworkType": "קבוצתי",
             "company_id": 67890,
             "target": {
                 "value": 6,
@@ -74,7 +74,7 @@
             "id": 3,
             "type": "Physical",
             "name": "שחייה",
-            "frameworkType": "אישי",
+            "frameworkType": "קבוצתי",
             "company_id": 67890,
             "target": {
                 "value": 8,
@@ -143,7 +143,7 @@
             "id": 6,
             "type": "Physical",
             "name": "רכיבה על אופניים",
-            "frameworkType": "אישי",
+            "frameworkType": "קבוצתי",
             "company_id": 67890,
             "target": {
                 "value": 15,
@@ -166,7 +166,7 @@
             "id": 7,
             "type": "Mental",
             "name": "מדיטציה",
-            "frameworkType": "אישי",
+            "frameworkType": "קבוצתי",
             "company_id": 12345,
             "target": {
                 "value": 20,
