@@ -59,7 +59,6 @@ header {
   height: 64px;
   gap: 0px;
   border-radius: 100px;
-  opacity: 0px;
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -347,7 +346,7 @@ label {
   width: 135px;
   height: 39px;
   border-radius: 3px 0px 0px 0px;
-  border: 2px 0px 0px 0px;
+  border: 2px 0px 0px;
 }
 #upload {
   display: none;
@@ -563,7 +562,7 @@ label {
   text-align: right;
   margin-left: 1rem;
 }
-#form-row-schedule{
+#form-row-schedule {
   margin-left: 0;
 }
 
@@ -629,8 +628,8 @@ label {
   width: 183px;
   height: 42px;
   padding: 0px 10px 1px 10px;
-  background: #3BA585;
-  color: #FFFFFF;
+  background: #3ba585;
+  color: #ffffff;
   border-radius: 3px;
   font-family: "Heebo";
   font-weight: 400;
