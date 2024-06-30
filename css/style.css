@@ -471,11 +471,11 @@ label {
 }
 
 .activity-participants-amount::before {
-  background-image: url("/images/activity/buttons/people-icon.png");
+  background-image: url("images/activity/buttons/people-icon.png");
 }
 
 .activity-date::before {
-  background-image: url("/images/activity/buttons/clock-icon.png");
+  background-image: url("images/activity/buttons/clock-icon.png");
 }
 
 .activity-buttons {
