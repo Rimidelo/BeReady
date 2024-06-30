@@ -101,7 +101,7 @@ const getActivityFormData = (activityList) => {
     name: activityFormData.get("name") || activityList.name,
     type: activityFormData.get("type") || activityList.type,
     description:
-      activityFormData.get("description") || activityList.description,
+      activityFormData.get("description") || activityList?.description,
     target: {
       value: activityFormData.get("target") || activityList.target.value,
       unit: activityFormData.get("unit") || activityList.target.unit,
