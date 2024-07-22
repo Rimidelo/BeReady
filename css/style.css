@@ -637,12 +637,79 @@ label {
   text-align: center;
   border: none;
 }
-/* responsive alternatives */
 @media (max-width: 768px) {
-  #sidebar {
-    width: 100%;
-    height: auto;
-    padding: 20px;
-    margin-bottom: 20px;
+  header {
+    height: 63px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: #ffffff;
+    border-bottom: 1px solid #dedede;
+  }
+
+  #site-logo {
+    height: 81px;
+    width: 81px;
+    margin: 0 auto; /* Center logo */
+  }
+
+  #info_section {
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    display: flex;
+    align-items: center;
+  }
+
+  #company-logo {
+    display: none; /* Hide company logo */
+  }
+
+  #info_section a {
+    display: flex;
+    align-items: center;
+  }
+
+  #user_info {
+    display: flex;
+    width: 43.75px;
+    height: 50px;
+    align-items: center;
+    position: absolute;
+    left: 29px;
+    top: 0px;
+  }
+
+  #user_info img {
+    height: 50px;
+  }
+
+  #user_info div {
+    display: none; /* Hide the text inside #user_info */
+  }
+
+  /* Show hamburger menu */
+  #hamburger-menu {
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 55px;
+    height: 55px;
+    background-image: url("../images/sidebar/hamburger.png");
+    background-size: cover;
+    cursor: pointer;
+  }
+
+  .hamburger-menu {
+    display: none; /* Hide hamburger menu for now */
+  }
+
+  /* Hide sidebar and main content adjustments for now */
+  #sidebar,
+  main {
+    display: none;
   }
 }

@@ -77,7 +77,7 @@ const openActivityModal = (mode, activityData) => {
   document.getElementById("activity-modal").addEventListener("hidden.bs.modal", function () {
     const modalElement = document.getElementById("activity-modal");
     modalElement.querySelectorAll("input, textarea, select").forEach(el => {
-      el.disabled = false; // Reset disabled state when the modal is closed
+      el.disabled = false;
     });
   });
 };
