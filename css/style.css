@@ -637,6 +637,11 @@ label {
   text-align: center;
   border: none;
 }
+
+#hamburger-menu {
+  display: none; /* Hide on larger screens */
+}
+
 @media (max-width: 768px) {
   header {
     height: 63px;
@@ -664,7 +669,7 @@ label {
   }
 
   #company-logo {
-    display: none; /* Hide company logo */
+    display: none;
   }
 
   #info_section a {
@@ -687,10 +692,10 @@ label {
   }
 
   #user_info div {
-    display: none; /* Hide the text inside #user_info */
+    display: none;
   }
 
-  /* Show hamburger menu */
+
   #hamburger-menu {
     display: block;
     position: absolute;
@@ -704,12 +709,10 @@ label {
   }
 
   .hamburger-menu {
-    display: none; /* Hide hamburger menu for now */
+    display: none;
   }
 
-  /* Hide sidebar and main content adjustments for now */
-  #sidebar,
-  main {
+  #sidebar,main {
     display: none;
   }
 }
