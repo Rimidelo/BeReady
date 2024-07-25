@@ -59,7 +59,6 @@ header {
   height: 64px;
   gap: 0px;
   border-radius: 100px;
-  opacity: 0px;
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -170,7 +169,7 @@ main {
 .add-activity-btn {
   width: 50px;
   height: 50px;
-  background-image: url("/images/plus.png");
+  background-image: url("../images/plus.png");
   background-size: cover;
   background-position: center 5px;
   cursor: pointer;
@@ -347,7 +346,7 @@ label {
   width: 135px;
   height: 39px;
   border-radius: 3px 0px 0px 0px;
-  border: 2px 0px 0px 0px;
+  border: 2px 0px 0px;
 }
 #upload {
   display: none;
@@ -472,11 +471,11 @@ label {
 }
 
 .activity-participants-amount::before {
-  background-image: url("/images/activity/buttons/people-icon.png");
+  background-image: url("../images/activity/buttons/people-icon.png");
 }
 
 .activity-date::before {
-  background-image: url("/images/activity/buttons/clock-icon.png");
+  background-image: url("../images/activity/buttons/clock-icon.png");
 }
 
 .activity-buttons {
@@ -563,7 +562,7 @@ label {
   text-align: right;
   margin-left: 1rem;
 }
-#form-row-schedule{
+#form-row-schedule {
   margin-left: 0;
 }
 
@@ -629,8 +628,8 @@ label {
   width: 183px;
   height: 42px;
   padding: 0px 10px 1px 10px;
-  background: #3BA585;
-  color: #FFFFFF;
+  background: #3ba585;
+  color: #ffffff;
   border-radius: 3px;
   font-family: "Heebo";
   font-weight: 400;
@@ -638,12 +637,82 @@ label {
   text-align: center;
   border: none;
 }
-/* responsive alternatives */
+
+#hamburger-menu {
+  display: none; /* Hide on larger screens */
+}
+
 @media (max-width: 768px) {
-  #sidebar {
-    width: 100%;
-    height: auto;
-    padding: 20px;
-    margin-bottom: 20px;
+  header {
+    height: 63px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: #ffffff;
+    border-bottom: 1px solid #dedede;
+  }
+
+  #site-logo {
+    height: 81px;
+    width: 81px;
+    margin: 0 auto; /* Center logo */
+  }
+
+  #info_section {
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    display: flex;
+    align-items: center;
+  }
+
+  #company-logo {
+    display: none;
+  }
+
+  #info_section a {
+    display: flex;
+    align-items: center;
+  }
+
+  #user_info {
+    display: flex;
+    width: 43.75px;
+    height: 50px;
+    align-items: center;
+    position: absolute;
+    left: 29px;
+    top: 0px;
+  }
+
+  #user_info img {
+    height: 50px;
+  }
+
+  #user_info div {
+    display: none;
+  }
+
+
+  #hamburger-menu {
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 55px;
+    height: 55px;
+    background-image: url("../images/sidebar/hamburger.png");
+    background-size: cover;
+    cursor: pointer;
+  }
+
+  .hamburger-menu {
+    display: none;
+  }
+
+  #sidebar,main {
+    display: none;
   }
 }
