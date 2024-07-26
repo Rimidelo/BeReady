@@ -837,3 +837,31 @@ label {
     display: none;
   }
 }
+
+/*CFMS user css */
+
+.accordion-button {
+  background-color: #f8f9fa;
+  color: #000;
+}
+.accordion-button:not(.collapsed) {
+  background-color: #F6F6F6;
+  color: #000;
+}
+
+.accordion-body {
+  background-color: rgba(223, 223, 223, 0.77);
+}
+
+/* Override padding and margin for mobile view */
+@media (max-width: 768px) {
+  .container-fluid {
+      padding-left: 0;
+      padding-right: 0;
+  }
+
+  .accordion {
+      margin-left: 0;
+      margin-right: 0;
+  }
+}
