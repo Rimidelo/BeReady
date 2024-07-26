@@ -268,5 +268,6 @@ const setAddActivityBtnOnClick = () => {
 
 document.getElementById('hamburger-menu').addEventListener('click', function () {
   const sidebar = document.getElementById('sidebar');
-  sidebar.style.display = sidebar.style.display === 'none' || sidebar.style.display === '' ? 'block' : 'none';
+  sidebar.classList.toggle('active');
 });
+

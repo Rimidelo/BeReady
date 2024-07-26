@@ -639,7 +639,94 @@ label {
 }
 
 #hamburger-menu {
-  display: none; /* Hide on larger screens */
+  display: none;
+}
+
+@media (max-width: 990px) {
+  #page_info {
+    padding-left: 20px;
+  }
+
+  #page_info > section > h1 {
+    font-size: 40px;
+  }
+  .custom-search-form {
+    width: 45px;
+  }
+
+  .custom-search-input {
+    display: none;
+  }
+  /* Responsive styles for activity list items */
+  #activity-list > li {
+    flex-direction: column;
+    align-items: center;
+    width: calc(100% - 30px);
+    height: auto;
+    padding: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .activity-type-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .activity-type-icon img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .activity-content {
+    padding: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .activity-name {
+    font-size: 24px;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .activity-details {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .activity-framework-type,
+  .activity-participants-amount,
+  .activity-date,
+  .activity-day,
+  .activity-hour {
+    font-size: 18px;
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .activity-buttons {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .activity-buttons button {
+    padding: 0;
+  }
+
+  .activity-buttons img {
+    width: 40px;
+    height: 40px;
+  }
+
+  #activity-list{
+    padding-left: 0px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -657,7 +744,7 @@ label {
   #site-logo {
     height: 81px;
     width: 81px;
-    margin: 0 auto; /* Center logo */
+    margin: 0 auto;
   }
 
   #info_section {
@@ -695,7 +782,6 @@ label {
     display: none;
   }
 
-
   #hamburger-menu {
     display: block;
     position: absolute;
@@ -712,7 +798,42 @@ label {
     display: none;
   }
 
-  #sidebar,main {
+  #sidebar {
+    display: none;
+    margin-top: 0%;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  #sidebar.active {
+    display: block;
+  }
+
+  main {
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 0px;
+  }
+
+  #page_info {
+    padding-left: 0px;
+  }
+
+  #page_info > section {
+    display: flex;
+    align-items: center;
+  }
+
+  #page_info > section > h1 {
+    height: 62px;
+    font-size: 26px;
+  }
+
+  .custom-search-form {
+    width: 45px;
+  }
+
+  .custom-search-input {
     display: none;
   }
 }
