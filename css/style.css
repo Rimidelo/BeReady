@@ -846,6 +846,7 @@ label {
   align-items: center;
   direction: ltr;
   gap: 10px;
+  margin-top: 5px;
 }
 
 .accordion-item {
@@ -870,17 +871,14 @@ label {
   transform: rotate(90deg);
 }
 
-
-
 .progress-circle {
-  width: 30px;
-  height: 30px;
+  width: 62px;
+  height: 75px;
+  position: relative;
   border-radius: 50%;
-  background-color: #f0f0f0;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 
 .progress-circle span {
