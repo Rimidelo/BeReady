@@ -1,0 +1,40 @@
+{
+    "chartData": {
+        "labels": [
+            "22/01/24",
+            "12/02/24",
+            "22/03/24"
+        ],
+        "datasets": [
+            {
+                "label": "התקדמות שלי",
+                "data": [
+                    70,
+                    59,
+                    45
+                ],
+                "borderColor": "rgba(75, 192, 192, 1)",
+                "tension": 0.1,
+                "fill": false
+            }
+        ]
+    },
+    "tableData": [
+        {
+            "date": "22/03/24",
+            "result": 45,
+            "resultType": "דקות"
+        },
+        {
+            "date": "12/02/24",
+            "result": 59,
+            "resultType": "דקות"
+        },
+        {
+            "date": "22/01/24",
+            "result": 70,
+            "resultType": "דקות"
+        }
+    ],
+    "resultType": "דקות"
+}
