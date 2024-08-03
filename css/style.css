@@ -834,6 +834,7 @@ label {
 }
 
 /*CFMS user css */
+/*CFMS activity list css */
 .accordion {
   width: 100%;
 }
@@ -917,4 +918,72 @@ label {
     margin-left: 0;
     margin-right: 0;
   }
+}
+
+/*CFMS activity css*/
+.btn-icon {
+  width: 34px;
+  height: 34px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.back-button {
+  background-image: url("../images/activity/buttons/back-icon.png");
+}
+
+.info-button {
+  background-image: url("../images/activity/buttons/info-icon.png");
+}
+
+.goal-button {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 5px;
+  background-image: url("../images/activity/buttons/goal-icon.png");
+  vertical-align: middle;
+}
+
+.table {
+  margin-top: 1.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+  font-family: 'Heebo', sans-serif;
+  font-size: 14px;
+}
+.table th, .table td {
+  border: none;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 300;
+}
+
+.table thead th {
+  border-bottom: 2px solid #8C8C8D;
+  font-size: 18px;
+}
+
+.view-btn {
+  width: 24px;
+  height: 24px;
+  background-image: url("../images/activity/buttons/view-icon.png");
+}
+
+.edit-btn {
+  width: 24px;
+  height: 24px;
+  background-image: url("../images/activity/buttons/grey-edit-icon.png");
+}
+
+.delete-btn {
+  width: 24px;
+  height: 24px;
+  background-image: url("../images/activity/buttons/grey-delete-icon.png");
 }
