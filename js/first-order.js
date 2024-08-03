@@ -1,92 +1,110 @@
-const FIRST_ORDER_FIELDS = {
-  medicalProfile: {
-    name: "פרופיל רפואי",
-    type: "number",
-    validation: (value) => {
-      const MEDICAL_VALUES = [97, 82, 72, 64, 45, 27, 21];
-      return MEDICAL_VALUES.includes(value);
-    },
-  },
-  ipr: {
-    name: 'דפ"ר',
-    type: "number",
-    validation: () => {},
-  },
-  adaptionDiff: {
-    name: 'קה"ס',
-    type: "number",
-    validation: () => {},
-  },
-  technicalAct: {
-    name: "הפעלה טכנית",
-    type: "number",
-    validation: () => {},
-  },
-  manageAndOrg: {
-    name: "ניהול וארגון",
-    type: "number",
-    validation: () => {},
-  },
-  teamwork: {
-    name: "עבודת צוות",
-    type: "number",
-    validation: () => {},
-  },
-  command: {
-    name: "פיקוד",
-    type: "number",
-    validation: () => {},
-  },
-  field: {
-    name: "שדה",
-    type: "number",
-    validation: () => {},
-  },
-  humanRelations: {
-    name: "יחסי אנוש",
-    type: "number",
-    validation: () => {},
-  },
-  informProc: {
-    name: "עיבוד מידע",
-    type: "number",
-    validation: () => {},
-  },
-  instruction: {
-    name: "הדרכה",
-    type: "number",
-    validation: () => {},
-  },
-  frameBehave: {
-    name: "התנהגות מסגרית",
-    type: "number",
-    validation: () => {},
-  },
-  sustainAttention: {
-    name: "קשב מתמשך",
-    type: "number",
-    validation: () => {},
-  },
-  investAndPersist: {
-    name: "השקעה והתמדה",
-    type: "number",
-    validation: () => {},
-  },
-  spatialPer: {
-    name: "תפיסה מרחבית",
-    type: "number",
-    validation: () => {},
-  },
-};
-
 window.onload = async () => {
-  await fetchFirstOrderDetails(1);
-  createFirstOrderForm();
+  const firstOrderDetails = await fetchFirstOrderDetails(1);
+  createFirstOrderForm(firstOrderDetails);
 };
 
-const fetchFirstOrderDetails = async (id) => {};
+const fetchFirstOrderDetails = async (id) => {
+  // fetch(`https://127.0.0.1/profile/getFirstOrderDetails/${userId}`);
+  return {
+    medicalProfile: {
+      name: "פרופיל רפואי",
+      value: 97,
+      type: "number",
+      validation: (value) => {
+        const MEDICAL_VALUES = [97, 82, 72, 64, 45, 27, 21];
+        return MEDICAL_VALUES.includes(value);
+      },
+    },
+    ipr: {
+      name: 'דפ"ר',
+      value: 90,
+      type: "number",
+      validation: () => {},
+    },
+    adaptionDiff: {
+      name: 'קה"ס',
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    technicalAct: {
+      name: "הפעלה טכנית",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    manageAndOrg: {
+      name: "ניהול וארגון",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    teamwork: {
+      name: "עבודת צוות",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    command: {
+      name: "פיקוד",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    field: {
+      name: "שדה",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    humanRelations: {
+      name: "יחסי אנוש",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    informProc: {
+      name: "עיבוד מידע",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    instruction: {
+      name: "הדרכה",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    frameBehave: {
+      name: "התנהגות מסגרית",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    sustainAttention: {
+      name: "קשב מתמשך",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    investAndPersist: {
+      name: "השקעה והתמדה",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+    spatialPer: {
+      name: "תפיסה מרחבית",
+      value: 5,
+      type: "number",
+      validation: () => {},
+    },
+  };
+};
 
-const updateFirstOrderDetails = async (id) => {};
+const updateFirstOrderDetails = async (id) => {
+  // fetch(`https://127.0.0.1/profile/setFirstOrderDetails/${userId}`);
+};
 
 const convertToHtmlIdConvention = (id) =>
   id
@@ -111,9 +129,9 @@ const createFirstOrderField = (id, fieldProperties) => {
   return firstOrderFieldGroupElement;
 };
 
-const createFirstOrderForm = () => {
+const createFirstOrderForm = (firstOrderDetails) => {
   const firstOrderForm = document.getElementById("first-order-form");
-  Object.entries(FIRST_ORDER_FIELDS).map(([id, props]) => {
+  Object.entries(firstOrderDetails).map(([id, props]) => {
     firstOrderForm.appendChild(createFirstOrderField(id, props));
   });
 };
