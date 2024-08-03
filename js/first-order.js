@@ -113,7 +113,7 @@ const createFirstOrderField = (id, fieldProperties) => {
 
 const createFirstOrderForm = () => {
   const firstOrderForm = document.getElementById("first-order-form");
-  Object.entries(FIRST_ORDER_FIELDS).map(([id, props], i) => {
+  Object.entries(FIRST_ORDER_FIELDS).map(([id, props]) => {
     firstOrderForm.appendChild(createFirstOrderField(id, props));
   });
 };
