@@ -62,15 +62,24 @@
                 <span id="sort-button"></span>
             </section>
         </section>
-        <div class="accordion" id="accordionActivitySelection">
-            <!-- Accordion items will be dynamically generated here -->
-        </div>
+        <div class="accordion" id="accordionActivitySelection"></div>
         <div class="text-center mt-4">
             <button id="updateActivitiesButton" class="btn btn-success">עדכן</button>
         </div>
         </section>
     </main>
     <!-- Modals -->
+    <div class="modal fade" id="updateSuccessModal" tabindex="-1" aria-labelledby="updateSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5 class="modal-title" id="updateSuccessModalLabel">עודכן בהצלחה</h5>
+                    <button class="btn save-icon-btn mx-auto"></button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/progressbar.js@1.1.0/dist/progressbar.min.js"></script>
     <script src="js/utili.js"></script>
     <script src="js/cfms-select-activities.js"></script>

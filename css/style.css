@@ -1044,7 +1044,7 @@ label {
   margin-top: 8px;
 }
 
-#activityRecordModal .save-record-btn {
+.save-icon-btn {
   width: 53px;
   height: 53px;
   background-image: url("../images/activity/buttons/check-icon.png");
@@ -1092,4 +1092,29 @@ label {
   margin-left: 1.5rem;
   text-align: center;
   flex-shrink: 0;
+}
+
+#updateSuccessModal .modal-dialog {
+  max-width: 400px;
+}
+
+#updateSuccessModal .modal-content {
+  background-color: #f0f0f0;
+  border-radius: 15px;
+  border: none;
+  padding: 20px;
+  text-align: center;
+}
+
+#updateSuccessModal .modal-body {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#updateSuccessModal .modal-title {
+  font-size: 24px;
+  font-weight: normal;
+  margin-bottom: 15px;
 }

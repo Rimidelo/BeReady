@@ -13,14 +13,11 @@ window.onload = async () => {
     }
 };
 
-// Fetch plan data from the JSON file
 const fetchPlanData = async () => {
     const response = await fetch(PLAN_DATA_URL);
     const data = await response.json();
     planData.push(...data.jobs);
 };
-
-// Render the activity selection accordion
 const renderActivitySelection = () => {
     planData.forEach(job => {
         job.categories.forEach(category => {
@@ -30,7 +27,6 @@ const renderActivitySelection = () => {
     });
 };
 
-// Create category elements similar to cfmsPlan.js
 const createCategoryElement = (category) => {
     const categoryElement = document.createElement("div");
     categoryElement.classList.add("accordion-item");
@@ -83,27 +79,22 @@ const createActivityElement = (activity) => {
     const activityElement = document.createElement("div");
     activityElement.classList.add("cfms-activity-card");
 
-    // Title of the Activity
     const title = document.createElement("span");
     title.classList.add("cfms-activity-title");
     title.textContent = activity.name;
 
-    // Type of the Activity (e.g., קבוצתית or אישית)
     const type = document.createElement("span");
     type.classList.add("cfms-activity-type");
     type.textContent = activity.type;
 
-    // Create the Info Button with both classes
     const infoButton = document.createElement("button");
     infoButton.classList.add("btn-icon", "info-button");
 
-    // Append the elements to the card
-   
+
     activityElement.appendChild(title);
     activityElement.appendChild(type);
-    activityElement.appendChild(infoButton); // Info icon on the left
+    activityElement.appendChild(infoButton);
 
-    // Handle the click to toggle selection
     activityElement.addEventListener('click', function () {
         this.classList.toggle('selected');
         if (this.classList.contains('selected')) {
@@ -116,13 +107,11 @@ const createActivityElement = (activity) => {
     return activityElement;
 };
 
-
-
 document.getElementById("updateActivitiesButton").addEventListener("click", () => {
     console.log("Selected activities:", selectedActivities);
-    alert("Selected activities have been updated.");
-});
-
-document.getElementById("backButton").addEventListener("click", function () {
-    window.location.href = "cfmsPlan.html";
+    const updateSuccessModal = new bootstrap.Modal(document.getElementById('updateSuccessModal'));
+    updateSuccessModal.show();
+    document.querySelector('.save-icon-btn').addEventListener('click', () => {
+        updateSuccessModal.hide();
+    });
 });
