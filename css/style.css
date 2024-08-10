@@ -998,7 +998,7 @@ label {
 }
 
 #activityRecordModal .modal-content {
-  width:auto;
+  width: auto;
   border-radius: 10px;
 }
 
@@ -1051,4 +1051,45 @@ label {
   background-size: cover;
   cursor: pointer;
   border: none;
+}
+
+/*CFMS activity record card css*/
+.cfms-activity-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #d3d3d3;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cfms-activity-card.selected {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.cfms-activity-card .cfms-info-button {
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.cfms-activity-card .cfms-activity-title {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.cfms-activity-card .cfms-activity-type {
+  margin: 0 auto;
+  margin-left: 1.5rem;
+  text-align: center;
+  flex-shrink: 0;
 }
