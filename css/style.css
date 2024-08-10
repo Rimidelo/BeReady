@@ -955,10 +955,11 @@ label {
   width: 100%;
   margin-bottom: 1rem;
   border-collapse: collapse;
-  font-family: 'Heebo', sans-serif;
+  font-family: "Heebo", sans-serif;
   font-size: 14px;
 }
-.table th, .table td {
+.table th,
+.table td {
   border: none;
   text-align: center;
   vertical-align: middle;
@@ -966,24 +967,88 @@ label {
 }
 
 .table thead th {
-  border-bottom: 2px solid #8C8C8D;
+  border-bottom: 2px solid #8c8c8d;
   font-size: 18px;
 }
 
-.view-btn {
+.record-view-btn {
   width: 24px;
   height: 24px;
   background-image: url("../images/activity/buttons/view-icon.png");
 }
 
-.edit-btn {
+.record-edit-btn {
   width: 24px;
   height: 24px;
   background-image: url("../images/activity/buttons/grey-edit-icon.png");
 }
 
-.delete-btn {
+.record-delete-btn {
   width: 24px;
   height: 24px;
   background-image: url("../images/activity/buttons/grey-delete-icon.png");
+}
+
+#activityRecordModal .modal-body {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#activityRecordModal .modal-content {
+  width:auto;
+  border-radius: 10px;
+}
+
+#activityRecordModal .name-with-icon {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+#activityRecordModal .calendar-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url("../images/activity/buttons/calender-icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 8px;
+}
+
+#activityRecordModal .goal-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url("../images/activity/buttons/grey-goal-icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 8px;
+}
+
+#activityRecordModal .happy-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url("../images/activity/buttons/happy-icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 8px;
+}
+
+#activityRecordModal #feedbackInput {
+  width: 100%;
+  margin-right: 8px;
+  margin-top: 8px;
+}
+
+#activityRecordModal .save-record-btn {
+  width: 53px;
+  height: 53px;
+  background-image: url("../images/activity/buttons/check-icon.png");
+  background-size: cover;
+  cursor: pointer;
+  border: none;
 }

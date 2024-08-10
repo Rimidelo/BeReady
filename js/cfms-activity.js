@@ -37,7 +37,6 @@ fetch('data/cfmsActivity.json')
         };
         const activityChart = new Chart(ctx, config);
 
-        // Populate the table header
         const tableHeader = document.querySelector('#activityTable thead tr');
         tableHeader.innerHTML = `
             <th>תאריך</th>
@@ -45,21 +44,22 @@ fetch('data/cfmsActivity.json')
             <th></th>
         `;
 
-        // Populate the table body
+
         const tableBody = document.querySelector('#activityTable tbody');
-        tableBody.innerHTML = ''; // Clear existing rows
+        tableBody.innerHTML = '';
         data.tableData.forEach(row => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${row.date}</td>
                 <td data-type="result">${row.result}</td>
                 <td>
-                    <button class="btn btn-secondary view-btn btn-icon"></button>
-                    <button class="btn btn-warning edit-btn btn-icon"></button>
-                    <button class="btn btn-danger delete-btn btn-icon"></button>
+                    <button class="btn btn-secondary record-view-btn btn-icon"></button>
+                    <button class="btn btn-warning record-edit-btn btn-icon"></button>
+                    <button class="btn btn-danger record-delete-btn btn-icon"></button>
                 </td>
             `;
             tableBody.appendChild(tr);
         });
     })
-    .catch(error => console.error('Error loading data:', error));
+    .catch(error => console.error('Error loading data:', error))
+

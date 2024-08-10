@@ -78,7 +78,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th>תאריך</th>
-                            <th>תוצאה - דקות</th>
+                            <th>תוצאה</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -90,9 +90,46 @@
         </section>
     </main>
     <!-- Modals -->
+    <div class="modal fade" id="activityRecordModal" tabindex="-1" aria-labelledby="activityRecordModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content ">
+                <div class="modal-body">
+                    <form id="activityRecordForm">
+                        <div class="mb-3 d-flex align-items-center justify-content-between">
+                            <div class="name-with-icon">
+                                <span class="calendar-icon"></span>
+                                <label for="dateInput" class="form-label m-0">תאריך:</label>
+                            </div>
+                            <input type="date" class="form-control date-input" id="dateInput" name="date" required />
+                        </div>
+                        <div class="mb-3 d-flex align-items-center justify-content-between">
+                            <div class="name-with-icon">
+                                <span class="goal-icon"></span>
+                                <label for="resultInput" class="form-label m-0">תוצאה:</label>
+                            </div>
+                            <input type="number" class="form-control" id="resultInput" name="result" min="1" required />
+                        </div>
+                        <div class="mb-3">
+                            <div class="name-with-icon d-flex align-items-center">
+                                <span class="happy-icon"></span>
+                                <label for="feedbackInput" class="form-label m-0">איך היה לי:</label>
+                            </div>
+                            <textarea class="form-control mt-2" id="feedbackInput" name="feedback" rows="3"></textarea>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <button type="submit" class="btn save-record-btn mx-auto"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/progressbar.js@1.1.0/dist/progressbar.min.js"></script>
     <script src="js/utili.js"></script>
     <script src="js/cfms-activity.js"></script>
+    <script src="js/cfms-activity-record.js"></script>
 </body>
 
 </html>
