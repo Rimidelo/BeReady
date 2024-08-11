@@ -1,6 +1,41 @@
 window.onload = async () => {
   const firstOrderDetails = await fetchFirstOrderDetails(1);
   createFirstOrderForm(firstOrderDetails);
+
+  document.getElementById('first-order-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const isValid = validateForm(firstOrderDetails);
+
+    if (isValid) {
+      window.location.href = "profile-status.html";
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'שגיאה',
+        text: 'אנא תקן את השגיאות בטופס לפני שליחה.',
+        confirmButtonText: 'אישור',
+      });
+    }
+  });
+};
+
+const validateForm = (formDetails) => {
+  let isValid = true;
+
+  Object.entries(formDetails).forEach(([id, props]) => {
+    const inputElement = document.getElementById(convertToHtmlIdConvention(id));
+    const value = parseInt(inputElement.value, 10);
+
+    if (!props.validation(value)) {
+      isValid = false;
+      inputElement.style.borderColor = 'red';
+    } else {
+      inputElement.style.borderColor = '';
+    }
+  });
+
+  return isValid;
 };
 
 const fetchFirstOrderDetails = async (id) => {
@@ -20,7 +55,7 @@ const fetchFirstOrderDetails = async (id) => {
       value: 90,
       type: "number",
       validation: (value) => {
-        const BRAIN_VALUES = [80, 70, 60, 50, 40, 30, 20, 10];
+        const BRAIN_VALUES = [90, 80, 70, 60, 50, 40, 30, 20, 10];
         return BRAIN_VALUES.includes(value)
       },
     },
@@ -160,28 +195,37 @@ const convertToHtmlIdConvention = (id) =>
 
 const createFirstOrderField = (id, fieldProperties) => {
   const firstOrderFieldGroupElement = document.createElement("div");
-  firstOrderFieldGroupElement.classList.add("form-group"); // Use existing form-group class
+  firstOrderFieldGroupElement.classList.add("form-group");
 
   const fieldLabelElement = document.createElement("label");
   fieldLabelElement.setAttribute("for", convertToHtmlIdConvention(id));
-  fieldLabelElement.classList.add("form-label"); // Use existing form-label class
+  fieldLabelElement.classList.add("form-label");
   fieldLabelElement.innerText = fieldProperties.name;
 
   const fieldElement = document.createElement("input");
   fieldElement.type = "number";
   fieldElement.id = convertToHtmlIdConvention(id);
   fieldElement.name = id;
-  fieldElement.value = fieldProperties.value; // Set the default value
-  fieldElement.classList.add("form-control"); // Use existing form-control class
+  fieldElement.value = fieldProperties.value;
+  fieldElement.classList.add("form-control");
 
   firstOrderFieldGroupElement.append(fieldLabelElement, fieldElement);
   return firstOrderFieldGroupElement;
 };
 
-
 const createFirstOrderForm = (firstOrderDetails) => {
   const firstOrderForm = document.getElementById("first-order-form");
-  Object.entries(firstOrderDetails).map(([id, props]) => {
-    firstOrderForm.appendChild(createFirstOrderField(id, props));
+  firstOrderForm.innerHTML = "";
+  Object.entries(firstOrderDetails).forEach(([id, props]) => {
+    const formGroup = createFirstOrderField(id, props);
+    firstOrderForm.appendChild(formGroup);
   });
+
+  const submitButton = document.createElement("button");
+  submitButton.setAttribute("type", "submit");
+  submitButton.setAttribute("id", "save-first-order-details");
+  submitButton.classList.add("btn", "btn-success");
+  submitButton.textContent = "שמור";
+
+  firstOrderForm.appendChild(submitButton);
 };
