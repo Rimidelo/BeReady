@@ -202,32 +202,50 @@ const addActivity = (newActivityData) => {
   };
   activityList.push(newActivity);
   addActivityElement(createActivityElement(newActivity));
-  console.log("POST /activities");
-  console.log("Request body:", newActivity);
+
+  fetch(`https://127.0.0.1/api/activities`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newActivity)
+  })
+    .then(response => response.json())
+    .then(data => console.log('Activity added successfully:', data))
+    .catch(error => console.error('Error adding activity:', error));
 };
+
 
 const removeActivity = (id) => {
-  const activityToRemoveElement = document.getElementById(
-    getActivityElementId(id)
-  );
+  const activityToRemoveElement = document.getElementById(getActivityElementId(id));
   activityListElement.removeChild(activityToRemoveElement);
-  console.log(`DELETE /activities/${id}`);
-  delete activityList[getActivityIndexInList(id)];
+
+  fetch(`https://127.0.0.1/api/activities/${id}`, {
+    method: 'DELETE'
+  })
+    .then(response => response.json())
+    .then(data => console.log('Activity deleted successfully:', data))
+    .catch(error => console.error('Error deleting activity:', error));
 };
 
+
 const editActivity = (newActivityData) => {
-  const activityToEditElement = document.getElementById(
-    getActivityElementId(newActivityData.id)
-  );
-  activityList[getActivityIndexInList(newActivityData.id)] = {
-    ...newActivityData,
-  };
-  activityListElement.replaceChild(
-    createActivityElement(newActivityData),
-    activityToEditElement
-  );
-  console.log(`POST /activities/${newActivityData.id}`);
+  const activityToEditElement = document.getElementById(getActivityElementId(newActivityData.id));
+  activityList[getActivityIndexInList(newActivityData.id)] = { ...newActivityData };
+  activityListElement.replaceChild(createActivityElement(newActivityData), activityToEditElement);
+
+  fetch(`https://127.0.0.1/api/activities/${newActivityData.id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newActivityData)
+  })
+    .then(response => response.json())
+    .then(data => console.log('Activity edited successfully:', data))
+    .catch(error => console.error('Error editing activity:', error));
 };
+
 
 const MODE_CONFIG = {
   READ: {

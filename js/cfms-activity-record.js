@@ -54,9 +54,26 @@ function saveActivityRecord(event) {
     if (currentEditIndex === -1) {
         activityRecords.push(newRecord);
         addRecordToTable(newRecord);
+        fetch(`https://127.0.0.1/api/userActivityRecords`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newRecord)
+        })
+            .then(response => response.json())
+            .then(data => console.log('Record added successfully:', data))
+            .catch(error => console.error('Error adding record:', error));
+
     } else {
-        activityRecords[currentEditIndex] = newRecord;
-        updateRecordInTable(currentEditIndex, newRecord);
+        const updatedRecord = activityRecords[currentEditIndex] = newRecord;
+        updateRecordInTable(currentEditIndex, updatedRecord);
+        fetch(`https://127.0.0.1/api/userActivityRecords/${currentEditIndex}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedRecord)
+        })
+            .then(response => response.json())
+            .then(data => console.log('Record updated successfully:', data))
+            .catch(error => console.error('Error updating record:', error));
     }
 
     const modalElement = document.getElementById('activityRecordModal');
@@ -66,7 +83,6 @@ function saveActivityRecord(event) {
     document.getElementById('activityRecordForm').reset();
     currentEditIndex = -1;
 }
-
 
 function addRecordToTable(record) {
     const tableBody = document.querySelector('#activityTable tbody');
@@ -106,8 +122,16 @@ function deleteRecord(event) {
 }
 
 function deleteActivityRecord(index) {
+    const recordToDelete = activityRecords[index];
+
     activityRecords.splice(index, 1);
     document.querySelectorAll('#activityTable tbody tr')[index].remove();
+    fetch(`https://127.0.0.1/api/userActivityRecords/${index}`, {
+        method: 'DELETE'
+    })
+        .then(response => response.json())
+        .then(data => console.log('Record deleted successfully:', data))
+        .catch(error => console.error('Error deleting record:', error));
 }
 
 document.getElementById('activityRecordForm').addEventListener('submit', saveActivityRecord);
