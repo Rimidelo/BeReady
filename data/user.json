@@ -1,12 +1,12 @@
 {
     "LoggedInUser": {
-        "type": "manager",
+        "type": "cfms",
         "name": "יוגב שגיא",
         "company_name": "חמש אצבעות",
         "company_id": 12345,
         "profile_pic": "/images/header/yogev.png",
         "company_logo": "/images/header/5finger-logo.png",
-        "email": "yogev@example.com",
+        "email": "yogev@gmail.com",
         "password": "123456"
     }
 }

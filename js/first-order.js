@@ -196,12 +196,10 @@ const convertToHtmlIdConvention = (id) =>
 const createFirstOrderField = (id, fieldProperties) => {
   const firstOrderFieldGroupElement = document.createElement("div");
   firstOrderFieldGroupElement.classList.add("form-group");
-
   const fieldLabelElement = document.createElement("label");
   fieldLabelElement.setAttribute("for", convertToHtmlIdConvention(id));
   fieldLabelElement.classList.add("form-label");
   fieldLabelElement.innerText = fieldProperties.name;
-
   const fieldElement = document.createElement("input");
   fieldElement.type = "number";
   fieldElement.id = convertToHtmlIdConvention(id);
