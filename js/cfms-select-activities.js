@@ -1,4 +1,4 @@
-const PLAN_DATA_URL = "https://127.0.0.1/managePlan/changePlan/${userId}";
+const PLAN_DATA_URL = "https://127.0.0.1/managePlan/setPlan/${userId}";
 let selectedActivities = [];
 let planData = [];
 

@@ -12,17 +12,25 @@ window.onload = function () {
 };
 
 function fetchActivityAndUserRecords(activityId, userId) {
-    fetch(`https://127.0.0.1/managePlan/getActivityAndUserRecords/${activityId}/${userId}`, {
+    fetch(`https://127.0.0.1/managePlan/getUserActivity/${userId}?activityId=${activityId}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             displayActivityDetails(data.activityDetails);
             displayUserActivityRecords(data.userRecords);
         })
-        .catch(error => console.error('Error fetching activity or user records:', error));
+        .catch(error => {
+            console.error('Error fetching activity or user records:', error);
+        });
 }
+
 
 function displayActivityDetails(activityDetails) {
     document.querySelector("h1").textContent = `התוכנית שלי - ${activityDetails.name}`;
