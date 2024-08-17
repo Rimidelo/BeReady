@@ -11,11 +11,6 @@ const TYPE_ICONS = {
   Leadership: "images/activity/types/leadership-icon.png",
 };
 
-const ACTIVITY_DATA_URL_BY_PAGE = {
-  "BeReady": "./data/activities.json",
-  "BeReady - Activity archive": "./data/activityArchive.json",
-}
-
 const COLLECTIVE = "קבוצתי";
 const PERSONAL = "אישי";
 let activityList = [];
@@ -25,7 +20,14 @@ let generateId;
 
 window.onload = async () => {
   try {
-    await readUserData();
+    LoggedInUser = getUserDataFromSession();
+
+    if (!LoggedInUser) {
+      alert("No user data found. Redirecting to login...");
+      window.location.href = 'login.html';
+      return;
+    }
+
     await readActivitiesData();
     generateId = createIdGenerator();
     initActivityList();
@@ -35,17 +37,17 @@ window.onload = async () => {
   }
 };
 
-const readActivitiesData = async () =>
-  fetch(ACTIVITY_DATA_URL_BY_PAGE[document.title])
-    .then((response) => response.json())
-    .then(({ activities }) => activityList.push(...activities));
+const getUserDataFromSession = () => {
+  return JSON.parse(sessionStorage.getItem("LoggedInUser"));
+};
 
-const readUserData = async () =>
-  fetch("./data/user.json")
+const readActivitiesData = async () => {
+  const endpoint = `https://127.0.0.1/api/activities?companyId=${LoggedInUser.company_id}`;
+  return fetch(endpoint)
     .then((response) => response.json())
-    .then((data) => {
-      LoggedInUser = data.LoggedInUser;
-    });
+    .then((data) => activityList.push(...data.activities))
+    .catch((error) => console.error('Error fetching activities:', error));
+};
 
 const initActivityList = () => {
   for (const activity of activityList) {
@@ -200,7 +202,6 @@ const addActivity = (newActivityData) => {
   };
   activityList.push(newActivity);
   addActivityElement(createActivityElement(newActivity));
-  // Simulate POST request
   console.log("POST /activities");
   console.log("Request body:", newActivity);
 };

@@ -4,7 +4,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    fetch('../data/user.json')
+    fetch('https://127.0.0.1/profile/logIn/${userId}')
         .then(response => response.json())
         .then(data => {
             const user = data.LoggedInUser;

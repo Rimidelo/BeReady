@@ -1,4 +1,4 @@
-const PLAN_DATA_URL = "./data/plan.json";
+const PLAN_DATA_URL = "https://127.0.0.1/managePlan/getPlan/${userId}";
 
 let planData = [];
 const planListElement = document.getElementById("cfmsPlan");
@@ -167,6 +167,13 @@ const createActivityElement = (activity) => {
     </div>
   `;
 
+    activityElement.addEventListener('click', () => {
+        if (activity.id) {
+            window.location.href = `cfms-activity.html?activityId=${activity.id}`;
+        } else {
+            alert("Activity ID not found");
+        }
+    });
     return activityElement;
 };
 
