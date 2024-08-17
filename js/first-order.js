@@ -2,22 +2,24 @@ window.onload = async () => {
   const firstOrderDetails = await fetchFirstOrderDetails(1);
   createFirstOrderForm(firstOrderDetails);
 
-  document.getElementById('first-order-form').addEventListener('submit', function (event) {
-    event.preventDefault();
+  document
+    .getElementById("first-order-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
 
-    const isValid = validateForm(firstOrderDetails);
+      const isValid = validateForm(firstOrderDetails);
 
-    if (isValid) {
-      window.location.href = "profile-status.html";
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'שגיאה',
-        text: 'אנא תקן את השגיאות בטופס לפני שליחה.',
-        confirmButtonText: 'אישור',
-      });
-    }
-  });
+      if (isValid) {
+        window.location.href = "profile-status.html";
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "שגיאה",
+          text: "אנא תקן את השגיאות בטופס לפני שליחה.",
+          confirmButtonText: "אישור",
+        });
+      }
+    });
 };
 
 const validateForm = (formDetails) => {
@@ -29,21 +31,28 @@ const validateForm = (formDetails) => {
 
     if (!props.validation(value)) {
       isValid = false;
-      inputElement.style.borderColor = 'red';
+      inputElement.style.borderColor = "red";
     } else {
-      inputElement.style.borderColor = '';
+      inputElement.style.borderColor = "";
     }
   });
 
   return isValid;
 };
 
+const check1To5 = (value) => {
+  return value >= 1 && value <= 5;
+};
+
 const fetchFirstOrderDetails = async (id) => {
-  // fetch(`https://127.0.0.1/profile/getFirstOrderDetails/${userId}`);
+  const res = await fetch(
+    `https://127.0.0.1/profile/getFirstOrderDetails/${id}`
+  );
+  const data = await res.json();
   return {
     medicalProfile: {
       name: "פרופיל רפואי",
-      value: 97,
+      value: data.medicalProfile,
       type: "number",
       validation: (value) => {
         const MEDICAL_VALUES = [97, 82, 72, 64, 45, 27, 21];
@@ -52,135 +61,102 @@ const fetchFirstOrderDetails = async (id) => {
     },
     ipr: {
       name: 'דפ"ר',
-      value: 90,
+      value: data.ipr,
       type: "number",
       validation: (value) => {
         const BRAIN_VALUES = [90, 80, 70, 60, 50, 40, 30, 20, 10];
-        return BRAIN_VALUES.includes(value)
+        return BRAIN_VALUES.includes(value);
       },
     },
     adaptionDiff: {
       name: 'קה"ס',
-      value: 5,
+      value: data.adaptionDiff,
       type: "number",
-      validation: (value) => {
-        const ADAPTION_VALUES = [5, 4, 3, 2, 1];
-        return ADAPTION_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     technicalAct: {
       name: "הפעלה טכנית",
-      value: 5,
+      value: data.technicalAct,
       type: "number",
-      validation: (value) => {
-        const TECHNICAL_VALUES = [5, 4, 3, 2, 1];
-        return TECHNICAL_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     manageAndOrg: {
       name: "ניהול וארגון",
-      value: 5,
+      value: data.manageAndOrg,
       type: "number",
-      validation: (value) => {
-        const MANAGE_VALUES = [5, 4, 3, 2, 1];
-        return MANAGE_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     teamwork: {
       name: "עבודת צוות",
-      value: 5,
+      value: data.teamwork,
       type: "number",
-      validation: (value) => {
-        const TEAM_VALUES = [5, 4, 3, 2, 1];
-        return TEAM_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     command: {
       name: "פיקוד",
-      value: 5,
+      value: data.command,
       type: "number",
-      validation: (value) => {
-        const COMMAND_VALUES = [5, 4, 3, 2, 1];
-        return COMMAND_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     field: {
       name: "שדה",
-      value: 5,
+      value: data.field,
       type: "number",
-      validation: (value) => {
-        const FIELD_VALUES = [5, 4, 3, 2, 1];
-        return FIELD_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     humanRelations: {
       name: "יחסי אנוש",
-      value: 5,
+      value: data.humanRelations,
       type: "number",
-      validation: (value) => {
-        const HUMAN_VALUES = [5, 4, 3, 2, 1];
-        return HUMAN_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     informProc: {
       name: "עיבוד מידע",
-      value: 5,
+      value: data.informProc,
       type: "number",
-      validation: (value) => {
-        const INFORM_VALUES = [5, 4, 3, 2, 1];
-        return INFORM_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     instruction: {
       name: "הדרכה",
-      value: 5,
+      value: data.instruction,
       type: "number",
-      validation: (value) => {
-        const INSTRUCTION_VALUES = [5, 4, 3, 2, 1];
-        return INSTRUCTION_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     frameBehave: {
       name: "התנהגות מסגרית",
-      value: 5,
+      value: data.frameBehave,
       type: "number",
-      validation: (value) => {
-        const FRAME_VALUES = [5, 4, 3, 2, 1];
-        return FRAME_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     sustainAttention: {
       name: "קשב מתמשך",
-      value: 5,
+      value: data.sustainAttention,
       type: "number",
-      validation: (value) => {
-        const SUSTAIN_VALUES = [5, 4, 3, 2, 1];
-        return SUSTAIN_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     investAndPersist: {
       name: "השקעה והתמדה",
-      value: 5,
+      value: data.investAndPersist,
       type: "number",
-      validation: (value) => {
-        const INVEST_VALUES = [5, 4, 3, 2, 1];
-        return INVEST_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
     spatialPer: {
       name: "תפיסה מרחבית",
-      value: 5,
+      value: data.spatialPer,
       type: "number",
-      validation: (value) => {
-        const SPATIAL_VALUES = [5, 4, 3, 2, 1];
-        return SPATIAL_VALUES.includes(value)
-      },
+      validation: check1To5,
     },
   };
 };
 
-const updateFirstOrderDetails = async (id) => {
-  // fetch(`https://127.0.0.1/profile/setFirstOrderDetails/${userId}`);
+const updateFirstOrderDetails = async (id, firstOrderDetails) => {
+  fetch(`https://127.0.0.1/profile/setFirstOrderDetails/${id}`, {
+    method: "POST",
+    body: JSON.stringify(firstOrderDetails),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
 };
 
 const convertToHtmlIdConvention = (id) =>

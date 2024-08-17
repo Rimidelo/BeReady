@@ -42,27 +42,33 @@ const initProfileStatusPage = (profileStatus) => {
 };
 
 const fetchProfileStatus = async (userId) => {
-  // fetch(`https://127.0.0.1/profile/getProfileStatus/${userId}`);
+  const res = await fetch(
+    `https://127.0.0.1/profile/getProfileStatus/${userId}`
+  );
+  const { personalDetails, preferences, firstOrderDetails } = await res.json();
   return {
     PERSONAL_DETAILS: {
       id: "personal-details",
       name: "פרטים אישיים",
-      isFilled: true,
+      isFilled: personalDetails,
     },
     PREFERENCES: {
       id: "preferences",
       name: "שאלון אישי",
-      isFilled: true,
+      isFilled: preferences,
     },
     FIRST_ORDER_DETAILS: {
       id: "first-order-details",
       name: "נתוני צו ראשון",
-      isFilled: false,
+      isFilled: firstOrderDetails,
     },
   };
 };
 
 const fetchProfileImage = async (userId) => {
-  // fetch(`https://127.0.0.1/profile/getProfileImage/${userId}`);
-  return "";
+  const res = await fetch(
+    `https://127.0.0.1/profile/getProfileImage/${userId}`
+  );
+  const data = await res.json();
+  return data;
 };
