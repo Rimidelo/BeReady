@@ -1,5 +1,5 @@
 let activityRecords = [];
-let currentEditIndex = -1;
+let currentEditRecord = null;
 
 const activityRecordModal = new bootstrap.Modal(document.getElementById('activityRecordModal'));
 
@@ -9,15 +9,18 @@ document.querySelector('#add_record .btn.add-activity-btn').addEventListener('cl
 
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('record-edit-btn')) {
-        const index = Array.from(event.target.closest('tbody').children).indexOf(event.target.closest('tr'));
-        currentEditIndex = index;
-        openActivityModal('EDIT', activityRecords[index]);
+        const row = event.target.closest('tr');
+        const record = activityRecords.find(r => r.recordDate === row.dataset.recordDate);
+        currentEditRecord = record;
+        openActivityModal('EDIT', record);
     } else if (event.target.classList.contains('record-view-btn')) {
-        const index = Array.from(event.target.closest('tbody').children).indexOf(event.target.closest('tr'));
-        openActivityModal('VIEW', activityRecords[index]);
+        const row = event.target.closest('tr');
+        const record = activityRecords.find(r => r.recordDate === row.dataset.recordDate);
+        openActivityModal('VIEW', record);
     } else if (event.target.classList.contains('record-delete-btn')) {
-        const index = Array.from(event.target.closest('tbody').children).indexOf(event.target.closest('tr'));
-        deleteActivityRecord(index);
+        const row = event.target.closest('tr');
+        const record = activityRecords.find(r => r.recordDate === row.dataset.recordDate);
+        deleteActivityRecord(record);
     }
 });
 
@@ -26,18 +29,14 @@ function openActivityModal(mode, record = {}) {
 
     if (mode === 'ADD') {
         form.reset();
-        currentEditIndex = -1;
+        currentEditRecord = null;
     } else {
-        document.getElementById('dateInput').value = record.date;
+        document.getElementById('dateInput').value = record.recordDate;
         document.getElementById('resultInput').value = record.result;
         document.getElementById('feedbackInput').value = record.feedback;
     }
 
-    if (mode === 'VIEW') {
-        form.querySelectorAll('input, textarea').forEach(input => input.disabled = true);
-    } else {
-        form.querySelectorAll('input, textarea').forEach(input => input.disabled = false);
-    }
+    form.querySelectorAll('input, textarea').forEach(input => input.disabled = (mode === 'VIEW'));
 
     activityRecordModal.show();
 }
@@ -46,14 +45,18 @@ function saveActivityRecord(event) {
     event.preventDefault();
 
     const newRecord = {
-        date: document.getElementById('dateInput').value,
+        userId: currentEditRecord ? currentEditRecord.userId : 2,
+        activityId: currentEditRecord ? currentEditRecord.activityId : 1,
+        recordDate: document.getElementById('dateInput').value,
         result: document.getElementById('resultInput').value,
-        feedback: document.getElementById('feedbackInput').value,
+        feedback: document.getElementById('feedbackInput').value
     };
 
-    if (currentEditIndex === -1) {
+    if (!currentEditRecord) {
+
         activityRecords.push(newRecord);
         addRecordToTable(newRecord);
+
         fetch(`https://127.0.0.1/api/userActivityRecords`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -64,70 +67,54 @@ function saveActivityRecord(event) {
             .catch(error => console.error('Error adding record:', error));
 
     } else {
-        const updatedRecord = activityRecords[currentEditIndex] = newRecord;
-        updateRecordInTable(currentEditIndex, updatedRecord);
-        fetch(`https://127.0.0.1/api/userActivityRecords/${currentEditIndex}`, {
+        activityRecords = activityRecords.map(record => record.recordDate === currentEditRecord.recordDate ? newRecord : record);
+        updateRecordInTable(newRecord);
+
+        fetch(`https://127.0.0.1/api/userActivityRecords`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(updatedRecord)
+            body: JSON.stringify(newRecord)
         })
             .then(response => response.json())
             .then(data => console.log('Record updated successfully:', data))
             .catch(error => console.error('Error updating record:', error));
     }
 
-    const modalElement = document.getElementById('activityRecordModal');
-    const modalInstance = bootstrap.Modal.getInstance(modalElement);
-    modalInstance.hide();
-
+    activityRecordModal.hide();
     document.getElementById('activityRecordForm').reset();
-    currentEditIndex = -1;
+    currentEditRecord = null;
 }
 
 function addRecordToTable(record) {
     const tableBody = document.querySelector('#activityTable tbody');
     const newRow = document.createElement('tr');
-
+    newRow.dataset.recordDate = record.recordDate;
     newRow.innerHTML = `
-        <td>${record.date}</td>
+        <td>${record.recordDate}</td>
         <td>${record.result}</td>
         <td>
-            <button class="btn record-btn-secondary record-view-btn btn-icon"></button>
-            <button class="btn record-btn-warning record-edit-btn btn-icon"></button>
-            <button class="btn record-btn-danger record-delete-btn btn-icon"></button>
+            <button class="btn btn-secondary record-view-btn btn-icon"></button>
+            <button class="btn btn-warning record-edit-btn btn-icon"></button>
+            <button class="btn btn-danger record-delete-btn btn-icon"></button>
         </td>
     `;
-
     tableBody.appendChild(newRow);
-
-    newRow.querySelector('.record-view-btn').addEventListener('click', () => openActivityModal('VIEW', record));
-    newRow.querySelector('.record-edit-btn').addEventListener('click', () => openActivityModal('EDIT', record));
-    newRow.querySelector('.record-delete-btn').addEventListener('click', deleteRecord);
 }
 
-function updateRecordInTable(index, record) {
-    const tableRows = document.querySelectorAll('#activityTable tbody tr');
-    const row = tableRows[index];
-
-    row.cells[0].textContent = record.date;
-    row.cells[1].textContent = record.result;
+function updateRecordInTable(updatedRecord) {
+    const row = document.querySelector(`tr[data-record-date='${updatedRecord.recordDate}']`);
+    row.cells[0].textContent = updatedRecord.recordDate;
+    row.cells[1].textContent = updatedRecord.result;
 }
 
-function deleteRecord(event) {
-    const button = event.target;
-    const row = button.closest('tr');
-    const index = Array.from(row.parentNode.children).indexOf(row);
+function deleteActivityRecord(record) {
+    activityRecords = activityRecords.filter(r => r.recordDate !== record.recordDate);
+    document.querySelector(`tr[data-record-date='${record.recordDate}']`).remove();
 
-    deleteActivityRecord(index);
-}
-
-function deleteActivityRecord(index) {
-    const recordToDelete = activityRecords[index];
-
-    activityRecords.splice(index, 1);
-    document.querySelectorAll('#activityTable tbody tr')[index].remove();
-    fetch(`https://127.0.0.1/api/userActivityRecords/${index}`, {
-        method: 'DELETE'
+    fetch(`https://127.0.0.1/api/userActivityRecords`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: record.userId, activityId: record.activityId, recordDate: record.recordDate })
     })
         .then(response => response.json())
         .then(data => console.log('Record deleted successfully:', data))
