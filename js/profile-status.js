@@ -1,9 +1,11 @@
+import { SERVER_URL } from "./constants.js";
+
 document.getElementById('first-order-details').addEventListener('click', function () {
     window.location.href = 'profile-first-order-details.html';
 });
 
 window.onload = () => {
-    fetch('https://127.0.0.1/profile/getProfileStatus/${userId}')
+    fetch(`${SERVER_URL}/profile/getProfileStatus/${userId}`)
         .then(response => response.json())
         .then(data => {
             const user = data.LoggedInUser;

@@ -1,4 +1,6 @@
-const PLAN_DATA_URL = "https://127.0.0.1/managePlan/getActivites";
+import { SERVER_URL } from "./constants.js";
+
+const GET_ACTIVITIES_URL = `${SERVER_URL}/managePlan/getActivites`;
 let selectedActivities = [];
 let planData = [];
 
@@ -6,15 +8,15 @@ const activitySelectionElement = document.getElementById("accordionActivitySelec
 
 window.onload = async () => {
     try {
-        await fetchPlanData();
+        await fetchActivities();
         renderActivitySelection();
     } catch (error) {
         console.error("An error occurred:", error);
     }
 };
 
-const fetchPlanData = async () => {
-    const response = await fetch(PLAN_DATA_URL);
+const fetchActivities = async () => {
+    const response = await fetch(GET_ACTIVITIES_URL);
     const data = await response.json();
     planData.push(...data.jobs);
 };

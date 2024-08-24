@@ -1,25 +1,31 @@
+import { SERVER_URL } from "./constants.js";
+
 window.onload = async () => {
   const firstOrderDetails = await fetchFirstOrderDetails(1);
   createFirstOrderForm(firstOrderDetails);
+  
+  document.getElementById("first-order-form").onsubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
 
-  document
-    .getElementById("first-order-form")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const isValid = validateForm(firstOrderDetails);
-
-      if (isValid) {
-        window.location.href = "profile-status.html";
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "שגיאה",
-          text: "אנא תקן את השגיאות בטופס לפני שליחה.",
-          confirmButtonText: "אישור",
-        });
-      }
+    const firstOrderData = {};
+    formData.forEach((value, key) => {
+      firstOrderData[key] = value;
     });
+    const isValid = validateForm(firstOrderDetails);
+
+    if (isValid) {
+      window.location.href = "profile-status.html";
+      updateFirstOrderDetails(firstOrderData);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "שגיאה",
+        text: "אנא תקן את השגיאות בטופס לפני שליחה.",
+        confirmButtonText: "אישור",
+      });
+    }
+  };
 };
 
 const validateForm = (formDetails) => {
@@ -46,7 +52,7 @@ const check1To5 = (value) => {
 
 const fetchFirstOrderDetails = async (id) => {
   const res = await fetch(
-    `https://127.0.0.1/profile/getFirstOrderDetails/${id}`
+    `${SERVER_URL}/profile/getFirstOrderDetails/${id}`
   );
   const data = await res.json();
   return {
@@ -59,7 +65,7 @@ const fetchFirstOrderDetails = async (id) => {
         return MEDICAL_VALUES.includes(value);
       },
     },
-    ipr: {
+    IPR: {
       name: 'דפ"ר',
       value: data.IPR,
       type: "number",
@@ -149,14 +155,19 @@ const fetchFirstOrderDetails = async (id) => {
   };
 };
 
-const updateFirstOrderDetails = async (id, firstOrderDetails) => {
-  fetch(`https://127.0.0.1/profile/setFirstOrderDetails/${id}`, {
-    method: "POST",
-    body: JSON.stringify(firstOrderDetails),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  });
+const updateFirstOrderDetails = async (firstOrderDetails) => {
+  fetch(
+    `${SERVER_URL}/profile/setFirstOrderDetails/${
+      JSON.parse(sessionStorage.getItem("LoggedInUser")).UserID
+    }`,
+    {
+      method: "POST",
+      body: JSON.stringify(firstOrderDetails),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }
+  );
 };
 
 const convertToHtmlIdConvention = (id) =>
@@ -200,6 +211,5 @@ const createFirstOrderForm = (firstOrderDetails) => {
   submitButton.setAttribute("id", "save-first-order-details");
   submitButton.classList.add("btn", "btn-success");
   submitButton.textContent = "שמור";
-
   firstOrderForm.appendChild(submitButton);
 };
