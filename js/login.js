@@ -4,17 +4,19 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    fetch('https://127.0.0.1/profile/login/${userId}')
+    fetch('https://127.0.0.1/profile/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+    })
         .then(response => response.json())
-        .then(data => {
-            const user = data.LoggedInUser;
-
-            if (email && password) {
-                if (user.type === "cfms") {
-                    window.location.href = "cfmsPlan.html";
-                } else if (user.type === "manager") {
-                    window.location.href = "org-activities.html";
-                }
+        .then(user => {
+            if (user.Role === "cfms") {
+                window.location.href = "cfmsPlan.html";
+            } else if (user.Role === "manager") {
+                window.location.href = "org-activities.html";
             } else {
                 alert("התחברות נכשלה. אנא בדוק את הפרטים שלך.");
             }
