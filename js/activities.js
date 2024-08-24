@@ -21,13 +21,6 @@ let generateId;
 window.onload = async () => {
   try {
     LoggedInUser = getUserDataFromSession();
-
-    if (!LoggedInUser) {
-      alert("No user data found. Redirecting to login...");
-      window.location.href = 'login.html';
-      return;
-    }
-
     await readActivitiesData();
     generateId = createIdGenerator();
     initActivityList();
@@ -38,6 +31,7 @@ window.onload = async () => {
 };
 
 const getUserDataFromSession = () => {
+  console.log(sessionStorage);
   return JSON.parse(sessionStorage.getItem("LoggedInUser"));
 };
 
