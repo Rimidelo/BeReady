@@ -36,12 +36,17 @@ const getUserDataFromSession = () => {
 };
 
 const readActivitiesData = async () => {
-  const endpoint = `http://127.0.0.1:8081/activities/getActivitiesByInstitute/${LoggedInUser.InstituteID}`;
+  let endpoint;
+  if (document.title === "BeReady - Activity archive") {
+    endpoint = `http://127.0.0.1:8081/activities/getAllActivities`;
+  } else {
+    endpoint = `http://127.0.0.1:8081/activities/getActivitiesByInstitute/${LoggedInUser.InstituteID}`;
+  }
   return fetch(endpoint)
     .then((response) => response.json())
     .then((data) => activityList.push(...data.activities))
     .then(() => console.log(activityList)
-  ).catch((error) => console.error('Error fetching activities:', error));
+    ).catch((error) => console.error('Error fetching activities:', error));
 };
 
 const initActivityList = () => {
@@ -53,8 +58,7 @@ const initActivityList = () => {
 const getActivityElementId = (id) => `activity-${id}`;
 
 const createActivityElement = (activity) => {
-  const { id, type, name, frameworkType, scheduledAttributes, company_id } =
-    activity;
+  const { id, type, name, frameworkType, scheduledAttributes, instituteID } = activity;
   const newActivityElement = document.createElement("li");
   newActivityElement.id = getActivityElementId(id);
   newActivityElement.classList.add("activity");
@@ -66,7 +70,7 @@ const createActivityElement = (activity) => {
       frameworkType,
       scheduledAttributes
     ),
-    createActivityButtonsElement(id, company_id)
+    createActivityButtonsElement(id, instituteID)
   );
   return newActivityElement;
 };
@@ -131,15 +135,22 @@ const createActivityDetailsElement = (frameworkType, scheduledAttributes) => {
   return activityDetailsElement;
 };
 
-const createActivityButtonsElement = (id, company_id) => {
+const createActivityButtonsElement = (id, instituteId) => {
   const activityButtonsElement = document.createElement("section");
-  if (company_id == LoggedInUser.company_id || document.title == MY_ACTIVITIES_PAGE_TITLE) {
-    isArchivePage() && createActivityEditBtn(id, activityButtonsElement);
-    createActivityDeleteBtn(id, activityButtonsElement);
+  if (document.title === "BeReady - Activity archive") {
+    if (instituteId == LoggedInUser.InstituteID) {
+      createActivityEditBtn(id, activityButtonsElement);
+      createActivityDeleteBtn(id, activityButtonsElement);
+    }
   }
+  else if (document.title === "BeReady") {
+    if (instituteId == LoggedInUser.InstituteID) {
+      createActivityDeleteBtn(id, activityButtonsElement);
+    }
+  }
+
   return activityButtonsElement;
 };
-
 const isArchivePage = () => document.title == "BeReady - Activity archive";
 
 const createActivityEditBtn = (id, activityButtonsElement) => {
@@ -192,13 +203,17 @@ const getActivityIndexInList = (id) => {
 
 const addActivity = (newActivityData) => {
   const newActivity = {
-    ...newActivityData,
-    id: generateId(),
+    ActivityID: generateId(),
+    Type: newActivityData.type,
+    Name: newActivityData.name,
+    FrameworkType: newActivityData.frameworkType,
+    InstituteID: LoggedInUser.InstituteID,
+    TargetValue: newActivityData.targetValue,
+    TargetUnit: newActivityData.targetUnit,
   };
   activityList.push(newActivity);
   addActivityElement(createActivityElement(newActivity));
-
-  fetch(`https://127.0.0.1/api/activities`, {
+  fetch(`http://127.0.0.1:8081/activities/createActivity`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -211,11 +226,12 @@ const addActivity = (newActivityData) => {
 };
 
 
+
 const removeActivity = (id) => {
   const activityToRemoveElement = document.getElementById(getActivityElementId(id));
   activityListElement.removeChild(activityToRemoveElement);
 
-  fetch(`https://127.0.0.1/api/activities/${id}`, {
+  fetch(`http://127.0.0.1:8081/activities//deleteActivity/${id}`, {
     method: 'DELETE'
   })
     .then(response => response.json())
@@ -229,7 +245,7 @@ const editActivity = (newActivityData) => {
   activityList[getActivityIndexInList(newActivityData.id)] = { ...newActivityData };
   activityListElement.replaceChild(createActivityElement(newActivityData), activityToEditElement);
 
-  fetch(`https://127.0.0.1/api/activities/${newActivityData.id}`, {
+  fetch(`http://127.0.0.1:8081/activities/editActivity/${newActivityData.id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

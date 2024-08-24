@@ -24,18 +24,20 @@ const getActivityFormData = (activityList) => {
 };
 
 const openActivityModal = (mode, activityData) => {
-  document.getElementById("activity-modal-title").textContent = mode.title;
   const activityForm = document.getElementById("activity-form");
+  if (!activityData) {
+    activityForm.reset();
+    document.getElementById("is-group-activity").checked = false;
+  }
+  document.getElementById("activity-modal-title").textContent = mode.title;
   const addFileIconElement = document.getElementById("file-add-icon");
   const uploadElement = document.getElementById("upload");
 
   addFileIconElement.onclick = () => {
     uploadElement.click();
   };
-
   document.querySelector('label[for="upload"]').onclick = () =>
     document.getElementById("upload").click();
-
   if (activityData) {
     document.querySelector(
       `option[value=${activityData.type}]`
@@ -43,13 +45,11 @@ const openActivityModal = (mode, activityData) => {
     document.querySelector(
       `option[value=${activityData.target.unit}]`
     ).selected = true;
-
     document.getElementById("activity-form-name").value = activityData.name || EMPTY_FIELD;
     document.getElementById("activity-form-description").value = activityData.description || EMPTY_FIELD;
     document.getElementById("activity-form-target").value = activityData.target.value || EMPTY_FIELD;
     document.getElementById("is-group-activity").checked = activityData.frameworkType == COLLECTIVE;
   }
-
   if (mode.disabled) {
     activityForm.querySelectorAll("input, textarea, select").forEach(el => {
       el.disabled = true;
@@ -59,11 +59,8 @@ const openActivityModal = (mode, activityData) => {
       el.disabled = false;
     });
   }
-
   const activityModal = new bootstrap.Modal(document.getElementById("activity-modal"));
-
   activityModal.show();
-
   activityForm.onsubmit = (event) => {
     event.preventDefault();
     const action = event.submitter.getAttribute("data-action");
@@ -73,7 +70,6 @@ const openActivityModal = (mode, activityData) => {
     activityModal.hide();
     activityForm.reset();
   };
-
   document.getElementById("activity-modal").addEventListener("hidden.bs.modal", function () {
     const modalElement = document.getElementById("activity-modal");
     modalElement.querySelectorAll("input, textarea, select").forEach(el => {
