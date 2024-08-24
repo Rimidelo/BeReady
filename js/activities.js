@@ -203,12 +203,15 @@ const formatForServer = (activityData) => ({
   InstituteID: activityData.InstituteID || LoggedInUser.InstituteID,
   TargetValue: activityData.target?.value || activityData.TargetValue,
   TargetUnit: activityData.target?.unit || activityData.TargetUnit,
+  Description: activityData.description || activityData.Description
 });
+
 
 const formatForClient = (activityData) => ({
   id: activityData.ActivityID,
   type: activityData.Type,
   name: activityData.Name,
+  description: activityData.Description,
   frameworkType: activityData.FrameworkType,
   instituteID: activityData.InstituteID,
   target: {
@@ -228,6 +231,7 @@ const formatForClient = (activityData) => ({
     },
   },
 });
+
 
 
 const addActivity = (newActivityData) => {
