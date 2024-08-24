@@ -61,7 +61,7 @@ const fetchFirstOrderDetails = async (id) => {
     },
     ipr: {
       name: 'דפ"ר',
-      value: data.ipr,
+      value: data.IPR,
       type: "number",
       validation: (value) => {
         const BRAIN_VALUES = [90, 80, 70, 60, 50, 40, 30, 20, 10];
