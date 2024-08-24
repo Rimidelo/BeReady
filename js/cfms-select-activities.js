@@ -1,4 +1,6 @@
-const GET_ACTIVITIES_URL = "http://127.0.0.1:8081/managePlan/getActivites";
+import { SERVER_URL } from "./constants.js";
+
+const GET_ACTIVITIES_URL = `${SERVER_URL}/managePlan/getActivites`;
 let selectedActivities = [];
 let planData = [];
 

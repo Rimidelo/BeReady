@@ -1,3 +1,5 @@
+import { SERVER_URL } from "./constants.js";
+
 let planData = [];
 const planListElement = document.getElementById("cfmsPlan");
 
@@ -12,7 +14,7 @@ window.onload = async () => {
 
 const fetchPlanData = async () => {
   const response = await fetch(
-    `http://127.0.0.1:8081/managePlan/getPlan/${
+    `${SERVER_URL}/managePlan/getPlan/${
       JSON.parse(sessionStorage.getItem("LoggedInUser")).UserID
     }`
   );

@@ -1,3 +1,5 @@
+import { SERVER_URL } from "./constants.js";
+
 const MY_ACTIVITIES_PAGE_TITLE = "BeReady";
 const ACTIVITY_ACTIONS_ICONS = {
   edit: "images/activity/buttons/edit-icon.png",
@@ -38,15 +40,15 @@ const getUserDataFromSession = () => {
 const readActivitiesData = async () => {
   let endpoint;
   if (document.title === "BeReady - Activity archive") {
-    endpoint = `http://127.0.0.1:8081/activities/getAllActivities`;
+    endpoint = `${SERVER_URL}/activities/getAllActivities`;
   } else {
-    endpoint = `http://127.0.0.1:8081/activities/getActivitiesByInstitute/${LoggedInUser.InstituteID}`;
+    endpoint = `${SERVER_URL}/activities/getActivitiesByInstitute/${LoggedInUser.InstituteID}`;
   }
   return fetch(endpoint)
     .then((response) => response.json())
     .then((data) => activityList.push(...data.activities))
-    .then(() => console.log(activityList)
-    ).catch((error) => console.error('Error fetching activities:', error));
+    .then(() => console.log(activityList))
+    .catch((error) => console.error("Error fetching activities:", error));
 };
 
 const initActivityList = () => {
@@ -58,7 +60,8 @@ const initActivityList = () => {
 const getActivityElementId = (id) => `activity-${id}`;
 
 const createActivityElement = (activity) => {
-  const { id, type, name, frameworkType, scheduledAttributes, instituteID } = activity;
+  const { id, type, name, frameworkType, scheduledAttributes, instituteID } =
+    activity;
   const newActivityElement = document.createElement("li");
   newActivityElement.id = getActivityElementId(id);
   newActivityElement.classList.add("activity");
@@ -142,8 +145,7 @@ const createActivityButtonsElement = (id, instituteId) => {
       createActivityEditBtn(id, activityButtonsElement);
       createActivityDeleteBtn(id, activityButtonsElement);
     }
-  }
-  else if (document.title === "BeReady") {
+  } else if (document.title === "BeReady") {
     if (instituteId == LoggedInUser.InstituteID) {
       createActivityDeleteBtn(id, activityButtonsElement);
     }
@@ -162,7 +164,7 @@ const createActivityEditBtn = (id, activityButtonsElement) => {
   editIconElement.alt = "edit";
   editButtonElement.appendChild(editIconElement);
   activityButtonsElement.appendChild(editButtonElement);
-}
+};
 
 const createActivityDeleteBtn = (id, activityButtonsElement) => {
   const deleteButtonElement = document.createElement("button");
@@ -213,50 +215,55 @@ const addActivity = (newActivityData) => {
   };
   activityList.push(newActivity);
   addActivityElement(createActivityElement(newActivity));
-  fetch(`http://127.0.0.1:8081/activities/createActivity`, {
-    method: 'POST',
+  fetch(`${SERVER_URL}/activities/createActivity`, {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(newActivity)
+    body: JSON.stringify(newActivity),
   })
-    .then(response => response.json())
-    .then(data => console.log('Activity added successfully:', data))
-    .catch(error => console.error('Error adding activity:', error));
+    .then((response) => response.json())
+    .then((data) => console.log("Activity added successfully:", data))
+    .catch((error) => console.error("Error adding activity:", error));
 };
-
-
 
 const removeActivity = (id) => {
-  const activityToRemoveElement = document.getElementById(getActivityElementId(id));
+  const activityToRemoveElement = document.getElementById(
+    getActivityElementId(id)
+  );
   activityListElement.removeChild(activityToRemoveElement);
 
-  fetch(`http://127.0.0.1:8081/activities//deleteActivity/${id}`, {
-    method: 'DELETE'
+  fetch(`${SERVER_URL}/activities//deleteActivity/${id}`, {
+    method: "DELETE",
   })
-    .then(response => response.json())
-    .then(data => console.log('Activity deleted successfully:', data))
-    .catch(error => console.error('Error deleting activity:', error));
+    .then((response) => response.json())
+    .then((data) => console.log("Activity deleted successfully:", data))
+    .catch((error) => console.error("Error deleting activity:", error));
 };
-
 
 const editActivity = (newActivityData) => {
-  const activityToEditElement = document.getElementById(getActivityElementId(newActivityData.id));
-  activityList[getActivityIndexInList(newActivityData.id)] = { ...newActivityData };
-  activityListElement.replaceChild(createActivityElement(newActivityData), activityToEditElement);
+  const activityToEditElement = document.getElementById(
+    getActivityElementId(newActivityData.id)
+  );
+  activityList[getActivityIndexInList(newActivityData.id)] = {
+    ...newActivityData,
+  };
+  activityListElement.replaceChild(
+    createActivityElement(newActivityData),
+    activityToEditElement
+  );
 
-  fetch(`http://127.0.0.1:8081/activities/editActivity/${newActivityData.id}`, {
-    method: 'POST',
+  fetch(`${SERVER_URL}/activities/editActivity/${newActivityData.id}`, {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(newActivityData)
+    body: JSON.stringify(newActivityData),
   })
-    .then(response => response.json())
-    .then(data => console.log('Activity edited successfully:', data))
-    .catch(error => console.error('Error editing activity:', error));
+    .then((response) => response.json())
+    .then((data) => console.log("Activity edited successfully:", data))
+    .catch((error) => console.error("Error editing activity:", error));
 };
-
 
 const MODE_CONFIG = {
   READ: {
@@ -295,6 +302,3 @@ const setAddActivityBtnOnClick = () => {
     addActivityElement.onclick = () => openActivityModal(MODE_CONFIG["ADD"]);
   }
 };
-
-
-

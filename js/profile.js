@@ -1,3 +1,5 @@
+import { SERVER_URL } from "./constants.js";
+
 window.onload = async () => {
   const profileStatus = await fetchProfileStatus(userId);
   const profileImgSrc = await fetchProfileImage(userId);
@@ -43,7 +45,7 @@ const initProfileStatusPage = (profileStatus) => {
 
 const fetchProfileStatus = async (userId) => {
   const res = await fetch(
-    `http://127.0.0.1:8081/profile/getProfileStatus/${userId}`
+    `${SERVER_URL}/profile/getProfileStatus/${userId}`
   );
   const { personalDetails, preferences, firstOrderDetails } = await res.json();
   return {
@@ -67,7 +69,7 @@ const fetchProfileStatus = async (userId) => {
 
 const fetchProfileImage = async (userId) => {
   const res = await fetch(
-    `http://127.0.0.1:8081/profile/getProfileImage/${userId}`
+    `${SERVER_URL}/profile/getProfileImage/${userId}`
   );
   const data = await res.json();
   return data;

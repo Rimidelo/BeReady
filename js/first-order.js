@@ -1,3 +1,5 @@
+import { SERVER_URL } from "./constants.js";
+
 window.onload = async () => {
   const firstOrderDetails = await fetchFirstOrderDetails(1);
   createFirstOrderForm(firstOrderDetails);
@@ -50,7 +52,7 @@ const check1To5 = (value) => {
 
 const fetchFirstOrderDetails = async (id) => {
   const res = await fetch(
-    `http://127.0.0.1:8081/profile/getFirstOrderDetails/${id}`
+    `${SERVER_URL}/profile/getFirstOrderDetails/${id}`
   );
   const data = await res.json();
   return {
@@ -155,7 +157,7 @@ const fetchFirstOrderDetails = async (id) => {
 
 const updateFirstOrderDetails = async (firstOrderDetails) => {
   fetch(
-    `http://127.0.0.1:8081/profile/setFirstOrderDetails/${
+    `${SERVER_URL}/profile/setFirstOrderDetails/${
       JSON.parse(sessionStorage.getItem("LoggedInUser")).UserID
     }`,
     {

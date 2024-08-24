@@ -1,3 +1,5 @@
+import { SERVER_URL } from "./constants.js";
+
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     const activityId = urlParams.get('activityId');
@@ -12,7 +14,7 @@ window.onload = function () {
 };
 
 function fetchActivityAndUserRecords(activityId, userId) {
-    fetch(`http://127.0.0.1:8081/managePlan/getUserActivity/${userId}?activityID=${activityId}`, {
+    fetch(`${SERVER_URL}/managePlan/getUserActivity/${userId}?activityID=${activityId}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })

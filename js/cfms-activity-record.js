@@ -1,3 +1,5 @@
+import { SERVER_URL } from "./constants.js";
+
 let activityRecords = [];
 let currentEditRecord = null;
 
@@ -73,7 +75,7 @@ function saveActivityRecord(event) {
     );
     updateRecordInTable(newRecord);
   }
-  fetch(`http://127.0.0.1:8081/userActivityRecords/setRecord`, {
+  fetch(`${SERVER_URL}/userActivityRecords/setRecord`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newRecord),
@@ -119,7 +121,7 @@ function deleteActivityRecord(record) {
     .querySelector(`tr[data-record-date='${record.recordDate}']`)
     .remove();
 
-  fetch(`http://127.0.0.1:8081/userActivityRecords/deleteRecord`, {
+  fetch(`${SERVER_URL}/userActivityRecords/deleteRecord`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
