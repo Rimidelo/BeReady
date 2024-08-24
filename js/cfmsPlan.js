@@ -32,13 +32,12 @@ const initPlanList = () => {
 
   planListElement.appendChild(accordionContainer);
 
-  // TODO
-  // planData.forEach((job) => {
-  //   initializeProgressCircle(
-  //     `#progress-circle-${job.id}`,
-  //     calculateJobProgress(job)
-  //   );
-  // });
+  planData.forEach((job) => {
+    initializeProgressCircle(
+      `#progress-circle-${job.id}`,
+      calculateJobProgress(job)
+    );
+  });
 };
 
 const createJobElement = (job) => {
@@ -95,15 +94,14 @@ const createJobElement = (job) => {
   return jobElement;
 };
 
-// TODO
 const calculateJobProgress = (job) => {
-  // let totalProgress = 0;
-  // let totalActivities = 0;
-  // job.activities.forEach((activity) => {
-  //   totalProgress += activity.progress;
-  //   totalActivities++;
-  // });
-  // return totalActivities ? Math.round(totalProgress / totalActivities) : 0;
+  let totalProgress = 0;
+  let totalActivities = 0;
+  job.activities.forEach((activity) => {
+    totalProgress += activity.progress;
+    totalActivities++;
+  });
+  return totalActivities ? Math.round(totalProgress / totalActivities) : 0;
 };
 
 const hebrewActivityType = {

@@ -237,7 +237,7 @@ const removeActivity = (id) => {
   );
   activityListElement.removeChild(activityToRemoveElement);
 
-  fetch(`${SERVER_URL}/activities//deleteActivity/${id}`, {
+  fetch(`${SERVER_URL}/activities/deleteActivity/${id}`, {
     method: "DELETE",
   })
     .then((response) => response.json())
