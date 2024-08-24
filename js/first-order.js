@@ -1,5 +1,3 @@
-import { SERVER_URL } from "./constants.js";
-
 window.onload = async () => {
   const firstOrderDetails = await fetchFirstOrderDetails(1);
   createFirstOrderForm(firstOrderDetails);

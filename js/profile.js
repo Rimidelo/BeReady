@@ -1,5 +1,3 @@
-import { SERVER_URL } from "./constants.js";
-
 window.onload = async () => {
   const profileStatus = await fetchProfileStatus(userId);
   const profileImgSrc = await fetchProfileImage(userId);

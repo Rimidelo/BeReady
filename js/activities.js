@@ -1,5 +1,3 @@
-import { SERVER_URL } from "./constants.js";
-
 const MY_ACTIVITIES_PAGE_TITLE = "BeReady";
 const ACTIVITY_ACTIONS_ICONS = {
   edit: "images/activity/buttons/edit-icon.png",

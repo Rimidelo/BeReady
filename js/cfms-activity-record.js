@@ -1,5 +1,3 @@
-import { SERVER_URL } from "./constants.js";
-
 let activityRecords = [];
 let currentEditRecord = null;
 

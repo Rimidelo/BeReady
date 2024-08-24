@@ -1,5 +1,3 @@
-import { SERVER_URL } from "./constants.js";
-
 let planData = [];
 const planListElement = document.getElementById("cfmsPlan");
 

@@ -1,5 +1,3 @@
-import { SERVER_URL } from "./constants.js";
-
 const loggedInUser = JSON.parse(sessionStorage.getItem("LoggedInUser"));
 
 if (loggedInUser) {

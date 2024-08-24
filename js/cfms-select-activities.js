@@ -1,5 +1,3 @@
-import { SERVER_URL } from "./constants.js";
-
 const GET_ACTIVITIES_URL = `${SERVER_URL}/managePlan/getActivites`;
 let selectedActivities = [];
 let planData = [];

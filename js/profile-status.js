@@ -1,5 +1,3 @@
-import { SERVER_URL } from "./constants.js";
-
 document.getElementById('first-order-details').addEventListener('click', function () {
     window.location.href = 'profile-first-order-details.html';
 });

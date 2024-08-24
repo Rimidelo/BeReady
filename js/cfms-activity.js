@@ -1,5 +1,3 @@
-import { SERVER_URL } from "./constants.js";
-
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     const activityId = urlParams.get('activityId');
