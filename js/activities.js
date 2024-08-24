@@ -22,9 +22,9 @@ window.onload = async () => {
   try {
     LoggedInUser = getUserDataFromSession();
     await readActivitiesData();
-    generateId = createIdGenerator();
     initActivityList();
     setAddActivityBtnOnClick();
+
   } catch (error) {
     console.error("An error occurred:", error);
   }
@@ -151,6 +151,7 @@ const createActivityButtonsElement = (id, instituteId) => {
 
   return activityButtonsElement;
 };
+
 const isArchivePage = () => document.title == "BeReady - Activity archive";
 
 const createActivityEditBtn = (id, activityButtonsElement) => {
@@ -180,8 +181,11 @@ const addOnClickToBtn = (id, element, onClickAction) => {
 };
 
 const createIdGenerator = () => {
-  let lastId = activityList[activityList.length - 1]?.id || -1;
-  return () => ++lastId;
+  let lastActivityId = activityList.length > 0
+    ? Number(activityList[activityList.length - 1].id)
+    : 0;
+
+  return () => ++lastActivityId;
 };
 
 const addActivityElement = (activityElement) => {
@@ -202,23 +206,29 @@ const getActivityIndexInList = (id) => {
 };
 
 const addActivity = (newActivityData) => {
+  const generateId = createIdGenerator();
   const newActivity = {
     ActivityID: generateId(),
     Type: newActivityData.type,
     Name: newActivityData.name,
     FrameworkType: newActivityData.frameworkType,
     InstituteID: LoggedInUser.InstituteID,
-    TargetValue: newActivityData.targetValue,
-    TargetUnit: newActivityData.targetUnit,
+    TargetValue: newActivityData.target.value,
+    TargetUnit: newActivityData.target.unit,
   };
+
   activityList.push(newActivity);
-  addActivityElement(createActivityElement(newActivity));
+  console.log("Created Activity Element:", newActivity);
+  const activityElement = createActivityElement(newActivity);
+  console.log("Created Activity Element:", activityElement);
+  addActivityElement(activityElement);
+  
   fetch(`http://127.0.0.1:8081/activities/createActivity`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(newActivity)
+    body: JSON.stringify(newActivity),
   })
     .then(response => response.json())
     .then(data => console.log('Activity added successfully:', data))
@@ -226,18 +236,26 @@ const addActivity = (newActivityData) => {
 };
 
 
-
 const removeActivity = (id) => {
+  console.log(`Attempting to remove activity with ID: ${id}`);
   const activityToRemoveElement = document.getElementById(getActivityElementId(id));
-  activityListElement.removeChild(activityToRemoveElement);
-
-  fetch(`http://127.0.0.1:8081/activities//deleteActivity/${id}`, {
+  if (activityToRemoveElement) {
+    activityListElement.removeChild(activityToRemoveElement);
+  }
+  fetch(`http://127.0.0.1:8081/activities/deleteActivity/${id}`, {
     method: 'DELETE'
   })
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then(data => console.log('Activity deleted successfully:', data))
     .catch(error => console.error('Error deleting activity:', error));
 };
+
+
 
 
 const editActivity = (newActivityData) => {

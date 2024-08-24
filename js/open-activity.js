@@ -19,7 +19,7 @@ const getActivityFormData = (activityList) => {
       : activityList
         ? activityList.frameworkType
         : PERSONAL,
-    company_id: LoggedInUser.company_id,
+        InstituteID: LoggedInUser.InstituteID,
   };
 };
 
