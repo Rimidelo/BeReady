@@ -36,11 +36,12 @@ const getUserDataFromSession = () => {
 };
 
 const readActivitiesData = async () => {
-  const endpoint = `https://127.0.0.1/api/activities?companyId=${LoggedInUser.company_id}`;
+  const endpoint = `http://127.0.0.1:8081/activities/getActivitiesByInstitute/${LoggedInUser.InstituteID}`;
   return fetch(endpoint)
     .then((response) => response.json())
     .then((data) => activityList.push(...data.activities))
-    .catch((error) => console.error('Error fetching activities:', error));
+    .then(() => console.log(activityList)
+  ).catch((error) => console.error('Error fetching activities:', error));
 };
 
 const initActivityList = () => {
