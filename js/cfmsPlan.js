@@ -32,23 +32,18 @@ const initPlanList = () => {
 
   planListElement.appendChild(accordionContainer);
 
-  planData.forEach((job) => {
-    initializeProgressCircle(
-      `#progress-circle-${job.id}`,
-      calculateJobProgress(job)
-    );
-  });
+  // TODO
+  // planData.forEach((job) => {
+  //   initializeProgressCircle(
+  //     `#progress-circle-${job.id}`,
+  //     calculateJobProgress(job)
+  //   );
+  // });
 };
 
 const createJobElement = (job) => {
   const jobElement = document.createElement("div");
   jobElement.classList.add("accordion-item");
-
-  const totalActivities = job.categories.reduce(
-    (count, category) => count + category.activities.length,
-    0
-  );
-  const jobProgress = calculateJobProgress(job);
 
   const jobHeader = document.createElement("h2");
   jobHeader.classList.add("accordion-header");
@@ -65,11 +60,10 @@ const createJobElement = (job) => {
   jobButton.innerHTML = `
     <div class="d-flex align-items-center">
       <div class="progress-circle me-2" id="progress-circle-${job.id}"></div>
-      <span class="badge bg-secondary mx-2">${totalActivities}</span>
+      <span class="badge bg-secondary mx-2">${job.activities.length}</span>
     </div>
     <div class="text-end w-100">
       <div>${job.title}</div>
-      <div class="text-muted">${job.dueDate}: תאריך יעד</div>
     </div>
   `;
 
@@ -88,9 +82,9 @@ const createJobElement = (job) => {
   nestedAccordion.classList.add("accordion", "w-100");
   nestedAccordion.id = `nestedAccordion${job.id}`;
 
-  job.categories.forEach((category) => {
-    const categoryElement = createCategoryElement(category);
-    nestedAccordion.appendChild(categoryElement);
+  job.activities.forEach((activity) => {
+    const activityElement = createActivityElement(activity);
+    nestedAccordion.appendChild(activityElement);
   });
 
   jobBody.appendChild(nestedAccordion);
@@ -101,81 +95,23 @@ const createJobElement = (job) => {
   return jobElement;
 };
 
+// TODO
 const calculateJobProgress = (job) => {
-  let totalProgress = 0;
-  let totalActivities = 0;
-
-  job.categories.forEach((category) => {
-    category.activities.forEach((activity) => {
-      totalProgress += activity.progress;
-      totalActivities++;
-    });
-  });
-
-  return totalActivities ? Math.round(totalProgress / totalActivities) : 0;
+  // let totalProgress = 0;
+  // let totalActivities = 0;
+  // job.activities.forEach((activity) => {
+  //   totalProgress += activity.progress;
+  //   totalActivities++;
+  // });
+  // return totalActivities ? Math.round(totalProgress / totalActivities) : 0;
 };
 
-const createCategoryElement = (category) => {
-  const categoryElement = document.createElement("div");
-  categoryElement.classList.add("accordion-item");
-
-  const categoryHeader = document.createElement("h2");
-  categoryHeader.classList.add("accordion-header");
-  categoryHeader.id = `nestedHeading${category.id}`;
-
-  const categoryButton = document.createElement("button");
-  categoryButton.classList.add(
-    "accordion-button",
-    "d-flex",
-    "align-items-center",
-    "collapsed",
-    "rounded-4"
-  );
-  categoryButton.type = "button";
-  categoryButton.setAttribute("data-bs-toggle", "collapse");
-  categoryButton.setAttribute(
-    "data-bs-target",
-    `#nestedCollapse${category.id}`
-  );
-  categoryButton.setAttribute("aria-expanded", "false");
-  categoryButton.setAttribute("aria-controls", `nestedCollapse${category.id}`);
-
-  categoryButton.innerHTML = `
-    <div class="d-flex align-items-center">
-      <span class="badge bg-secondary mx-2">${category.activities.length}</span>
-    </div>
-    <div class="text-end w-100">
-      <div>${category.title}</div>
-    </div>
-  `;
-
-  categoryHeader.appendChild(categoryButton);
-
-  const categoryCollapse = document.createElement("div");
-  categoryCollapse.id = `nestedCollapse${category.id}`;
-  categoryCollapse.classList.add("accordion-collapse", "collapse");
-  categoryCollapse.setAttribute(
-    "aria-labelledby",
-    `nestedHeading${category.id}`
-  );
-  categoryCollapse.setAttribute(
-    "data-bs-parent",
-    `#nestedAccordion${category.id}`
-  );
-
-  const categoryBody = document.createElement("div");
-  categoryBody.classList.add("accordion-body");
-
-  category.activities.forEach((activity) => {
-    const activityElement = createActivityElement(activity);
-    categoryBody.appendChild(activityElement);
-  });
-
-  categoryCollapse.appendChild(categoryBody);
-  categoryElement.appendChild(categoryHeader);
-  categoryElement.appendChild(categoryCollapse);
-
-  return categoryElement;
+const hebrewActivityType = {
+  Physical: "כוח וסיבולת",
+  Brain: "חשיבתי",
+  Mental: "מנטלי",
+  Coordination: "קורדינציה",
+  Leadership: "כישורי מנהיגות",
 };
 
 const createActivityElement = (activity) => {
@@ -190,7 +126,7 @@ const createActivityElement = (activity) => {
 
   activityElement.innerHTML = `
     <div>${activity.name}</div>
-    <div class="text-muted">${activity.type}</div>
+    <div class="text-muted">${hebrewActivityType[activity.type]}</div>
     <div class="progress-circle me-2"id="progress-circle-${activity.progress}">
     <span>${activity.progress}%</span>
     </div>
