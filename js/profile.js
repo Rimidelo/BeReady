@@ -43,7 +43,7 @@ const initProfileStatusPage = (profileStatus) => {
 
 const fetchProfileStatus = async (userId) => {
   const res = await fetch(
-    `https://127.0.0.1/profile/getProfileStatus/${userId}`
+    `http://127.0.0.1:8081/profile/getProfileStatus/${userId}`
   );
   const { personalDetails, preferences, firstOrderDetails } = await res.json();
   return {
@@ -67,7 +67,7 @@ const fetchProfileStatus = async (userId) => {
 
 const fetchProfileImage = async (userId) => {
   const res = await fetch(
-    `https://127.0.0.1/profile/getProfileImage/${userId}`
+    `http://127.0.0.1:8081/profile/getProfileImage/${userId}`
   );
   const data = await res.json();
   return data;

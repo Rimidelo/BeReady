@@ -3,7 +3,7 @@ document.getElementById('first-order-details').addEventListener('click', functio
 });
 
 window.onload = () => {
-    fetch('https://127.0.0.1/profile/getProfileStatus/${userId}')
+    fetch('http://127.0.0.1:8081/profile/getProfileStatus/${userId}')
         .then(response => response.json())
         .then(data => {
             const user = data.LoggedInUser;

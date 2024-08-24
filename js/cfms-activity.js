@@ -12,7 +12,7 @@ window.onload = function () {
 };
 
 function fetchActivityAndUserRecords(activityId, userId) {
-    fetch(`https://127.0.0.1/managePlan/getUserActivity/${userId}?activityId=${activityId}`, {
+    fetch(`http://127.0.0.1:8081/managePlan/getUserActivity/${userId}?activityID=${activityId}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
