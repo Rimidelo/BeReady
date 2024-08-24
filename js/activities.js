@@ -16,7 +16,6 @@ const PERSONAL = "אישי";
 let activityList = [];
 const activityListElement = document.getElementById("activity-list");
 let LoggedInUser;
-let generateId;
 
 window.onload = async () => {
   try {
@@ -180,14 +179,6 @@ const addOnClickToBtn = (id, element, onClickAction) => {
   element.onclick = () => onClickAction(id);
 };
 
-const createIdGenerator = () => {
-  let lastActivityId = activityList.length > 0
-    ? Number(activityList[activityList.length - 1].id)
-    : 0;
-
-  return () => ++lastActivityId;
-};
-
 const addActivityElement = (activityElement) => {
   activityListElement.insertBefore(
     activityElement,
@@ -205,60 +196,101 @@ const getActivityIndexInList = (id) => {
   }
 };
 
-const addActivity = (newActivityData) => {
-  const generateId = createIdGenerator();
-  const newActivity = {
-    ActivityID: generateId(),
-    Type: newActivityData.type,
-    Name: newActivityData.name,
-    FrameworkType: newActivityData.frameworkType,
-    InstituteID: LoggedInUser.InstituteID,
-    TargetValue: newActivityData.target.value,
-    TargetUnit: newActivityData.target.unit,
-  };
+const formatForServer = (activityData) => ({
+  Type: activityData.type,
+  Name: activityData.name,
+  FrameworkType: activityData.frameworkType,
+  InstituteID: activityData.InstituteID || LoggedInUser.InstituteID,
+  TargetValue: activityData.target?.value || activityData.TargetValue,
+  TargetUnit: activityData.target?.unit || activityData.TargetUnit,
+});
 
-  activityList.push(newActivity);
-  addActivityElement(createActivityElement(newActivity));
+const formatForClient = (activityData) => ({
+  id: activityData.ActivityID,
+  type: activityData.Type,
+  name: activityData.Name,
+  frameworkType: activityData.FrameworkType,
+  instituteID: activityData.InstituteID,
+  target: {
+    value: activityData.TargetValue,
+    unit: activityData.TargetUnit,
+  },
+  scheduledAttributes: {
+    participants: {
+      actualAmount: activityData.ParticipantsActual,
+      maxAmount: activityData.ParticipantsMax,
+    },
+    schedule: {
+      date: activityData.ScheduleDate,
+      day: activityData.ScheduleDay,
+      hours: `${activityData.StartTime} - ${activityData.EndTime}`,
+      repeat: activityData.RepeatFrequency,
+    },
+  },
+});
+
+
+const addActivity = (newActivityData) => {
+  const formattedActivity = formatForServer(newActivityData);
+  activityList.push(formattedActivity);
+
   fetch(`${SERVER_URL}/activities/createActivity`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(newActivity),
+    body: JSON.stringify(formattedActivity),
   })
-    .then((response) => response.json())
-    .then((data) => console.log("Activity added successfully:", data))
-    .catch((error) => console.error("Error adding activity:", error));
+    .then(response => response.json())
+    .then(data => {
+      const clientFormattedActivity = formatForClient(formattedActivity);
+      addActivityElement(createActivityElement(clientFormattedActivity));
+      console.log('Activity added successfully:', data);
+    })
+    .catch(error => console.error('Error adding activity:', error));
 };
 
+
 const removeActivity = (id) => {
+  console.log(`Attempting to remove activity with ID: ${id}`);
   const activityToRemoveElement = document.getElementById(
     getActivityElementId(id)
   );
-  activityListElement.removeChild(activityToRemoveElement);
+
+  if (activityToRemoveElement) {
+    activityListElement.removeChild(activityToRemoveElement);
+  } else {
+    console.error(`Activity with ID: ${id} not found in the DOM.`);
+  }
 
   fetch(`${SERVER_URL}/activities/deleteActivity/${id}`, {
     method: "DELETE",
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then((data) => console.log("Activity deleted successfully:", data))
     .catch((error) => console.error("Error deleting activity:", error));
 };
 
+
 const editActivity = (newActivityData) => {
-  const activityToEditElement = document.getElementById(
-    getActivityElementId(newActivityData.id)
-  );
-  activityList[getActivityIndexInList(newActivityData.id)] = {
+  const activityIndex = getActivityIndexInList(newActivityData.id);
+  if (activityIndex === -1) {
+    console.error("Activity not found in the list");
+    return;
+  }
+  const activityToEditElement = document.getElementById(getActivityElementId(newActivityData.id));
+  activityList[activityIndex] = {
     ...newActivityData,
   };
-  activityListElement.replaceChild(
-    createActivityElement(newActivityData),
-    activityToEditElement
-  );
-
+  const updatedActivityElement = createActivityElement(newActivityData);
+  activityListElement.replaceChild(updatedActivityElement, activityToEditElement);
   fetch(`${SERVER_URL}/activities/editActivity/${newActivityData.id}`, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -268,6 +300,7 @@ const editActivity = (newActivityData) => {
     .then((data) => console.log("Activity edited successfully:", data))
     .catch((error) => console.error("Error editing activity:", error));
 };
+
 
 const MODE_CONFIG = {
   READ: {
