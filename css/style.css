@@ -833,7 +833,6 @@ label {
   }
 }
 
-/*CFMS user css */
 /*CFMS activity list css */
 .accordion {
   width: 100%;
@@ -894,11 +893,29 @@ label {
 }
 
 .activity-item {
+  display: flex;
+  align-items: center;
   background-color: #e9ecef;
   justify-content: space-between;
   padding: 0.5rem;
   border-radius: 0.25rem;
   height: 65px;
+}
+
+.text-muted {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-item > div:first-child {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.text-muted {
+  margin-left: 40%;
+  text-align: right;
 }
 
 /* Override padding and margin for mobile view */
@@ -918,6 +935,10 @@ label {
   .accordion {
     margin-left: 0;
     margin-right: 0;
+  }
+
+  .text-muted {
+    margin-left: 35%;
   }
 }
 
