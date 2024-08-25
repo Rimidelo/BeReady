@@ -1,3 +1,4 @@
+const EMPTY_FIELD = "";
 const getActivityFormData = (activityList) => {
   const activityFormElement = document.getElementById("activity-form");
   const activityFormData = new FormData(activityFormElement);
