@@ -177,11 +177,7 @@ const initializeProgressCircle = (selector, progress) => {
         circle.path.setAttribute("stroke-width", state.width);
 
         const value = Math.round(circle.value() * 100);
-        if (value === 0) {
-          circle.setText("");
-        } else {
-          circle.setText(value + "%");
-        }
+        circle.setText(value + "%");
       },
     });
 
