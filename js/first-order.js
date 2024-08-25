@@ -1,7 +1,8 @@
+
 window.onload = async () => {
-  const firstOrderDetails = await fetchFirstOrderDetails(1);
+  const loggedInUser = JSON.parse(sessionStorage.getItem("LoggedInUser"));
+  const firstOrderDetails = await fetchFirstOrderDetails(loggedInUser.UserID);
   createFirstOrderForm(firstOrderDetails);
-  
   document.getElementById("first-order-form").onsubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -13,7 +14,7 @@ window.onload = async () => {
     const isValid = validateForm(firstOrderDetails);
 
     if (isValid) {
-      window.location.href = "profile-status.html";
+      // window.location.href = "profile-status.html";
       updateFirstOrderDetails(firstOrderData);
     } else {
       Swal.fire({
@@ -53,6 +54,8 @@ const fetchFirstOrderDetails = async (id) => {
     `${SERVER_URL}/profile/getFirstOrderDetails/${id}`
   );
   const data = await res.json();
+  console.log(data);
+
   return {
     medicalProfile: {
       name: "פרופיל רפואי",
@@ -155,8 +158,7 @@ const fetchFirstOrderDetails = async (id) => {
 
 const updateFirstOrderDetails = async (firstOrderDetails) => {
   fetch(
-    `${SERVER_URL}/profile/setFirstOrderDetails/${
-      JSON.parse(sessionStorage.getItem("LoggedInUser")).UserID
+    `${SERVER_URL}/profile/setFirstOrderDetails/${JSON.parse(sessionStorage.getItem("LoggedInUser")).UserID
     }`,
     {
       method: "POST",
