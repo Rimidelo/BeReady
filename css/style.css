@@ -137,6 +137,7 @@ header {
   color: #bdbdbd;
 }
 
+
 main {
   padding-right: 200px;
   padding-top: 81px;
@@ -1090,7 +1091,6 @@ label {
 
 .cfms-activity-card.selected {
   background-color: #28a745;
-  color: #fff;
 }
 
 .cfms-activity-card .cfms-info-button {

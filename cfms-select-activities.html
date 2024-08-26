@@ -11,6 +11,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <title>BeReady</title>
@@ -39,7 +40,7 @@
         <section id="sidebar">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="">
+                    <a class="nav-link " href="cfmsPlan.html">
                         <span class="icon-placeholder"><img src="images/sidebar/check-list.png"
                                 alt="my-activitires-icon Icon" class="icon-img" /></span>התוכנית שלי
                     </a>
@@ -50,6 +51,12 @@
                                 alt="all-activitires-icon Icon" class="icon-img" /></span>התפקידים שלי
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="cfms-select-activities.html">
+                      <span class="icon-placeholder"><img src="images/sidebar/all-activitires-icon.png" alt="all-activities-icon"
+                          class="icon-img" /></span>הפעילויות שלי
+                    </a>
+                  </li>
             </ul>
         </section>
     </aside>
@@ -68,18 +75,6 @@
         </div>
         </section>
     </main>
-    <!-- Modals -->
-    <div class="modal fade" id="updateSuccessModal" tabindex="-1" aria-labelledby="updateSuccessModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h5 class="modal-title" id="updateSuccessModalLabel">עודכן בהצלחה</h5>
-                    <button class="btn save-icon-btn mx-auto"></button>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="js/constants.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/progressbar.js@1.1.0/dist/progressbar.min.js"></script>
     <script src="js/utili.js"></script>

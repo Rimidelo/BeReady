@@ -8,7 +8,6 @@ if (loggedInUser) {
   if (profileImg) {
     profileImg.src = profilePicUrl;
   }
-
   const companyLogo = document.getElementById("company-logo");
   if (companyLogo) {
     companyLogo.src = instituteLogoUrl;
@@ -24,9 +23,18 @@ if (loggedInUser) {
     userRole.innerText =
       loggedInUser.Role === "manager" ? "מנהל מערכת" : 'מלש"ב';
   }
+
+  if (loggedInUser.Role === "manager") {
+    const personaluQestLink = document.getElementById("personal-quest");
+    personaluQestLink.style.display = "hidden";
+    const firstOrderDetails = document.getElementById("first-order-details");
+    firstOrderDetails.style.display = "hidden";
+  };
 } else {
   window.location.href = "index.html";
 }
+
+
 
 document
   .getElementById("hamburger-menu")

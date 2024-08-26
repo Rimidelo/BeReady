@@ -7,4 +7,11 @@ if (loggedInUser) {
   if (profileImg) {
     profileImg.src = profilePicUrl;
   }
-}
+};
+
+if(loggedInUser.Role === "manager"){
+  const personaluQestLink = document.getElementById("personal-quest");
+  personaluQestLink.style.display = "none";
+  const firstOrderDetails = document.getElementById("first-order-details");
+  firstOrderDetails.style.display = "none";
+};

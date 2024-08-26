@@ -132,7 +132,7 @@ const createActivityElement = (activity) => {
 
   activityElement.addEventListener("click", () => {
     if (activity.id) {
-      window.location.href = `cfms-activity.html?activityId=${activity.id}`;
+      window.location.href = `cfms-open-activity.html?activityId=${activity.id}`;
     } else {
       alert("Activity ID not found");
     }

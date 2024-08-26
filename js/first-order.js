@@ -14,7 +14,6 @@ window.onload = async () => {
     const isValid = validateForm(firstOrderDetails);
 
     if (isValid) {
-      // window.location.href = "profile-status.html";
       updateFirstOrderDetails(firstOrderData);
     } else {
       Swal.fire({
@@ -157,17 +156,46 @@ const fetchFirstOrderDetails = async (id) => {
 };
 
 const updateFirstOrderDetails = async (firstOrderDetails) => {
-  fetch(
-    `${SERVER_URL}/profile/setFirstOrderDetails/${JSON.parse(sessionStorage.getItem("LoggedInUser")).UserID
-    }`,
-    {
-      method: "POST",
-      body: JSON.stringify(firstOrderDetails),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
+  try {
+    const response = await fetch(
+      `${SERVER_URL}/profile/setFirstOrderDetails/${JSON.parse(sessionStorage.getItem("LoggedInUser")).UserID}`,
+      {
+        method: "POST",
+        body: JSON.stringify(firstOrderDetails),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
+    const result = await response.json();
+    if (result.isSuitabilityChanged) {
+      Swal.fire({
+        icon: "warning",
+        title: "שינוי בהתאמה",
+        text: "שינויים בוצעו, וחלק מהתפקידים כבר לא זמינים.",
+        confirmButtonText: "אישור",
+      }).then(() => {
+        window.location.href = "profile-status.html";
+      });
+    } else {
+      Swal.fire({
+        icon: "success",
+        title: "שמור בהצלחה",
+        text: "הפרטים נשמרו בהצלחה.",
+        confirmButtonText: "אישור",
+      }).then(() => {
+        window.location.href = "profile-status.html";
+      });
     }
-  );
+  } catch (error) {
+    console.error("Error updating first order details:", error);
+    Swal.fire({
+      icon: "error",
+      title: "שגיאה",
+      text: "אירעה שגיאה במהלך העדכון, אנא נסה שוב.",
+      confirmButtonText: "אישור",
+    });
+  }
 };
 
 const convertToHtmlIdConvention = (id) =>
@@ -188,7 +216,7 @@ const createFirstOrderField = (id, fieldProperties) => {
   fieldLabelElement.classList.add("form-label");
   fieldLabelElement.innerText = fieldProperties.name;
   const fieldElement = document.createElement("input");
-  fieldElement.type = "number";
+  fieldElement.type = "text";
   fieldElement.id = convertToHtmlIdConvention(id);
   fieldElement.name = id;
   fieldElement.value = fieldProperties.value;
