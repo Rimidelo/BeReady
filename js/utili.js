@@ -23,13 +23,14 @@ if (loggedInUser) {
     userRole.innerText =
       loggedInUser.Role === "manager" ? "מנהל מערכת" : 'מלש"ב';
   }
-
-  if (loggedInUser.Role === "manager") {
-    const personaluQestLink = document.getElementById("personal-quest");
-    personaluQestLink.style.display = "hidden";
-    const firstOrderDetails = document.getElementById("first-order-details");
-    firstOrderDetails.style.display = "hidden";
-  };
+  if (window.location.pathname === "/pages/first-order-details.html") {
+    if (loggedInUser.Role === "manager") {
+      const personaluQestLink = document.getElementById("personal-quest");
+      personaluQestLink.style.display = "hidden";
+      const firstOrderDetails = document.getElementById("first-order-details");
+      firstOrderDetails.style.display = "hidden";
+    };
+  }
 } else {
   window.location.href = "index.html";
 }
