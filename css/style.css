@@ -1253,10 +1253,10 @@ label {
 .weather-card {
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  padding: 10px 15px; /* Moderate padding for both desktop and mobile */
+  padding: 10px 15px;
   background-color: #f8f9fa;
-  max-width: 350px; /* Fixed width for desktop */
-  margin: 20px auto; /* Center the card */
+  max-width: 350px;
+  margin: 20px auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1266,19 +1266,19 @@ label {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%; /* Ensure the content takes up full width */
+  width: 100%;
 }
 
 .weather-card .card-title {
-  font-size: 16px; /* Adjusted font size for clarity on desktop */
+  font-size: 16px;
   color: #007bff;
   margin: 0;
-  flex-grow: 1; /* Make title grow to fill available space */
-  text-align: left; /* Align title to the left */
+  flex-grow: 1;
+  text-align: left;
 }
 
 .weather-icon {
-  font-size: 24px; /* Moderate icon size */
+  font-size: 24px;
   color: #f39c12;
   margin: 0 15px;
 }
@@ -1290,27 +1290,26 @@ label {
 }
 
 #weather-temp {
-  font-size: 18px; /* Larger temperature font for visibility */
+  font-size: 18px;
   color: #e74c3c;
   margin-left: 10px;
 }
 
-/* Responsive adjustments for mobile devices */
 @media (max-width: 768px) {
   .weather-card {
-    max-width: 100%; /* Full width for mobile */
-    padding: 8px 10px; /* Reduce padding for mobile */
+    max-width: 100%;
+    padding: 8px 10px;
   }
 
   .weather-card .card-title {
-    font-size: 14px; /* Smaller font size for mobile */
+    font-size: 14px;
   }
 
   .weather-icon {
-    font-size: 20px; /* Smaller icon size for mobile */
+    font-size: 20px;
   }
 
   #weather-temp {
-    font-size: 16px; /* Smaller temperature font for mobile */
+    font-size: 16px;
   }
 }
