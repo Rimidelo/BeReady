@@ -4,10 +4,18 @@ if (loggedInUser) {
   const profilePicUrl = `${SERVER_URL}/assets/profile-pics/${loggedInUser.UserID}-profile-pic.png`;
   const instituteLogoUrl = `${SERVER_URL}/assets/institute-pics/${loggedInUser.InstituteID}-logo.png`;
 
-  const profileImg = document.getElementById("profile-img");
-  if (profileImg) {
+  const userInfoSection = document.getElementById("user_info");
+  if (userInfoSection) {
+    const profileLink = document.createElement("a");
+    profileLink.href = "profile-status.html";
+    const profileImg = document.createElement("img");
+    profileImg.id = "profile-img";
+    profileImg.alt = "User Avatar";
     profileImg.src = profilePicUrl;
+    profileLink.appendChild(profileImg);
+    userInfoSection.insertBefore(profileLink, userInfoSection.firstChild);
   }
+
   const companyLogo = document.getElementById("company-logo");
   if (companyLogo) {
     companyLogo.src = instituteLogoUrl;
