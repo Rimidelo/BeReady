@@ -137,7 +137,6 @@ header {
   color: #bdbdbd;
 }
 
-
 main {
   padding-right: 200px;
   padding-top: 81px;
@@ -1248,4 +1247,70 @@ label {
 
 .profile-item:hover {
   background-color: #d3d3d3;
+}
+
+/*weather card css*/
+.weather-card {
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px; /* Moderate padding for both desktop and mobile */
+  background-color: #f8f9fa;
+  max-width: 350px; /* Fixed width for desktop */
+  margin: 20px auto; /* Center the card */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.weather-card .card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; /* Ensure the content takes up full width */
+}
+
+.weather-card .card-title {
+  font-size: 16px; /* Adjusted font size for clarity on desktop */
+  color: #007bff;
+  margin: 0;
+  flex-grow: 1; /* Make title grow to fill available space */
+  text-align: left; /* Align title to the left */
+}
+
+.weather-icon {
+  font-size: 24px; /* Moderate icon size */
+  color: #f39c12;
+  margin: 0 15px;
+}
+
+.weather-card .card-text {
+  font-size: 12px;
+  color: #6c757d;
+  margin: 0;
+}
+
+#weather-temp {
+  font-size: 18px; /* Larger temperature font for visibility */
+  color: #e74c3c;
+  margin-left: 10px;
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 768px) {
+  .weather-card {
+    max-width: 100%; /* Full width for mobile */
+    padding: 8px 10px; /* Reduce padding for mobile */
+  }
+
+  .weather-card .card-title {
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+
+  .weather-icon {
+    font-size: 20px; /* Smaller icon size for mobile */
+  }
+
+  #weather-temp {
+    font-size: 16px; /* Smaller temperature font for mobile */
+  }
 }

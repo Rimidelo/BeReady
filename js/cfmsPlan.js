@@ -1,3 +1,4 @@
+import { fetchWeatherDataByCoords, fetchWeatherData } from './weather.js';
 let planData = [];
 const planListElement = document.getElementById("cfmsPlan");
 
@@ -5,6 +6,18 @@ window.onload = async () => {
   try {
     await fetchPlanData();
     initPlanList();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          fetchWeatherDataByCoords(lat, lon);
+        },
+        () => fetchWeatherData('תל אביב')
+      );
+    } else {
+      fetchWeatherData('תל אביב');
+    }
   } catch (error) {
     console.error("An error occurred:", error);
   }
@@ -12,8 +25,7 @@ window.onload = async () => {
 
 const fetchPlanData = async () => {
   const response = await fetch(
-    `${SERVER_URL}/managePlan/getPlan/${
-      JSON.parse(sessionStorage.getItem("LoggedInUser")).UserID
+    `${SERVER_URL}/managePlan/getPlan/${JSON.parse(sessionStorage.getItem("LoggedInUser")).UserID
     }`
   );
   const data = await response.json();
