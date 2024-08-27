@@ -4,6 +4,13 @@ if (loggedInUser) {
   const profilePicUrl = `${SERVER_URL}/assets/profile-pics/${loggedInUser.UserID}-profile-pic.png`;
   const instituteLogoUrl = `${SERVER_URL}/assets/institute-pics/${loggedInUser.InstituteID}-logo.png`;
 
+  const instituteLogo = document.getElementById("institute-logo");
+  if (instituteLogo) {
+    const companyLogo = document.createElement("img");
+    companyLogo.alt = "Company Logo";
+    companyLogo.src = instituteLogoUrl;
+    instituteLogo.appendChild(companyLogo);
+  }
   const userInfoSection = document.getElementById("user_info");
   if (userInfoSection) {
     const profileLink = document.createElement("a");
@@ -15,12 +22,6 @@ if (loggedInUser) {
     profileLink.appendChild(profileImg);
     userInfoSection.insertBefore(profileLink, userInfoSection.firstChild);
   }
-
-  const companyLogo = document.getElementById("company-logo");
-  if (companyLogo) {
-    companyLogo.src = instituteLogoUrl;
-  }
-
   const userGreeting = document.getElementById("user-greeting");
   if (userGreeting) {
     userGreeting.innerText = `שלום, ${loggedInUser.FirstName}!`;
