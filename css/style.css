@@ -1251,8 +1251,7 @@ label {
 
 /*weather card css*/
 .weather-card {
-  border-radius: 10px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   background-color: #f8f9fa;
   max-width: 350px;
   margin: 10px auto;
@@ -1286,6 +1285,7 @@ label {
 #weather-temp {
   font-size: 18px;
   color: #e74c3c;
+  margin-bottom: 0;
 }
 @media (max-width: 768px) {
   .weather-card {
