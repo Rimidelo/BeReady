@@ -1,84 +1,93 @@
+const loggedInUserID = JSON.parse(
+  sessionStorage.getItem("LoggedInUser")
+).UserID;
+let activityId;
 window.onload = function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const activityId = urlParams.get('activityId');
-    const userId = urlParams.get('userId');
+  const urlParams = new URLSearchParams(window.location.search);
+  activityId = urlParams.get("activityId");
+  let userId = urlParams.get("userId");
 
-    if (activityId && userId) {
-        fetchActivityAndUserRecords(activityId, userId);
-    } else {
-        console.error("No activity ID or user ID available.");
-        alert("Error: Activity or User information is missing.");
-    }
+  if (activityId && userId) {
+    fetchActivityAndUserRecords(activityId, userId);
+  } else {
+    console.error("No activity ID or user ID available.");
+    // alert("Error: Activity or User information is missing.");
+  }
 };
 
 function fetchActivityAndUserRecords(activityId, userId) {
-    fetch(`${SERVER_URL}/managePlan/getUserActivity/${userId}?activityID=${activityId}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+  fetch(
+    `${SERVER_URL}/managePlan/getUserActivity/${userId}?activityID=${activityId}`,
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            displayActivityDetails(data.activityDetails);
-            displayUserActivityRecords(data.userRecords);
-        })
-        .catch(error => {
-            console.error('Error fetching activity or user records:', error);
-        });
+    .then((data) => {
+      const activity = data.activityDetails;
+      displayActivityDetails(data.activityDetails);
+      displayUserActivityRecords(data.userRecords);
+    })
+    .catch((error) => {
+      console.error("Error fetching activity or user records:", error);
+    });
 }
 
-
 function displayActivityDetails(activityDetails) {
-    document.querySelector("h1").textContent = `התוכנית שלי - ${activityDetails.name}`;
-    document.querySelector("#activity_target h2").innerHTML = `
+  document.querySelector(
+    "h1"
+  ).textContent = `התוכנית שלי - ${activityDetails.name}`;
+  document.querySelector("#activity_target h2").innerHTML = `
         <span class="goal-button"></span>המטרה: ${activityDetails.targetValue} ${activityDetails.targetUnit}
     `;
-    const ctx = document.getElementById('activityChart').getContext('2d');
-    const config = {
-        type: 'line',
-        data: activityDetails.chartData,
-        options: {
-            scales: {
-                y: { beginAtZero: true }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                    onClick: null,
-                    labels: {
-                        usePointStyle: true,
-                        pointStyle: 'circle',
-                        padding: 20,
-                        boxWidth: 0
-                    }
-                },
-                datalabels: {
-                    color: 'green',
-                    anchor: 'end',
-                    align: 'top',
-                    formatter: function (value, context) {
-                        return value;
-                    }
-                }
-            }
+  const ctx = document.getElementById("activityChart").getContext("2d");
+  const config = {
+    type: "line",
+    data: activityDetails.chartData,
+    options: {
+      scales: {
+        y: { beginAtZero: true },
+      },
+      plugins: {
+        legend: {
+          display: true,
+          position: "bottom",
+          onClick: null,
+          labels: {
+            usePointStyle: true,
+            pointStyle: "circle",
+            padding: 20,
+            boxWidth: 0,
+          },
         },
-        plugins: [ChartDataLabels]
-    };
-    const activityChart = new Chart(ctx, config);
+        datalabels: {
+          color: "green",
+          anchor: "end",
+          align: "top",
+          formatter: function (value, context) {
+            return value;
+          },
+        },
+      },
+    },
+    plugins: [ChartDataLabels],
+  };
+  const activityChart = new Chart(ctx, config);
 }
 
 function displayUserActivityRecords(userRecords) {
-    const tableBody = document.querySelector('#activityTable tbody');
-    tableBody.innerHTML = '';
+  const tableBody = document.querySelector("#activityTable tbody");
+  tableBody.innerHTML = "";
 
-    userRecords.forEach(record => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
+  userRecords.forEach((record) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
             <td>${record.date}</td>
             <td>${record.result}</td>
             <td>
@@ -87,6 +96,34 @@ function displayUserActivityRecords(userRecords) {
                 <button class="btn btn-danger record-delete-btn btn-icon"></button>
             </td>
         `;
-        tableBody.appendChild(row);
-    });
+    tableBody.appendChild(row);
+  });
 }
+
+document
+  .querySelector("#add_record .btn.add-activity-btn")
+  .addEventListener("click", () => {
+    openActivityModal("ADD", { userId: loggedInUserID, activityId });
+  });
+
+document.addEventListener("click", function (event) {
+  if (event.target.classList.contains("record-edit-btn")) {
+    const row = event.target.closest("tr");
+    const record = activityRecords.find(
+      (r) => r.recordDate === row.dataset.recordDate
+    );
+    openActivityModal("EDIT", record);
+  } else if (event.target.classList.contains("record-view-btn")) {
+    const row = event.target.closest("tr");
+    const record = activityRecords.find(
+      (r) => r.recordDate === row.dataset.recordDate
+    );
+    openActivityModal("VIEW", record);
+  } else if (event.target.classList.contains("record-delete-btn")) {
+    const row = event.target.closest("tr");
+    const record = activityRecords.find(
+      (r) => r.recordDate === row.dataset.recordDate
+    );
+    deleteActivityRecord(record);
+  }
+});
