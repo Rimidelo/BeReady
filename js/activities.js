@@ -267,7 +267,6 @@ const scheduleActivity = (activityID, { schedule, participants }) => {
 };
 
 
-
 const removeActivity = (id) => {
   console.log(`Attempting to remove activity with ID: ${id}`);
   const activityToRemoveElement = document.getElementById(

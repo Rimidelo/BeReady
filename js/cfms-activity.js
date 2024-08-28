@@ -39,45 +39,13 @@ function fetchActivityAndUserRecords(activityId, userId) {
 }
 
 function displayActivityDetails(activityDetails) {
-  document.querySelector(
-    "h1"
-  ).textContent = `${activityDetails.name}`;
+  document.querySelector("h1").textContent = `${activityDetails.name}`;
   document.querySelector("#activity_target h2").innerHTML = `
-        <span class="goal-button"></span>המטרה: ${activityDetails.targetValue} ${activityDetails.targetUnit}
-    `;
-  const ctx = document.getElementById("activityChart").getContext("2d");
-  const config = {
-    type: "line",
-    data: activityDetails.chartData,
-    options: {
-      scales: {
-        y: { beginAtZero: true },
-      },
-      plugins: {
-        legend: {
-          display: true,
-          position: "bottom",
-          onClick: null,
-          labels: {
-            usePointStyle: true,
-            pointStyle: "circle",
-            padding: 20,
-            boxWidth: 0,
-          },
-        },
-        datalabels: {
-          color: "green",
-          anchor: "end",
-          align: "top",
-          formatter: function (value, context) {
-            return value;
-          },
-        },
-      },
-    },
-    plugins: [ChartDataLabels],
+    <span class="goal-button"></span>המטרה: ${activityDetails.targetValue} ${activityDetails.targetUnit}
+  `;
+  document.getElementById("showActivityDetailsButton").onclick = () => {
+    fetchAndDisplayActivityDetails(activityDetails.description);
   };
-  const activityChart = new Chart(ctx, config);
 }
 
 function displayUserActivityRecords(userRecords) {
@@ -123,3 +91,11 @@ document.addEventListener("click", function (event) {
     deleteActivityRecord(getRecordOfClick(event.target));
   }
 });
+
+async function fetchAndDisplayActivityDetails(description) {
+  Swal.fire({
+    title: "פרטי הפעילות",
+    html: `<p>${description || "לא נמצאו פרטי פעילות."}</p>`,
+    confirmButtonText: "אישור",
+  });
+}
