@@ -30,7 +30,6 @@ window.onload = async () => {
 };
 
 const getUserDataFromSession = () => {
-  console.log(sessionStorage);
   return JSON.parse(sessionStorage.getItem("LoggedInUser"));
 };
 
@@ -44,7 +43,6 @@ const readActivitiesData = async () => {
   return fetch(endpoint)
     .then((response) => response.json())
     .then((data) => activityList.push(...data.activities))
-    .then(() => console.log(activityList))
     .catch((error) => console.error("Error fetching activities:", error));
 };
 
