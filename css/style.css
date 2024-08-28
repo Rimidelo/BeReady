@@ -71,7 +71,7 @@ header {
   flex-direction: column;
 }
 
-#user_info > img {
+#user_info > a > img {
   width: 62px;
   height: 55px;
 }

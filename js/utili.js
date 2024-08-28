@@ -19,6 +19,7 @@ if (loggedInUser) {
     profileImg.id = "profile-img";
     profileImg.alt = "User Avatar";
     profileImg.src = profilePicUrl;
+    profileImg.classList.add("clientCompany-sign");
     profileLink.appendChild(profileImg);
     userInfoSection.insertBefore(profileLink, userInfoSection.firstChild);
   }
