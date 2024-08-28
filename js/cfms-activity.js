@@ -41,7 +41,7 @@ function fetchActivityAndUserRecords(activityId, userId) {
 function displayActivityDetails(activityDetails) {
   document.querySelector(
     "h1"
-  ).textContent = `התוכנית שלי - ${activityDetails.name}`;
+  ).textContent = `${activityDetails.name}`;
   document.querySelector("#activity_target h2").innerHTML = `
         <span class="goal-button"></span>המטרה: ${activityDetails.targetValue} ${activityDetails.targetUnit}
     `;
