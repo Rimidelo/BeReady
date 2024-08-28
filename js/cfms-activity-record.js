@@ -1,5 +1,3 @@
-let activityRecords = [];
-
 const activityRecordModal = new bootstrap.Modal(
   document.getElementById("activityRecordModal")
 );
@@ -10,7 +8,7 @@ function openActivityModal(mode, record = {}) {
   if (mode === "ADD") {
     form.reset();
   } else {
-    document.getElementById("dateInput").value = record.recordDate;
+    document.getElementById("dateInput").value = record.date;
     document.getElementById("resultInput").value = record.result;
     document.getElementById("feedbackInput").value = record.feedback;
   }
@@ -36,7 +34,7 @@ function saveActivityRecord(mode, record, event) {
   const newRecord = {
     userId: record.userId,
     activityId: record.activityId,
-    recordDate: activityRecordData.date,
+    date: activityRecordData.date,
     result: activityRecordData.result,
     feedback: activityRecordData.feedback,
   };
@@ -45,7 +43,7 @@ function saveActivityRecord(mode, record, event) {
     addRecordToTable(newRecord);
   } else {
     activityRecords = activityRecords.map((currRecord) =>
-      currRecord.recordDate === record.recordDate ? newRecord : currRecord
+      currRecord.date === record.date ? newRecord : currRecord
     );
     updateRecordInTable(newRecord);
   }
@@ -66,9 +64,9 @@ function saveActivityRecord(mode, record, event) {
 function addRecordToTable(record) {
   const tableBody = document.querySelector("#activityTable tbody");
   const newRow = document.createElement("tr");
-  newRow.dataset.recordDate = record.recordDate;
+  newRow.dataset.date = record.date;
   newRow.innerHTML = `
-        <td>${record.recordDate}</td>
+        <td>${record.date}</td>
         <td>${record.result}</td>
         <td>
             <button class="btn btn-secondary record-view-btn btn-icon"></button>
@@ -80,20 +78,14 @@ function addRecordToTable(record) {
 }
 
 function updateRecordInTable(updatedRecord) {
-  const row = document.querySelector(
-    `tr[data-record-date='${updatedRecord.recordDate}']`
-  );
-  row.cells[0].textContent = updatedRecord.recordDate;
+  const row = document.getElementById(`record-${updatedRecord.date}`);
+  row.cells[0].textContent = updatedRecord.date;
   row.cells[1].textContent = updatedRecord.result;
 }
 
 function deleteActivityRecord(record) {
-  activityRecords = activityRecords.filter(
-    (r) => r.recordDate !== record.recordDate
-  );
-  document
-    .querySelector(`tr[data-record-date='${record.recordDate}']`)
-    .remove();
+  activityRecords = activityRecords.filter((r) => r.date !== record.date);
+  document.getElementById(`record-${record.date}`).remove();
 
   fetch(`${SERVER_URL}/userActivityRecords/deleteRecord`, {
     method: "DELETE",
@@ -101,7 +93,7 @@ function deleteActivityRecord(record) {
     body: JSON.stringify({
       userId: record.userId,
       activityId: record.activityId,
-      recordDate: record.recordDate,
+      date: record.date,
     }),
   })
     .then((response) => response.json())

@@ -1,3 +1,4 @@
+let activityRecords = [];
 const loggedInUserID = JSON.parse(
   sessionStorage.getItem("LoggedInUser")
 ).UserID;
@@ -5,13 +6,11 @@ let activityId;
 window.onload = function () {
   const urlParams = new URLSearchParams(window.location.search);
   activityId = urlParams.get("activityId");
-  let userId = urlParams.get("userId");
 
-  if (activityId && userId) {
-    fetchActivityAndUserRecords(activityId, userId);
+  if (activityId && loggedInUserID) {
+    fetchActivityAndUserRecords(activityId, loggedInUserID);
   } else {
     console.error("No activity ID or user ID available.");
-    // alert("Error: Activity or User information is missing.");
   }
 };
 
@@ -30,9 +29,9 @@ function fetchActivityAndUserRecords(activityId, userId) {
       return response.json();
     })
     .then((data) => {
-      const activity = data.activityDetails;
-      displayActivityDetails(data.activityDetails);
+      displayActivityDetails(data.activityDetails[0]);
       displayUserActivityRecords(data.userRecords);
+      activityRecords = data.userRecords;
     })
     .catch((error) => {
       console.error("Error fetching activity or user records:", error);
@@ -87,6 +86,7 @@ function displayUserActivityRecords(userRecords) {
 
   userRecords.forEach((record) => {
     const row = document.createElement("tr");
+    row.id = `record-${record.date}`;
     row.innerHTML = `
             <td>${record.date}</td>
             <td>${record.result}</td>
@@ -105,25 +105,21 @@ document
   .addEventListener("click", () => {
     openActivityModal("ADD", { userId: loggedInUserID, activityId });
   });
-
+const getRecordOfClick = (target) => {
+  const row = target.closest("tr");
+  return {
+    userId: loggedInUserID,
+    activityId,
+    ...activityRecords.find((r) => `record-${r.date}` === row.id),
+  };
+};
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("record-edit-btn")) {
-    const row = event.target.closest("tr");
-    const record = activityRecords.find(
-      (r) => r.recordDate === row.dataset.recordDate
-    );
-    openActivityModal("EDIT", record);
+    openActivityModal("EDIT", getRecordOfClick(event.target));
   } else if (event.target.classList.contains("record-view-btn")) {
-    const row = event.target.closest("tr");
-    const record = activityRecords.find(
-      (r) => r.recordDate === row.dataset.recordDate
-    );
-    openActivityModal("VIEW", record);
+    openActivityModal("VIEW", getRecordOfClick(event.target));
   } else if (event.target.classList.contains("record-delete-btn")) {
-    const row = event.target.closest("tr");
-    const record = activityRecords.find(
-      (r) => r.recordDate === row.dataset.recordDate
-    );
-    deleteActivityRecord(record);
+    getRecordOfClick(event.target);
+    deleteActivityRecord(getRecordOfClick(event.target));
   }
 });
