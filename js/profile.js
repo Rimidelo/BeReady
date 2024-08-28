@@ -1,5 +1,3 @@
-const loggedInUser = JSON.parse(sessionStorage.getItem("LoggedInUser"));
-
 if (loggedInUser) {
   const profilePicUrl = `${SERVER_URL}/assets/profile-pics/${loggedInUser.UserID}-profile-pic.png`;
 
@@ -7,11 +5,12 @@ if (loggedInUser) {
   if (profileImg) {
     profileImg.src = profilePicUrl;
   }
-};
-
-if(loggedInUser.Role === "manager"){
-  const personaluQestLink = document.getElementById("personal-quest");
-  personaluQestLink.style.display = "none";
-  const firstOrderDetails = document.getElementById("first-order-details");
-  firstOrderDetails.style.display = "none";
+  if (loggedInUser.Role === "manager") {
+    const personaluQestLink = document.getElementById("personal-quest");
+    personaluQestLink.style.display = "none";
+    const firstOrderDetails = document.getElementById("first-order-details");
+    firstOrderDetails.style.display = "none";
+    const correctHomePage = document.getElementById("site-logo");
+    correctHomePage.href = "org-activities.html";
+  };
 };
