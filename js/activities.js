@@ -234,7 +234,6 @@ const formatForClient = (activityData) => ({
 
 const addActivity = (newActivityData) => {
   const formattedActivity = formatForServer(newActivityData);
-  activityList.push(formattedActivity);
 
   fetch(`${SERVER_URL}/activities/createActivity`, {
     method: "POST",
@@ -245,12 +244,28 @@ const addActivity = (newActivityData) => {
   })
     .then(response => response.json())
     .then(data => {
-      const clientFormattedActivity = formatForClient(formattedActivity);
-      addActivityElement(createActivityElement(clientFormattedActivity));
-      console.log('Activity added successfully:', data);
+      const newActivityId = data.newActivityId;
+      console.log("Activity added successfully:", newActivityId);
+      scheduleActivity(newActivityId, newActivityData.scheduledAttributes);
     })
     .catch(error => console.error('Error adding activity:', error));
 };
+
+const scheduleActivity = (activityID, { schedule, participants }) => {
+  fetch(`${SERVER_URL}/activities/scheduleActivity/${activityID}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      InstituteID: LoggedInUser.InstituteID,
+      participants,
+      schedule
+    }),
+  })
+    .then(res => res.json())
+    .then(data => console.log("Scheduled:", data))
+    .catch(console.error);
+};
+
 
 
 const removeActivity = (id) => {
