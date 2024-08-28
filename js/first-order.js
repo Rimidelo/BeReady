@@ -53,8 +53,6 @@ const fetchFirstOrderDetails = async (id) => {
     `${SERVER_URL}/profile/getFirstOrderDetails/${id}`
   );
   const data = await res.json();
-  console.log(data);
-
   return {
     medicalProfile: {
       name: "פרופיל רפואי",

@@ -33,19 +33,9 @@ if (loggedInUser) {
     userRole.innerText =
       loggedInUser.Role === "manager" ? "מנהל מערכת" : 'מלש"ב';
   }
-  if (window.location.pathname === "/pages/first-order-details.html") {
-    if (loggedInUser.Role === "manager") {
-      const personaluQestLink = document.getElementById("personal-quest");
-      personaluQestLink.style.display = "hidden";
-      const firstOrderDetails = document.getElementById("first-order-details");
-      firstOrderDetails.style.display = "hidden";
-    };
-  }
 } else {
   window.location.href = "index.html";
 }
-
-
 
 document
   .getElementById("hamburger-menu")
@@ -53,3 +43,80 @@ document
     const sidebar = document.getElementById("sidebar");
     sidebar.classList.toggle("active");
   });
+
+const generateManagerSidebar = (currentPage) => `
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link ${currentPage === 'org-activities.html' ? 'active' : ''}" href="org-activities.html">
+        <span class="icon-placeholder">
+          <img src="images/sidebar/my-activitires-icon.png" alt="my-activitires-icon Icon" class="icon-img">
+        </span> הפעילויות שלנו
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link ${currentPage === 'activity-archive.html' ? 'active' : ''}" href="activity-archive.html">
+        <span class="icon-placeholder">
+          <img src="images/sidebar/all-activitires-icon.png" alt="all-activitires-icon Icon" class="icon-img">
+        </span> מאגר פעילויות
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link ${currentPage === 'calendar.html' ? 'active' : ''}" href="#">
+        <span class="icon-placeholder">
+          <img src="images/sidebar/calender.svg" alt="calender Icon" class="icon-img">
+        </span> יומן
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link ${currentPage === 'members.html' ? 'active' : ''}" href="#">
+        <span class="icon-placeholder">
+          <img src="images/sidebar/members.png" alt="Members Icon" class="icon-img">
+        </span> חניכים
+      </a>
+    </li>
+  </ul>
+`;
+
+const generateCfmsSidebar = (currentPage) => `
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link ${currentPage === 'cfmsPlan.html' ? 'active' : ''}" href="cfmsPlan.html">
+        <span class="icon-placeholder">
+          <img src="images/sidebar/check-list.png" alt="my-activitires-icon Icon" class="icon-img">
+        </span> התוכנית שלי
+      </a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link ${currentPage === 'cfms-roles.html' ? 'active' : ''}" href="#">
+        <span class="icon-placeholder">
+          <img src="images/sidebar/soldier.png" alt="all-roles-icon" class="icon-img">
+        </span> התפקידים שלי
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link ${currentPage === 'cfms-select-activities.html' ? 'active' : ''}" href="cfms-select-activities.html">
+        <span class="icon-placeholder">
+          <img src="images/sidebar/soldier.png" alt="all-activities-icon" class="icon-img">
+        </span> הפעילויות שלי
+      </a>
+    </li>
+  </ul>
+`;
+
+const initializeSidebar = () => {
+  const loggedInUser = JSON.parse(sessionStorage.getItem("LoggedInUser"));
+  const sidebarElement = document.getElementById("sidebar");
+  const currentPage = window.location.pathname.split('/').pop();
+  if (loggedInUser) {
+    if (loggedInUser.Role === "manager") {
+      sidebarElement.innerHTML = generateManagerSidebar(currentPage);
+    } else if (loggedInUser.Role === "cfms") {
+      sidebarElement.innerHTML = generateCfmsSidebar(currentPage);
+    }
+  } else {
+    window.location.href = "index.html";
+  }
+};
+
+initializeSidebar();
+
