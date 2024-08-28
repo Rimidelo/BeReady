@@ -1,45 +1,14 @@
 let activityRecords = [];
-let currentEditRecord = null;
 
 const activityRecordModal = new bootstrap.Modal(
   document.getElementById("activityRecordModal")
 );
-
-document
-  .querySelector("#add_record .btn.add-activity-btn")
-  .addEventListener("click", () => {
-    openActivityModal("ADD");
-  });
-
-document.addEventListener("click", function (event) {
-  if (event.target.classList.contains("record-edit-btn")) {
-    const row = event.target.closest("tr");
-    const record = activityRecords.find(
-      (r) => r.recordDate === row.dataset.recordDate
-    );
-    currentEditRecord = record;
-    openActivityModal("EDIT", record);
-  } else if (event.target.classList.contains("record-view-btn")) {
-    const row = event.target.closest("tr");
-    const record = activityRecords.find(
-      (r) => r.recordDate === row.dataset.recordDate
-    );
-    openActivityModal("VIEW", record);
-  } else if (event.target.classList.contains("record-delete-btn")) {
-    const row = event.target.closest("tr");
-    const record = activityRecords.find(
-      (r) => r.recordDate === row.dataset.recordDate
-    );
-    deleteActivityRecord(record);
-  }
-});
 
 function openActivityModal(mode, record = {}) {
   const form = document.getElementById("activityRecordForm");
 
   if (mode === "ADD") {
     form.reset();
-    currentEditRecord = null;
   } else {
     document.getElementById("dateInput").value = record.recordDate;
     document.getElementById("resultInput").value = record.result;
@@ -51,28 +20,36 @@ function openActivityModal(mode, record = {}) {
     .forEach((input) => (input.disabled = mode === "VIEW"));
 
   activityRecordModal.show();
+  document.getElementById("activityRecordForm").onsubmit = (event) =>
+    saveActivityRecord(mode, record, event);
 }
 
-function saveActivityRecord(event) {
+function saveActivityRecord(mode, record, event) {
   event.preventDefault();
+  const formData = new FormData(event.target);
+
+  const activityRecordData = {};
+  formData.forEach((value, key) => {
+    activityRecordData[key] = value;
+  });
 
   const newRecord = {
-    userId: currentEditRecord ? currentEditRecord.userId : 2,
-    activityId: currentEditRecord ? currentEditRecord.activityId : 1,
-    recordDate: document.getElementById("dateInput").value,
-    result: document.getElementById("resultInput").value,
-    feedback: document.getElementById("feedbackInput").value,
+    userId: record.userId,
+    activityId: record.activityId,
+    recordDate: activityRecordData.date,
+    result: activityRecordData.result,
+    feedback: activityRecordData.feedback,
   };
-
-  if (!currentEditRecord) {
+  if (mode == "ADD") {
     activityRecords.push(newRecord);
     addRecordToTable(newRecord);
   } else {
-    activityRecords = activityRecords.map((record) =>
-      record.recordDate === currentEditRecord.recordDate ? newRecord : record
+    activityRecords = activityRecords.map((currRecord) =>
+      currRecord.recordDate === record.recordDate ? newRecord : currRecord
     );
     updateRecordInTable(newRecord);
   }
+
   fetch(`${SERVER_URL}/userActivityRecords/setRecord`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -84,7 +61,6 @@ function saveActivityRecord(event) {
 
   activityRecordModal.hide();
   document.getElementById("activityRecordForm").reset();
-  currentEditRecord = null;
 }
 
 function addRecordToTable(record) {
@@ -132,7 +108,3 @@ function deleteActivityRecord(record) {
     .then((data) => console.log("Record deleted successfully:", data))
     .catch((error) => console.error("Error deleting record:", error));
 }
-
-document
-  .getElementById("activityRecordForm")
-  .addEventListener("submit", saveActivityRecord);
