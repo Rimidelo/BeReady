@@ -1,1 +1,1 @@
-const SERVER_URL = "http://127.0.0.1:8081";
+const SERVER_URL = "https://beready-server.onrender.com";
