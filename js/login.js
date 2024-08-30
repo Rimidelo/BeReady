@@ -2,6 +2,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     event.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+
     fetch(`${SERVER_URL}/profile/login`, {
         method: 'POST',
         headers: {
@@ -21,9 +22,15 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
                 window.location.href = "cfmsPlan.html";
             } else if (user.Role === "manager") {
                 window.location.href = "org-activities.html";
-            } else {
-                alert("התחברות נכשלה. אנא בדוק את הפרטים שלך.");
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: "error",
+                title: "שגיאה",
+                text: "התחברות נכשלה. אנא בדוק את הפרטים שלך",
+                confirmButtonText: "אישור",
+            });
+        });
 });
